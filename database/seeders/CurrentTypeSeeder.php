@@ -1,0 +1,170 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class CurrentTypeSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+    	DB::table('current_types')->insert(['name' => 'afgani', 'iso'=>'AFN', 'symbol'=>'؋']);
+		DB::table('current_types')->insert(['name' => 'ariari', 'iso'=>'MGA', 'symbol'=>'Ar']);
+		DB::table('current_types')->insert(['name' => 'balboa panameño', 'iso'=>'PAB', 'symbol'=>'B/.']);
+		DB::table('current_types')->insert(['name' => 'bat', 'iso'=>'THB', 'symbol'=>'฿']);
+		DB::table('current_types')->insert(['name' => 'bir', 'iso'=>'ETB', 'symbol'=>'Br']);
+		DB::table('current_types')->insert(['name' => 'bolívar fuerte', 'iso'=>'VEF', 'symbol'=>'Bs F']);
+		DB::table('current_types')->insert(['name' => 'boliviano', 'iso'=>'BOB', 'symbol'=>'Bs.']);
+		DB::table('current_types')->insert(['name' => 'cedi de Gana', 'iso'=>'GHS', 'symbol'=>'₵']);
+		DB::table('current_types')->insert(['name' => 'chelín keniano', 'iso'=>'KES', 'symbol'=>'Sh']);
+		DB::table('current_types')->insert(['name' => 'chelín somalí', 'iso'=>'SOS', 'symbol'=>'Sh']);
+		DB::table('current_types')->insert(['name' => 'chelín tanzaniano', 'iso'=>'TZS', 'symbol'=>'Sh']);
+		DB::table('current_types')->insert(['name' => 'chelín ugandés', 'iso'=>'UGX', 'symbol'=>'Sh']);
+		DB::table('current_types')->insert(['name' => 'colón costarricense', 'iso'=>'CRC', 'symbol'=>'₡']);
+		DB::table('current_types')->insert(['name' => 'colón salvadoreño', 'iso'=>'SVC', 'symbol'=>'₡']);
+		DB::table('current_types')->insert(['name' => 'córdoba nicaragüense', 'iso'=>'NIO', 'symbol'=>'C$']);
+		DB::table('current_types')->insert(['name' => 'corona checa', 'iso'=>'CZK', 'symbol'=>'Kč']);
+		DB::table('current_types')->insert(['name' => 'corona danesa', 'iso'=>'DKK', 'symbol'=>'kr']);
+		DB::table('current_types')->insert(['name' => 'corona islandesa', 'iso'=>'ISK', 'symbol'=>'kr']);
+		DB::table('current_types')->insert(['name' => 'corona noruega', 'iso'=>'NOK', 'symbol'=>'kr']);
+		DB::table('current_types')->insert(['name' => 'corona sueca', 'iso'=>'SEK', 'symbol'=>'kr']);
+		DB::table('current_types')->insert(['name' => 'dalasi gambiano', 'iso'=>'GMD', 'symbol'=>'D']);
+		DB::table('current_types')->insert(['name' => 'denar', 'iso'=>'MKD', 'symbol'=>'ден']);
+		DB::table('current_types')->insert(['name' => 'dinar', 'iso'=>'DZD', 'symbol'=>'د.ج']);
+		DB::table('current_types')->insert(['name' => 'dinar de Baréin', 'iso'=>'BHD', 'symbol'=>'.د.ب']);
+		DB::table('current_types')->insert(['name' => 'dinar irakí', 'iso'=>'IQD', 'symbol'=>'ع.د']);
+		DB::table('current_types')->insert(['name' => 'dinar jordano', 'iso'=>'JOD', 'symbol'=>'د.ا']);
+		DB::table('current_types')->insert(['name' => 'dinar kuwaití', 'iso'=>'KWD', 'symbol'=>'د.ك']);
+		DB::table('current_types')->insert(['name' => 'dinar libio', 'iso'=>'LYD', 'symbol'=>'ل.د']);
+		DB::table('current_types')->insert(['name' => 'dinar serbio', 'iso'=>'RSD', 'symbol'=>'дин. o din.']);
+		DB::table('current_types')->insert(['name' => 'dinar tunecino', 'iso'=>'TND', 'symbol'=>'د.ت']);
+		DB::table('current_types')->insert(['name' => 'dírham', 'iso'=>'MAD', 'symbol'=>'د.م.']);
+		DB::table('current_types')->insert(['name' => 'dobra', 'iso'=>'STD', 'symbol'=>'Db']);
+		DB::table('current_types')->insert(['name' => 'dólar australiano', 'iso'=>'AUD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar beliceño', 'iso'=>'BZD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar canadiense', 'iso'=>'CAD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de Brunei', 'iso'=>'BND', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de las Bahamas', 'iso'=>'BSD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de las Barbados', 'iso'=>'BBD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de las Islas Caimán', 'iso'=>'KYD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de Namibia', 'iso'=>'NAD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar de Nueva Zelanda', 'iso'=>'NZD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar del Caribe Oriental', 'iso'=>'XCD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar estadounidense', 'iso'=>'USD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar jamaicano', 'iso'=>'JMD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar liberiano', 'iso'=>'LRD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar micronesio', 'iso'=>'nenhum', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar salomonense', 'iso'=>'SBD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar singapurense', 'iso'=>'SGD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar surinamés', 'iso'=>'SRD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar trinitense', 'iso'=>'TTD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dólar zimbabuense', 'iso'=>'ZWL', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'dong', 'iso'=>'VND', 'symbol'=>'₫']);
+		DB::table('current_types')->insert(['name' => 'dram armenio', 'iso'=>'AMD', 'symbol'=>'dram']);
+		DB::table('current_types')->insert(['name' => 'escudo de Cabo Verde', 'iso'=>'CVE', 'symbol'=>'Esc, $']);
+		DB::table('current_types')->insert(['name' => 'euro', 'iso'=>'EUR', 'symbol'=>'€']);
+		DB::table('current_types')->insert(['name' => 'florín arubano', 'iso'=>'AWG', 'symbol'=>'ƒ']);
+		DB::table('current_types')->insert(['name' => 'florín de las Antillas Neerlandesas', 'iso'=>'ANG', 'symbol'=>'ƒ']);
+		DB::table('current_types')->insert(['name' => 'forinto', 'iso'=>'HUF', 'symbol'=>'Ft']);
+		DB::table('current_types')->insert(['name' => 'franco burundés', 'iso'=>'BIF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco CFA', 'iso'=>'XOF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco CFP', 'iso'=>'XPF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco comorano', 'iso'=>'KMF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco congoleño', 'iso'=>'CDF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco guineano', 'iso'=>'GNF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco ruandés', 'iso'=>'RWF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco suizo', 'iso'=>'CHF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'franco yibutiano', 'iso'=>'DJF', 'symbol'=>'Fr']);
+		DB::table('current_types')->insert(['name' => 'grivna', 'iso'=>'UAH', 'symbol'=>'₴']);
+		DB::table('current_types')->insert(['name' => 'guaraní paraguayo', 'iso'=>'PYG', 'symbol'=>'₲']);
+		DB::table('current_types')->insert(['name' => 'gultrum butanés', 'iso'=>'BTN', 'symbol'=>'Nu.']);
+		DB::table('current_types')->insert(['name' => 'gurde', 'iso'=>'HTG', 'symbol'=>'G']);
+		DB::table('current_types')->insert(['name' => 'kiat de Birmania', 'iso'=>'MMK', 'symbol'=>'K']);
+		DB::table('current_types')->insert(['name' => 'kina', 'iso'=>'PGK', 'symbol'=>'K']);
+		DB::table('current_types')->insert(['name' => 'kip', 'iso'=>'LAK', 'symbol'=>'₭']);
+		DB::table('current_types')->insert(['name' => 'kuacha de Malaui', 'iso'=>'MWK', 'symbol'=>'MK']);
+		DB::table('current_types')->insert(['name' => 'kuacha zambiano', 'iso'=>'ZMK', 'symbol'=>'ZK']);
+		DB::table('current_types')->insert(['name' => 'kuanza de Angola', 'iso'=>'AOA', 'symbol'=>'Kz']);
+		DB::table('current_types')->insert(['name' => 'kuna croata', 'iso'=>'HRK', 'symbol'=>'kn']);
+		DB::table('current_types')->insert(['name' => 'lari georgiano', 'iso'=>'GEL', 'symbol'=>'ლ']);
+		DB::table('current_types')->insert(['name' => 'lats', 'iso'=>'LVL', 'symbol'=>'Ls']);
+		DB::table('current_types')->insert(['name' => 'lek', 'iso'=>'ALL', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'lempira', 'iso'=>'HNL', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'leona', 'iso'=>'SLL', 'symbol'=>'Le']);
+		DB::table('current_types')->insert(['name' => 'leu moldavo', 'iso'=>'MDL', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'leu rumano', 'iso'=>'RON', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'leva búlgaro', 'iso'=>'BGN', 'symbol'=>'лв']);
+		DB::table('current_types')->insert(['name' => 'libra de Gibraltar', 'iso'=>'GIP', 'symbol'=>'£']);
+		DB::table('current_types')->insert(['name' => 'libra egipcia', 'iso'=>'EGP', 'symbol'=>'£, ج.م']);
+		DB::table('current_types')->insert(['name' => 'libra esterlina', 'iso'=>'GBP', 'symbol'=>'£']);
+		DB::table('current_types')->insert(['name' => 'libra libanesa', 'iso'=>'LBP', 'symbol'=>'ل.ل']);
+		DB::table('current_types')->insert(['name' => 'libra siria', 'iso'=>'SYP', 'symbol'=>'£ o ل.س']);
+		DB::table('current_types')->insert(['name' => 'libra sudanesa', 'iso'=>'SDG', 'symbol'=>'£']);
+		DB::table('current_types')->insert(['name' => 'libra sursudanesa', 'iso'=>'SSP', 'symbol'=>'£']);
+		DB::table('current_types')->insert(['name' => 'lilangeni', 'iso'=>'SZL', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'lira turca', 'iso'=>'TRY', 'symbol'=>'lira']);
+		DB::table('current_types')->insert(['name' => 'litas', 'iso'=>'LTL', 'symbol'=>'Lt']);
+		DB::table('current_types')->insert(['name' => 'loti de Lesoto', 'iso'=>'LSL', 'symbol'=>'L']);
+		DB::table('current_types')->insert(['name' => 'manat azerbayano', 'iso'=>'AZN', 'symbol'=>'manat']);
+		DB::table('current_types')->insert(['name' => 'manat turcomano', 'iso'=>'TMT', 'symbol'=>'m']);
+		DB::table('current_types')->insert(['name' => 'marco convertible de Bosnia y Herzegovina', 'iso'=>'BAM', 'symbol'=>'KM']);
+		DB::table('current_types')->insert(['name' => 'metical', 'iso'=>'MZN', 'symbol'=>'MT']);
+		DB::table('current_types')->insert(['name' => 'naira nigeriano', 'iso'=>'NGN', 'symbol'=>'₦']);
+		DB::table('current_types')->insert(['name' => 'nakfa de Eritrea', 'iso'=>'ERN', 'symbol'=>'Nfk']);
+		DB::table('current_types')->insert(['name' => 'nuevo dólar de Taiwán', 'iso'=>'TWD', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'nuevo séquel', 'iso'=>'ILS', 'symbol'=>'₪']);
+		DB::table('current_types')->insert(['name' => 'paanga', 'iso'=>'TOP', 'symbol'=>'T$']);
+		DB::table('current_types')->insert(['name' => 'pataca de Macao', 'iso'=>'MOP', 'symbol'=>'P']);
+		DB::table('current_types')->insert(['name' => 'peso argentino', 'iso'=>'ARS', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso chileno', 'iso'=>'CLP', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso colombiano', 'iso'=>'COP', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso cubano', 'iso'=>'CUP', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso dominicano', 'iso'=>'DOP', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso filipino', 'iso'=>'PHP', 'symbol'=>'₱']);
+		DB::table('current_types')->insert(['name' => 'peso mexicano', 'iso'=>'MXN', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'peso uruguayo', 'iso'=>'UYU', 'symbol'=>'$']);
+		DB::table('current_types')->insert(['name' => 'pula de Botsuana', 'iso'=>'BWP', 'symbol'=>'P']);
+		DB::table('current_types')->insert(['name' => 'quetzal', 'iso'=>'GTQ', 'symbol'=>'Q']);
+		DB::table('current_types')->insert(['name' => 'rand', 'iso'=>'ZAR', 'symbol'=>'R']);
+		DB::table('current_types')->insert(['name' => 'real brasileño', 'iso'=>'BRL', 'symbol'=>'R$']);
+		DB::table('current_types')->insert(['name' => 'rial catarí', 'iso'=>'QAR', 'symbol'=>'ر.ق']);
+		DB::table('current_types')->insert(['name' => 'rial de Omán', 'iso'=>'OMR', 'symbol'=>'ر.ع.']);
+		DB::table('current_types')->insert(['name' => 'rial iraní', 'iso'=>'IRR', 'symbol'=>'﷼']);
+		DB::table('current_types')->insert(['name' => 'rial saudí', 'iso'=>'SAR', 'symbol'=>'ر.س']);
+		DB::table('current_types')->insert(['name' => 'rial yemení', 'iso'=>'YER', 'symbol'=>'﷼']);
+		DB::table('current_types')->insert(['name' => 'riel camboyano', 'iso'=>'KHR', 'symbol'=>'៛']);
+		DB::table('current_types')->insert(['name' => 'ringit', 'iso'=>'MYR', 'symbol'=>'RM']);
+		DB::table('current_types')->insert(['name' => 'rublo', 'iso'=>'RUB', 'symbol'=>'₽']);
+		DB::table('current_types')->insert(['name' => 'rublo bielorruso', 'iso'=>'BYR', 'symbol'=>'Br']);
+		DB::table('current_types')->insert(['name' => 'rufiya', 'iso'=>'MVR', 'symbol'=>'.ރ']);
+		DB::table('current_types')->insert(['name' => 'rupia ceilandesa', 'iso'=>'LKR', 'symbol'=>'Rs']);
+		DB::table('current_types')->insert(['name' => 'rupia de Mauricio', 'iso'=>'MUR', 'symbol'=>'₨']);
+		DB::table('current_types')->insert(['name' => 'rupia india', 'iso'=>'INR', 'symbol'=>'₹']);
+		DB::table('current_types')->insert(['name' => 'rupia indonesia', 'iso'=>'IDR', 'symbol'=>'Rp']);
+		DB::table('current_types')->insert(['name' => 'rupia nepalí', 'iso'=>'NPR', 'symbol'=>'₨']);
+		DB::table('current_types')->insert(['name' => 'rupia pakistaní', 'iso'=>'PKR', 'symbol'=>'₨']);
+		DB::table('current_types')->insert(['name' => 'rupia seychellense', 'iso'=>'SCR', 'symbol'=>'₨']);
+		DB::table('current_types')->insert(['name' => 'sol', 'iso'=>'PEN', 'symbol'=>'S/']);
+		DB::table('current_types')->insert(['name' => 'som kirguís', 'iso'=>'KGS', 'symbol'=>'лв']);
+		DB::table('current_types')->insert(['name' => 'somoni', 'iso'=>'TJS', 'symbol'=>'ЅМ']);
+		DB::table('current_types')->insert(['name' => 'sum', 'iso'=>'UZS', 'symbol'=>'лв']);
+		DB::table('current_types')->insert(['name' => 'taka de Bangladés', 'iso'=>'BDT', 'symbol'=>'৳']);
+		DB::table('current_types')->insert(['name' => 'tala', 'iso'=>'WST', 'symbol'=>'T']);
+		DB::table('current_types')->insert(['name' => 'tengue kazajo', 'iso'=>'KZT', 'symbol'=>'₸']);
+		DB::table('current_types')->insert(['name' => 'tugrik mongol', 'iso'=>'MNT', 'symbol'=>'₮']);
+		DB::table('current_types')->insert(['name' => 'uguiya', 'iso'=>'MRO', 'symbol'=>'UM']);
+		DB::table('current_types')->insert(['name' => 'vatu do Vanuatu', 'iso'=>'VUV', 'symbol'=>'Vt']);
+		DB::table('current_types')->insert(['name' => 'won norcoreano', 'iso'=>'KPW', 'symbol'=>'₩']);
+		DB::table('current_types')->insert(['name' => 'won surcoreano', 'iso'=>'KRW', 'symbol'=>'₩']);
+		DB::table('current_types')->insert(['name' => 'yen', 'iso'=>'JPY', 'symbol'=>'¥']);
+		DB::table('current_types')->insert(['name' => 'yuan, renminbi', 'iso'=>'CNY', 'symbol'=>'¥, 元']);
+		DB::table('current_types')->insert(['name' => 'złóti', 'iso'=>'PLN', 'symbol'=>'zł']);
+
+    }
+}
