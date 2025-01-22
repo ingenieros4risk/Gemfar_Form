@@ -2579,7 +2579,7 @@
                                         <input type="hidden" name="user" value="{{ $user }}">
                                         <div class="form-group">
                                             <label>Plan de Acción Responsable SAGRILAFT:</label>
-                                            <select name="observation" id="observation" class="form-control input-lg" @if($request_form->sarlaft_comentario) disabled @endif>
+                                            <select name="observation" id="observation" class="form-control input-lg" @if($request_form->sarlaft_comentario) disabled @else required @endif>
                                                 <option value="">--- Seleccione la acción a realizar ---</option>
                                                 <option value="APROBADO" @if($request_form->sarlaft_comentario == 'APROBADO') selected @endif>APROBADO</option>
                                                 <option value="RECHAZADO" @if($request_form->sarlaft_comentario == 'RECHAZADO') selected @endif>RECHAZADO</option>
