@@ -57,7 +57,18 @@ class DatabaseSeeder extends Seeder
             SanofiRequestStatusSeeder::class,
             RequestRiskStatusSeeder::class,
             GenfarIndustryKeySeeder::class,
-            SanofiRequestRiskOldSeeder::class
+            SanofiRequestRiskOldSeeder::class,
+            ClientTypeSeeder::class,
+            LegalEntitiesSeeder::class,
+            SalesOrganizationSeeder::class,
+            ChannelsSeeder::class,
+            SectorsSeeder::class,
+            SociedadSolicitanteSeeder::class,
+            TiposSolicitudesSeeder::class,
+            OficinasVentasSeeder::class,
+            GrupoVendedoresSeeder::class,
+            TypeSaleSeeder::class,
+            GroupClientsSeeder::class,
 
         ]);
     }

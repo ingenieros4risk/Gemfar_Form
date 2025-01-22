@@ -10,7 +10,7 @@
 @if(session()->get('error'))
 
 <div class="alert alert-warning" rol="alert">
-  {{ session()->get('error') }}  
+  {{ session()->get('error') }}
 </div><br />
 
 @endif
@@ -21,12 +21,12 @@
       <div class="col-sm-12 col-md-12">
         <div class="card">
             <div class="card-header">
-              <i class="fa fa-align-justify"></i>{{ __('Lista Solicitudes Homologación de Proveedores a Risk') }}
+              <i class="fa fa-align-justify"></i>{{ __('Lista Solicitudes Clientes') }}
               <button class="btn btn-outline-success cc_pointer float-right" type="button">
                 <a href="{{ url('/genfar-request-clients/create') }}">
                   <svg class="c-icon">
                     <use xlink:href="assets/icons/coreui/free-symbol-defs.svg#cui-plus"></use>
-                  </svg>                          
+                  </svg>
                 </a>
               </button>
             </div>
@@ -36,32 +36,40 @@
                   <tr>
                     <th>id</th>
                     <th>Ver</th>
-                    <th>Crear Tarea</th>
                     <th>Estado</th>
-                    <th>Check HYS</th>
-                    <th>Check CSR</th>
-                    <th>Check ENV</th>
-                    <th>Check Ethics</th>
-                    <th>Check SAGRILAFT</th>
-                    <th>Check CSY</th>
+                    <th>Tipo Cliente</th>
+                    <th>Nombre Cliente</th>
+                    <th>Número de documento</th>
+                    <th>Correo Cliente</th>
                     <th>Fecha de Solicitud</th>
-                    <th>Fecha de Solución</th>
                     <th>Usuario Solicitante</th>
-                    <th>Correo Solicitante</th>
-                    <th>Nombre Proveedor</th>
-                    <th>TAX ID</th>
-                    <th>Correo Proveedor</th>
-                    <th>Tipo de Proveedor</th>
-                    <th>HACAT</th>
                   </tr>
                 </thead>
                 <tbody>
-                  
+                @foreach($clients as $value)
+                    <tr>
+                      <td>{{ $value->id}}</td>
+                      <td>
+                        <a href="{{ url('/genfar-request-clients/' . $value->id) }}" class="btn btn-block btn-primary">Ver</a>
+                      </td>
+                      <td>
+                          <span class="badge badge-pill {{ $value->class}}">
+                              {{$value->id_status}}
+                          </span>
+                      </td>
+                      <td>{{ $value->id_client_type}}</td>
+                      <td>{{ $value->third_party_name}}</td>
+                      <td>{{ $value->number_client}}</td>
+                      <td>{{ $value->email}}</td>
+                      <td>{{ date('d-m-y', strtotime($value->date_solicitud))}}</td>
+                      <td>{{ $value->id_user}}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
         </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>

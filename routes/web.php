@@ -21,7 +21,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/widgets', function () {    return view('dashboard.widgets'); });
         Route::get('/404', function () {        return view('dashboard.404'); });
         Route::get('/500', function () {        return view('dashboard.500'); });
-        Route::prefix('base')->group(function () {  
+        Route::prefix('base')->group(function () {
             Route::get('/breadcrumb', function(){   return view('dashboard.base.breadcrumb'); });
             Route::get('/cards', function(){        return view('dashboard.base.cards'); });
             Route::get('/carousel', function(){     return view('dashboard.base.carousel'); });
@@ -42,7 +42,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/tabs', function () {       return view('dashboard.base.tabs'); });
             Route::get('/tooltips', function () {   return view('dashboard.base.tooltips'); });
         });
-        Route::prefix('buttons')->group(function () {  
+        Route::prefix('buttons')->group(function () {
             Route::get('/buttons', function(){          return view('dashboard.buttons.buttons'); });
             Route::get('/button-group', function(){     return view('dashboard.buttons.button-group'); });
             Route::get('/dropdowns', function(){        return view('dashboard.buttons.dropdowns'); });
@@ -53,7 +53,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/flags', function(){                return view('dashboard.icons.flags'); });
             Route::get('/brands',function(){               return view('dashboard.icons.brands'); });
         });
-        Route::prefix('notifications')->group(function () {  
+        Route::prefix('notifications')->group(function () {
             Route::get('/alerts', function(){   return view('dashboard.notifications.alerts'); });
             Route::get('/badge', function(){    return view('dashboard.notifications.badge'); });
             Route::get('/modals', function(){   return view('dashboard.notifications.modals'); });
@@ -68,7 +68,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('inspektor/list/priority', 'InspektorPriorityController');
         Route::resource('inspektor/list/type', 'InspektorParameterizationTypeController');
         Route::resource('inspektor/list', 'InspektorListController');
-        Route::prefix('inspektor/list')->group(function () { 
+        Route::prefix('inspektor/list')->group(function () {
             Route::get('/',         'InspektorListController@index')->name('inspektor_lists.index');
             Route::get('/create',   'InspektorListController@create')->name('inspektor_lists.create');
             Route::post('/store',   'InspektorListController@store')->name('inspektor_lists.store');
@@ -101,12 +101,11 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::group(['prefix' => '{language}'], function(){
         Route::get('genfar/create/{form}', 'SanofiRequestFormController@create');
         Route::get('/download_consentimiento/{diligencia}','SanofiRequestFormController@consentimiento')->name('genfar.consentimiento');
-        Route::get('/download_manifestacion/{diligencia}','SanofiRequestFormController@manifestacion')->name('genfar.manifestacion');
     });
 
     //Ruta de Formulario de Clientes
     Route::group(['prefix' => '{language}'], function(){
-        Route::get('genfar/clients/{form}', 'ClientsController@create');
+        Route::get('genfar/clients/{form}', 'GenfarClientFormController@create');
    });
 
     //Route::get('genfar/create/{form}', 'SanofiRequestFormController@create');
@@ -120,11 +119,11 @@ Route::group(['middleware' => ['get.menu']], function () {
     });
 
     Route::get('genfarAsSherlock',        'SanofiRequestFormController@sherlock');
-    
+
     Auth::routes();
 
 
-    Route::group(['middleware' => ['role:genfar']], function () 
+    Route::group(['middleware' => ['role:genfar']], function ()
     {
         Route::resource('genfar-homologation-country',        'SanofiHomologationCountryController');
         Route::resource('genfar-homologation-type',        'SanofiHomologationTypeController');
@@ -141,7 +140,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('genfar-society',        'SanofiSocietyController');
         Route::resource('hacats',        'SanofiHacatController');
 
-        
+
         /* Rutas de la Solicitud de Clientes*/
         Route::resource('genfar-request-clients', 'ClientsController');
 
@@ -154,8 +153,6 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::post('/genfar-request-risk-csr', 'SanofiRequestRiskController@csr')->name('genfar.csr');
         Route::post('/genfar-request-risk-hys', 'SanofiRequestRiskController@hys')->name('genfar.hys');
         Route::post('/genfar-request-risk-env', 'SanofiRequestRiskController@env')->name('genfar.env');
-        Route::post('/genfar-request-risk-sarlaft', 'SanofiRequestRiskController@sarlaft')->name('genfar.sarlaft');
-        Route::post('/genfar-request-risk-perfilamiento', 'SanofiRequestRiskController@perfilamiento')->name('genfar.perfilamiento');
 
         Route::post('/genfar-request-risk-cancel', 'SanofiRequestRiskController@cancel')->name('genfar.cancel');
         Route::post('/genfar-request-risk-manage', 'SanofiRequestRiskController@manage')->name('genfar.manage');
@@ -173,7 +170,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/download_manifestacion_suscrita/{diligencia}','SanofiRequestRiskController@downloadManifestacion')->name('genfar.manifestacion_suscrita');
 
         /*Route Genfar Supliers Creation*/
-        
+
         Route::resource('genfar-supliers', 'GenfarSupliersCreationController');
         Route::get('genfar-supliers-pending', 'GenfarSupliersCreationController@pending')->name('genfar-pending-view');
         Route::get('/genfar-pending-notification', 'GenfarSupliersCreationController@pending_notification')->name('genfar.pending_notification');
@@ -181,8 +178,9 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::post('genfar-supliers/{solicitud}','GenfarSupliersCreationController@update');
         Route::get('genfar-supliers/create/{solicitud}', 'GenfarSupliersCreationController@createAsGenfar')->name('genfar.createasgenfar');
         Route::post('/genfar-supliers-aprobar', 'GenfarSupliersCreationController@aprobar')->name('genfar.aprobar');
+        Route::post('/genfar-supliers-confirmar', 'GenfarSupliersCreationController@confirmar')->name('genfar.confirmar');
         Route::get('/download_attach_suplier/{diligence}', 'GenfarSupliersCreationController@downloadattach')->name('genfar.downloadattach');
-        // Route::get('/download_attach_confirmation/{diligence}', 'GenfarSupliersCreationController@downloadattachConfirmation')->name('genfar.downloadattach_confirmation');
+        Route::get('/download_attach_confirmation/{diligence}', 'GenfarSupliersCreationController@downloadattachConfirmation')->name('genfar.downloadattach_confirmation');
         Route::get('/download_attach_aprobation/{diligence}', 'GenfarSupliersCreationController@downloadattachAprobation')->name('genfar.downloadattach_aprobation');
         Route::get('export_tasks_suplier', 'GenfarSupliersCreationController@export')->name('genfar.tasks');
 
@@ -190,7 +188,7 @@ Route::group(['middleware' => ['get.menu']], function () {
 
         Route::get('/genfar-search', 'SanofiRequestRiskController@findByURLView')->name('genfar.find');
         Route::get('/genfar-search-url','SanofiRequestRiskController@findByURL');
-        
+
         /*Route Beneficial Ownership*/
         Route::resource('beneficial-ownership','BeneficialOwnershipController');
 
@@ -221,7 +219,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/genfar-notification-aditional', 'SanofiRequestRiskController@pending_notification')->name('genfar.notification_aditional');
 
 
-        
+
         Route::get('/download_coincidences_bfs/{diligencia}','SanofiRequestFormController@downloadBeneficial')->name('genfar.beneficial_ownership');
         Route::get('/download_no_coincidences_bfs/{diligencia}','SanofiRequestFormController@downloadNoBeneficial')->name('genfar.no_beneficial_ownership');
         Route::get('/download_certificado_existencia/{diligencia}','SanofiRequestFormController@downloadCertificadoExistencia')->name('genfar.certificado_existencia');
@@ -235,7 +233,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::get('/download_certificado_politicas/{diligencia}','SanofiRequestFormController@downloadCertificadoPoliticas')->name('genfar.certificado_politicas');
         Route::get('/download_certificado_financiero/{diligencia}','SanofiRequestFormController@downloadCertificadoFinanciero')->name('genfar.certificado_financiero');
         Route::get('/download_certificado_comercial/{diligencia}','SanofiRequestFormController@downloadCertificadoComercial')->name('genfar.certificado_comercial');
-        
+
 
     });
 
@@ -243,7 +241,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::resource('users',        'UsersController')->except( ['create', 'store'] );
         Route::resource('roles',        'RolesController');
         Route::resource('login-log',        'CheckLoginController');
-        
+
         Route::get('users_export', 'UsersController@export')->name('users.export');
 
         Route::resource('mail',        'MailController');
@@ -252,7 +250,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::post('mailSend/{id}',        'MailController@send')->name('mailSend');
         Route::get('/roles/move/move-up',      'RolesController@moveUp')->name('roles.up');
         Route::get('/roles/move/move-down',    'RolesController@moveDown')->name('roles.down');
-        Route::prefix('menu/element')->group(function () { 
+        Route::prefix('menu/element')->group(function () {
             Route::get('/',             'MenuElementController@index')->name('menu.index');
             Route::get('/move-up',      'MenuElementController@moveUp')->name('menu.up');
             Route::get('/move-down',    'MenuElementController@moveDown')->name('menu.down');
@@ -264,7 +262,7 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::get('/show',         'MenuElementController@show')->name('menu.show');
             Route::get('/delete',       'MenuElementController@delete')->name('menu.delete');
         });
-        Route::prefix('menu/menu')->group(function () { 
+        Route::prefix('menu/menu')->group(function () {
             Route::get('/',         'MenuController@index')->name('menu.menu.index');
             Route::get('/create',   'MenuController@create')->name('menu.menu.create');
             Route::post('/store',   'MenuController@store')->name('menu.menu.store');
@@ -288,6 +286,25 @@ Route::group(['middleware' => ['get.menu']], function () {
             Route::post('/file/cropp',      'MediaController@cropp');
             Route::get('/file/copy',        'MediaController@fileCopy')->name('media.file.copy');
         });
+
+        Route::resource('clients','ClientsController');
+        // Route::post('/genfar-request-clients',   'ClientsController@store')->name('genfar-request-clients.store');
+        // Route::get('/genfar-request-clients',   'ClientsController@index')->name('genfar-request-clients.index');
+
+        Route::prefix('client')->group(function () {
+            Route::get('/',             'ClientsController@index')->name('client.index');
+            Route::get('/create',       'ClientsController@create')->name('client.create');
+            Route::post('/store',       'ClientsController@store')->name('client.store');
+            Route::get('/edit',         'ClientsController@edit')->name('client.edit');
+            Route::post('/update',      'ClientsController@update')->name('client.update');
+            Route::get('/show',         'ClientsController@show')->name('client.show');
+            Route::get('/delete',       'ClientsController@delete')->name('client.delete');
+        });
+
+        // Esta es la ruta a la que quieres redirigir después de guardar un cliente
+        Route::get('/genfar-request-clients', 'ClientsController@index')->name('genfar-request-clients');
+
+
 
     });
 });

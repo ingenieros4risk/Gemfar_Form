@@ -55,6 +55,7 @@
                             <th>Telefono Proveedor</th>
                             <th>Tipo de Proveedor</th>
                             <th>Aprobado</th>
+                            <th>Confirmado</th>
                             <th>Estado</th>
                             <th>Fecha de Solución</th>
                           </tr>
@@ -101,6 +102,17 @@
                                         SIN GESTIONAR
                                       @endif
                                   </span>
+                              </td>
+                              <td>
+                                <span class="badge badge-pill {{ $value->class}}">
+                                    @if($value->confirm == "CONFIRMAR")
+                                        CONFIRMADO
+                                    @elseif($value->confirm == "RECHAZAR")
+                                        RECHAZADO
+                                    @else
+                                        SIN GESTIONAR
+                                    @endif
+                                </span>
                               </td>
                               <td>
                                   @if($value->status == 0 )

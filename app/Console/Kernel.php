@@ -13,10 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\NotificacionPendientes',
-        'App\Console\Commands\NotificacionEproveedores'
-
-
+        //
     ];
 
     /**
@@ -27,12 +24,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-
-        $schedule->command('notificacion:pendientes')->dailyAt('9:00');
-        $schedule->command('notificacion:eproveedores')->dailyAt('9:00');
-
-        
-
         // $schedule->command('inspire')
         //          ->hourly();
     }

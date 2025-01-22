@@ -125,6 +125,20 @@
           <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
+                    <label>Estado de Confirmación:</label>
+                    @if($request_risk->confirm == "CONFIRMAR")
+                      <input class="form-control" type="text" value="CONFIRMADO" readonly >
+                    @elseif($request_risk->confirm == "RECHAZAR")
+                      <input class="form-control" type="text" value="RECHAZADO" readonly >
+                    @else
+                      <input class="form-control" type="text" value="SIN GESTIONAR" readonly >
+                    @endif
+                </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
                     <label>Solicitante:</label>
                     <input class="form-control" type="text" value="{{ $request_risk->solicitante}}" readonly >
                 </div>
@@ -266,7 +280,7 @@
       </div>
     </div>
 
-    @if($request_risk->approve == "RECHAZAR")
+    @if($request_risk->confirm == "RECHAZAR" || $request_risk->approve == "RECHAZAR")
 
       <div class="col-sm-6">
         <div class="card">
@@ -646,6 +660,72 @@
       </div>
       @endif
     @endrole
+    <hr>
+    <hr>
+    @role('masterdata')
+      @if($request_risk->approve != "RECHAZAR" && $request_risk->confirm != "CONFIRMADO" )
+      <!-- FORMULARIO EN CONFIRMAR TAREA -->
+      <div id="div-genfar-confirmar">
+        <div class="card">
+          <div class="card-header">
+            <strong class="card-title">CONFIRMAR TAREA</strong>
+          </div>
+          <div class="card-body">
+            <hr>                  
+            <form action="{{route('genfar.confirmar')}}" id="form-genfar-confirmar" required method="post" enctype="multipart/form-data">
+              {{csrf_field()}}
+              <input type="hidden" name="id" value="{{ $request_risk->id }}">
+              <div class="row form-group">
+                    <div class="col col-md-3">
+                      <label class=" form-control-label">CONFIRMAR TASK</label>
+                    </div>
+                    <div class="col col-md-9">
+                      <div class="form-check">
+                        <div class="radio">
+                          <label for="radio1" class="form-check-label ">
+                          <input type="radio" name="resumen" value="CONFIRMAR" class="form-check-input" required >
+                            Aprobación del Master Data
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label for="radio2" class="form-check-label ">
+                          <input type="radio" name="resumen" value="RECHAZAR" class="form-check-input" required>
+                          Rechazo del Master Data
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            <label>Adjunto Confirmación:</label>
+                            <input class="form-control" type="file" name="confirm_file" id="confirm_file">
+                        </div>
+                    </div>
+                </div>
+
+                  <div class="form-group">
+                      <label for="observacion" class="control-label mb-1">Comentarios de aprobación o rechazo.</label>
+                      <textarea form="form-genfar-confirmar" id="observacion" name="observacion" type="text" class="form-control cc-info-soporte valid" data-val="true" data-val-required="Please enter the link font"
+                      autocomplete="observacion" aria-required="true" aria-invalid="false" placeholder="p. ej. La solicitud de Debida Diligencia Ampliada no tuvo ningun inconveniente." required></textarea>
+                      <span class="help-block field-validation-valid" data-valmsg-for="cc-info-soporte" data-valmsg-replace="true"></span>
+                  </div>
+                  <div class="row form-group">
+                    <div class="row col-12 col-md-9">
+                      <button type="submit" form="form-genfar-confirmar" class="btn btn-outline-warning btn-block">
+                        CONFIRMAR
+                      </button>
+                    </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      @endif
+    @endrole
+        
+      
     </div>
   </div>
 </div>

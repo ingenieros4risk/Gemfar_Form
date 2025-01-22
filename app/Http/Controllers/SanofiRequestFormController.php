@@ -413,13 +413,6 @@ class SanofiRequestFormController extends Controller
         return $pdf->download('Consentimiento Informado.pdf');
     }
 
-    public function manifestacion($lang,$id) {
-        $requests_form = SanofiRequestForm::find($id);
-        view()->share('requests_form',$requests_form);
-        $pdf = PDF::loadView('manifestacion', $requests_form);
-        return $pdf->download('Manifestación Suscrita.pdf');
-    }
-
 
     /*Download methods*/
 

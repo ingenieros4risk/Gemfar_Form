@@ -62,5 +62,6 @@ class InspektorDocumentTypeSeeder extends Seeder
 		DB::table('inspektor_document_types')->insert(['cat' => 'CdI', 'name' => 'CARNE DE IDENTIDAD']);
 		DB::table('inspektor_document_types')->insert(['cat' => 'IDLC', 'name' => 'ID LICENCIA DE CONDUCIR']);
 		DB::table('inspektor_document_types')->insert(['cat' => 'SNN', 'name' => 'NÚMERO DE SEGURO SOCIAL']);
+		DB::table('inspektor_document_types')->insert(['cat' => 'NUC', 'name' => '-------']);
     }
 }

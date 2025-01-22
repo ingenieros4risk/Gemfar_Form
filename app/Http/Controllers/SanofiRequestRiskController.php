@@ -40,7 +40,6 @@ use App\Mail\GenfarENVAlert;
 use App\Mail\GenfarCSYAlert;
 use App\Mail\GenfarHYSAlert;
 use App\Mail\GenfarNotifyAll;
-use App\Mail\GenfarSARLAFTAlert;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
@@ -59,7 +58,7 @@ class SanofiRequestRiskController extends Controller
     {
         $you = auth()->user();
         $requests_risk = SanofiRequestRisk::all();
-
+        
         foreach ($requests_risk as $key) {
             $user_solicitante = User::find($key->user_solicitante);
 
@@ -77,7 +76,7 @@ class SanofiRequestRiskController extends Controller
             }else{
                 $key->user_solicitante = $user_solicitante->name;
             }
-
+            
             $provider = SanofiProvider::find($key->sanofi_provider);
             $provider ? $key->sanofi_provider = $provider->name : $key->sanofi_provider = "Sin Información";
 
@@ -95,57 +94,36 @@ class SanofiRequestRiskController extends Controller
             if($request_form->csr == 1 && $request_form->csr_comentario == null){
                 $key->csr = ($request_form->csr_1 == 0 || $request_form->csr_2 == 0 ||
                 $request_form->csr_3 == 0 || $request_form->csr_4 == 0 || $request_form->csr_5 == 0 ||
-                $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 ||
+                $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 || 
                 $request_form->csr_10 == 0) ? 1 : 0;
             }
 
-
+            
             /*Evaluación HYS*/
-            if($request_form->hys == 1 && $request_form->hys_comentario == null && $key->request_type == "Homologación"){
-                // $key->hys = ($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 ||
-                // $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 ||
-                // $request_form->hys_7 == 0 || $request_form->hys_8 == 0) ? 1 : 0;
-
-                $key->hys = 0;
+            if($request_form->hys == 1 && $request_form->hys_comentario == null){
+                $key->hys = ($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 || 
+                $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 || 
+                $request_form->hys_7 == 0 || $request_form->hys_8 == 0) ? 1 : 0;
             }
-
+            
             /*Evaluación CSY*/
-            if($request_form->csy == 1 && $request_form->csy_comentario == null && $key->request_type == "Homologación"){
+            if($request_form->csy == 1 && $request_form->csy_comentario == null){
                 $key->csy = $request_form->csy_1 == 0 ? 1 : 0;
             }
             /*Evaluación ENV*/
-            if($request_form->env == 1 && $request_form->env_comentario == null && $key->request_type == "Homologación"){
-                //$key->env = ($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0) ? 1 : 0;
-                $key->env = 0;
+            if($request_form->env == 1 && $request_form->env_comentario == null){
+                $key->env = ($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0) ? 1 : 0;
             }
-
+            
             /*Evaluación ETHICHS*/
-            if($request_form->ethics == 1 && $request_form->ebi_recomendacion != "Bandera(s)/señales de alerta adecuadamente mitigada(s)" && $key->request_type == "Homologación"){
+            if($request_form->ethics == 1 && $request_form->ebi_recomendacion != "Bandera(s)/señales de alerta adecuadamente mitigada(s)"){
                 $key->ethics = $request_form->ethics;
+                $key->sarlaf = $request_form->dda;
             }
-
             /*Evaluación SARLAFT*/
-            // if($request_form->sarlaft_comentario  == null && $key->request_type == "Homologación"){
-                // $key->sarlaft =  ($request_form->coincidencia_laft == 1 || $request_form->antecedentes_disciplinarios == 1 || $request_form->antecedentes_penales == 1 || $request_form->antecedentes_fiscales == 1 || $request_form->coincidencia_pep == 1 || $request_form->coincidencia_listas == 1 || $request_form->coincidencia_fuentes == 1) ? 3 : 0;
-            // }elseif($request_form->sarlaft_comentario != "APROBADO" && $key->request_type == "Homologación"){
-                // $key->sarlaft = 1;
-            // }else{
-                // $key->sarlaft = 0;
-            // }
+            $key->task_eprovedores = $key->csr+$key->hys+$key->csy+$key->env+$key->ethics+$key->sarlaf;
 
-			/*Evaluación SARLAFT*/
-            if($request_form->sarlaft_comentario  == null){
-                $key->sarlaft =  ($request_form->coincidencia_laft == 1 || $request_form->antecedentes_disciplinarios == 1 || $request_form->antecedentes_penales == 1 || $request_form->antecedentes_fiscales == 1 || $request_form->coincidencia_pep == 1 || $request_form->coincidencia_listas == 1 || $request_form->coincidencia_fuentes == 1) ? 3 : 0;
-            }elseif($request_form->sarlaft_comentario != "APROBADO"){
-                $key->sarlaft = 1;
-            }else{
-                $key->sarlaft = 0;
-            }
-
-            /* Evaluación Semáforo */
-            $key->task_eprovedores = $key->csr+$key->hys+$key->csy+$key->env+$key->ethics+$key->sarlaft;
-
-        }
+        }  
 
 
         return view('dashboard.sanofi.request_risk.index', compact('requests_risk', 'you'));
@@ -157,7 +135,7 @@ class SanofiRequestRiskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
         //$form = SanofiRequestRisk::find($id);
         $hacats = SanofiHacat::all();
         $societies = SanofiHomologationCountry::all();
@@ -174,7 +152,7 @@ class SanofiRequestRiskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getHacat($id)
+    public function getHacat($id) 
     {
         if($id == 2){
             return SanofiHacat::where('category_b', 1)->pluck('name', 'id');
@@ -184,7 +162,7 @@ class SanofiRequestRiskController extends Controller
             return SanofiHacat::where('category_c_hco', 1)->pluck('name', 'id');
         }else{
             return SanofiHacat::all()->pluck('name', 'id');
-        }
+        }        
     }
 
     /**
@@ -216,17 +194,17 @@ class SanofiRequestRiskController extends Controller
         $request_risk->paises = json_encode($request->input('paises'));
         $request_risk->date_solicitud = Carbon::now();
         $request_risk->matriz_question = $request->input('matriz_question');
-        $request_risk->terminos_question = $request->input('terminos_question');
+        $request_risk->terminos_question = $request->input('terminos_question');  
 
         /* Validadores de Estado de Dependencias * */
 
         $sanofyHacat = SanofiHacat::find($request->hacat);
-
+        
         $hys = $sanofyHacat->hys == 1 ? 1:0;
         $csr = $sanofyHacat->csr == 1 ? 1:0;
         $csy = $sanofyHacat->csy == 1 ? 1:0;
         $env = $sanofyHacat->env == 1 ? 1:0;
-        $csi = $request->input('cadena_suministros');
+        $csi = 1; // (Provisionalmente)
 
         if($request_risk->matriz_question == 0){
             $request_risk->matriz_justification = $request->input('matriz_justification');
@@ -236,7 +214,7 @@ class SanofiRequestRiskController extends Controller
             $ethics = $sanofyHacat->ethics == 1 ? 1:0;
             $dda = $sanofyHacat->dda == 1 ? 1:0;
         }
-
+        
         if($request_risk->sanofi_provider != 2){
             $request_risk->condicion_pago = $request->condicion_pago;
         }
@@ -248,8 +226,8 @@ class SanofiRequestRiskController extends Controller
         $request_risk->save();
 
         /* Agregar Aprobación de Compras */
-
-
+        
+        
         if($request->file('update_attachment_compras')){
             $fileReporte = $request->file('update_attachment_compras');
             $fileInformeName = $request_risk->id.'-Aprobacion-Compra.'.$fileReporte->getClientOriginalExtension();
@@ -276,7 +254,7 @@ class SanofiRequestRiskController extends Controller
 
         $request_form->save();
 
-
+      
         /*Adding files
         $fileReporte = $request->file('orden');
         $fileReporteName = 'OC-'.$request_risk->id.'.'.$fileReporte->getClientOriginalExtension();
@@ -292,7 +270,7 @@ class SanofiRequestRiskController extends Controller
 
         $paises = implode(",", $input['paises']);
 
-        /* SEND EMAIL
+        /* SEND EMAIL      
         $data = array(
             'id_request' => "SR-0".$request_risk->id,
             'name_solicitante' => $user->name,
@@ -304,7 +282,7 @@ class SanofiRequestRiskController extends Controller
             'date_solicitud' => $request_risk->date_solicitud
         );
 
-        Mail::to($request_risk->user_email)->cc("soporte@riskgc.com")->send(new SanofiRiskCreate($data));
+        Mail::to($request_risk->user_email)->cc("soporte@riskgc.com")->send(new SanofiRiskCreate($data)); 
         */
 
         $request->session()->flash('error', 'Solicitud creada satisfactoriamente.');
@@ -345,17 +323,17 @@ class SanofiRequestRiskController extends Controller
         $request_risk->paises = implode(", ", $paises);
 
 
-        $provider = SanofiProvider::find($request_risk->sanofi_provider);
+        $provider = SanofiProvider::find($request_risk->sanofi_provider); 
         $request_risk->sanofi_provider = $provider->name;
 
         $statusName = SanofiRequestStatus::find($request_risk->status_id);
         $request_risk->status_id_name = $statusName->name;
 
-
+        
         /*$type = SanofiRequestType::find($request_risk->request_type);
         $type ? $request_risk->request_type = $type->name : $request_risk->request_type = "Sin Información";
         */
-
+        
         $hacat = SanofiHacat::find($request_risk->hacat);
         $hacat ? $request_risk->hacat = $hacat->name : $request_risk->hacat = "";
 
@@ -369,26 +347,26 @@ class SanofiRequestRiskController extends Controller
         /*Multiples países*/
         $paises = json_decode($request_form->multiple_select_country);
         if(is_null($paises)){
-
+			
             $paises = explode(",", $request_form->multiple_select_country);
 			foreach ($paises as $key => $pais) {
                 $country = SanofiHomologationCountry::find($pais);
                 $paises[$key] = $country->country;
             }
-            $request_form->multiple_select_country = implode(", ", $paises);
-
+            $request_form->multiple_select_country = implode(", ", $paises);  
+			
         }else{
             if(is_array($paises)){
                 foreach ($paises as $key => $pais) {
                     $country = SanofiHomologationCountry::find($pais);
                     $paises[$key] = $country->country;
                 }
-                $request_form->multiple_select_country = implode(", ", $paises);
+                $request_form->multiple_select_country = implode(", ", $paises);  
             }else{
                 $country = SanofiHomologationCountry::find($paises);
                 $request_form->multiple_select_country = $country->country;
             }
-		}
+		}        
 
         /*País Solicitante*/
         $country_homologation = Country::find($request_form->country_homologation);
@@ -400,7 +378,7 @@ class SanofiRequestRiskController extends Controller
 
         /*Documento representante Legal*/
         $document_representante = InspektorDocumentType::find($request_form->quest_22);
-        $document_representante ? $request_form->quest_22 = $document_representante->name : $request_form->quest_22 = "Sin Información";
+        $document_representante ? $request_form->quest_22 = $document_representante->name : $request_form->quest_22 = "Sin Información";       
 
 
         /*Tipo de cuenta*/
@@ -455,22 +433,30 @@ class SanofiRequestRiskController extends Controller
         $request_form->quest_67 = $request_form->quest_67 > 0 ? "SI":"NO";
         $request_form->quest_68 = $request_form->quest_68 > 0 ? "SI":"NO";
         $request_form->quest_69 = $request_form->quest_69 > 0 ? "SI":"NO";
-
-        /* Cuestionario Interno SAGRILAFT* */
-        // $request_form->coincidencia_laft  = $request_form->coincidencia_laft > 0 ? "SI":"NO";
-        // $request_form->antecedentes_disciplinarios  = $request_form->antecedentes_disciplinarios > 0 ? "SI":"NO";
-        // $request_form->antecedentes_penales   = $request_form->antecedentes_penales  > 0 ? "SI":"NO";
-        // $request_form->antecedentes_fiscales    = $request_form->antecedentes_fiscales   > 0 ? "SI":"NO";
-        // $request_form->coincidencia_pep    = $request_form->coincidencia_pep   > 0 ? "SI":"NO";
-        // $request_form->coincidencia_listas     = $request_form->coincidencia_listas    > 0 ? "SI":"NO";
-        // $request_form->coincidencia_fuentes      = $request_form->coincidencia_fuentes     > 0 ? "SI":"NO";
+        // $request_form->env_1 = $request_form->env_1 > 0 ? "SI":"NO";
+        // $request_form->env_2 = $request_form->env_2 > 0 ? "SI":"NO";
+        // $request_form->env_3 = $request_form->env_3 > 0 ? "SI":"NO";
+        // $request_form->env_4 = $request_form->env_4 > 0 ? "SI":"NO";
+        // $request_form->env_5 = $request_form->env_5 > 0 ? "SI":"NO";
+        // $request_form->env_6 = $request_form->env_6 > 0 ? "SI":"NO";
+        // $request_form->env_7 = $request_form->env_7 > 0 ? "SI":"NO";
+        // $request_form->env_8 = $request_form->env_8 > 0 ? "SI":"NO";
+        // $request_form->hys_1 = $request_form->hys_1 > 0 ? "SI":"NO";
+        // $request_form->hys_2 = $request_form->hys_2 > 0 ? "SI":"NO";
+        // $request_form->hys_3 = $request_form->hys_3 > 0 ? "SI":"NO";
+        // $request_form->hys_4 = $request_form->hys_4 > 0 ? "SI":"NO";
+        // $request_form->hys_5 = $request_form->hys_5 > 0 ? "SI":"NO";
+        // $request_form->hys_6 = $request_form->hys_6 > 0 ? "SI":"NO";
+        // $request_form->hys_7 = $request_form->hys_7 > 0 ? "SI":"NO";
+        // $request_form->hys_8 = $request_form->hys_8 > 0 ? "SI":"NO";
+        // $request_form->csy_1 = $request_form->csy_1 > 0 ? "SI":"NO";
 
         /* Obtener BeneficialOwnership */
 
         $bfs = BeneficialOwnership::where('forms_id', $request_form->id)->get();
 
         foreach ($bfs as $coincidence) {
-
+            
             if ($coincidence->type_bf == 1) {
                 $coincidence->type_bf_texto = "MANUAL";
             }elseif ($coincidence->type_bf == 0) {
@@ -493,70 +479,67 @@ class SanofiRequestRiskController extends Controller
                 $coincidence->document_beneficial_ownership = $document_type->name;
             }else{
                 $coincidence->document_beneficial_ownership = "NO APLICA";
-            }
+            }   
         }
-        // dd($request_form);
 
         return view('dashboard.sanofi.request_risk.show',compact('request_form', 'request_risk', 'bfs', 'user', 'hacats', 'statuses'));
     }
 
-    public function pending_notification()
+    public function pending_notification() 
     {
 
         $requests_risk = SanofiRequestRisk::where('status_id',5)
             ->where('request_type','Homologación')
             ->where('id', '>', 447)
             ->get();
-
+    
 
         $requests_risk_csr = [];
         $requests_risk_hys = [];
         $requests_risk_csy = [];
         $requests_risk_env = [];
         $requests_risk_ethics = [];
-        $requests_risk_sarlaft = [];
 
 
         $ethicsCorreo  = array("santiago.pogo@genfar.com","daniela.martinezsilva@genfar.com","Nelson.Fonseca@genfar.com");
         $csrCorreo  = array("juanita.cuervo@genfar.com");
-        $csyCorreo  = array("Ana.TorresVillalobos@genfar.com","Alexander.vidales@genfar.com");
+        $csyCorreo  = array("Ana.TorresVillalobos@genfar.com");
         $hysCorreo  = array("carlos.Sanchez@genfar.com");
         $envCorreo  = array("carlos.Sanchez@genfar.com");
-        $sarlaftCorreo  = array("nelson.fonseca@genfar.com");
-
+        
         foreach ($requests_risk as $key) {
             $request_form = SanofiRequestForm::where('sanofi_request_risk_id', $key->id)->first();
-
+            
             /*Evaluación CSR*/
             if($request_form->csr == 1 && $request_form->csr_comentario == null && ($request_form->csr_1 == 0 || $request_form->csr_2 == 0 ||
             $request_form->csr_3 == 0 || $request_form->csr_4 == 0 || $request_form->csr_5 == 0 ||
-            $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 ||
+            $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 || 
             $request_form->csr_10 == 0)){
                 $requests_risk_csr[] = $key;
             }
-            // /*Evaluación HYS*/
-            // if($request_form->hys == 1 && $request_form->hys_comentario == null && ($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 ||
-            // $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 ||
-            // $request_form->hys_7 == 0 || $request_form->hys_8 == 0)){
-            //     $requests_risk_hys[] = $key;
-            // }
+            
+            /*Evaluación HYS*/
+            if($request_form->hys == 1 && $request_form->hys_comentario == null && ($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 || 
+            $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 || 
+            $request_form->hys_7 == 0 || $request_form->hys_8 == 0)){
+                $requests_risk_hys[] = $key;
+            }
+            
             /*Evaluación CSY*/
             if($request_form->csy == 1 && $request_form->csy_comentario == null && $request_form->csy_1 == 0){
                 $requests_risk_csy[] = $key;
             }
             /*Evaluación ENV*/
-            // if($request_form->env == 1 && $request_form->env_comentario == null && ($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0)){
-            //     $requests_risk_env[] = $key;
-            // }
+            if($request_form->env == 1 && $request_form->env_comentario == null && ($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0)){
+                $requests_risk_env[] = $key;
+            }
+            
             /*Evaluación ETHICHS*/
             if($request_form->ethics == 1 && $request_form->ebi_recomendacion != "Bandera(s)/señales de alerta adecuadamente mitigada(s)"){
                 $requests_risk_ethics[] = $key;
             }
-            /*Evaluación SARLAFT*/
-            if($request_form->sarlaft_comentario != "APROBADO" && ($request_form->coincidencia_laft == 1 || $request_form->antecedentes_disciplinarios == 1 || $request_form->antecedentes_penales == 1 || $request_form->antecedentes_fiscales == 1 || $request_form->coincidencia_pep == 1 || $request_form->coincidencia_listas == 1 || $request_form->coincidencia_fuentes == 1)){
-                $requests_risk_sarlaft[] = $key;
-            }
-        }
+
+        } 
 
         if(count($requests_risk_csr) > 0){
             $data = array(
@@ -602,23 +585,14 @@ class SanofiRequestRiskController extends Controller
             );
             Mail::to($ethicsCorreo)->send(new GenfarNotifyAll($data));
         }
-
-        if(count($requests_risk_sarlaft) > 0){
-            $data = array(
-                'tickets' => $requests_risk_sarlaft,
-                'amount' => count($requests_risk_sarlaft),
-                'type' => "SARLAFT"
-            );
-            Mail::to($sarlaftCorreo)->send(new GenfarNotifyAll($data));
-        }
-
+        
         return redirect()->back()->with('success', 'El correo de Solicitudes Pendientes se ha enviado.');
-
+        
     }
 
 
     public function cancel(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
         $user = json_decode($request->user);
         $request_risk->observation .= " | ".$user->name." MOTIVO CANCELACIÓN: ".$request->observation;
@@ -631,7 +605,7 @@ class SanofiRequestRiskController extends Controller
 
     /** Gestión Formulario Ético */
     public function ethics(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
         $request_form = SanofiRequestForm::find($request->id);
 
@@ -665,7 +639,7 @@ class SanofiRequestRiskController extends Controller
         $request_risk->save();
         $request_form->save();
 
-
+        
         return redirect()->route('genfar-request-risk.index');
     }
 
@@ -677,7 +651,7 @@ class SanofiRequestRiskController extends Controller
 
         $user = json_decode($request->user);
         $user_solicitante = User::find($request_risk->user_solicitante);
-        $csyCorreo  = array($user_solicitante->email,"Ana.TorresVillalobos@genfar.com","Alexander.vidales@genfar.com");
+        $csyCorreo  = array($user_solicitante->email,"Ana.TorresVillalobos@genfar.com");
 
         $request_risk->observation .= " | ".$user->name." GESTION CSY : ".$request->observation;
         $request_form->csy_comentario = $request->observation;
@@ -701,7 +675,7 @@ class SanofiRequestRiskController extends Controller
 
     /** Gestión Formulario CSR */
     public function csr(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
         $request_form = SanofiRequestForm::find($request->id);
 
@@ -727,7 +701,7 @@ class SanofiRequestRiskController extends Controller
         $request_form->save();
 
         return redirect()->route('genfar-request-risk.index');
-
+        
     }
 
     /** Gestión Formulario HYS */
@@ -761,7 +735,7 @@ class SanofiRequestRiskController extends Controller
 
     /** Gestión Formulario ENV */
     public function env(Request $request){
-
+         
         $request_risk = SanofiRequestRisk::find($request->id);
         $request_form = SanofiRequestForm::find($request->id);
 
@@ -789,85 +763,10 @@ class SanofiRequestRiskController extends Controller
         return redirect()->route('genfar-request-risk.index');
     }
 
-    public function perfilamiento(Request $request){
-
-        $request_form = SanofiRequestForm::find($request->id);
-        $promedio = 0;
-        $promedio2 = 0;
-
-        if($request_form->csi_1 == "Mas de 15 años"){
-            $promedio = 1;
-        }elseif ($request_form->csi_1 == "De 10 a 15 años") {
-            $promedio = 3;
-        }elseif ($request_form->csi_1 == "De 5 a 10 años") {
-            $promedio = 7;
-        }elseif ($request_form->csi_1 == "Menos de 5 años") {
-            $promedio = 10;
-        }else{
-            $promedio = 0;
-        }
-
-
-
-
-        if($request_form->csi_2 == "OEA /C-TPAT / AEO / NEEC"){
-            $promedio += 1;
-        }elseif ($request_form->csi_2 == "ISO 28000 / BASC") {
-            $promedio += 3;
-        }elseif ($request_form->csi_2 == "Ninguna") {
-            $promedio += 10;
-        }else{
-            $promedio += 0;
-        }
-
-
-
-        $promedio += $request->perfilamiento_1 + $request->perfilamiento_2 + $request->perfilamiento_3 + $request->perfilamiento_4;
-
-        $request_form->calificacion_oea = $promedio/6;
-        $request_form->save();
-
-
-        return redirect()->back()->with('success', 'La evaluación del cuestionario OEA fué Calificado.');
-    }
-
-    public function sarlaft(Request $request){
-
-        $request_risk = SanofiRequestRisk::find($request->id);
-        $request_form = SanofiRequestForm::find($request->id);
-
-        $user = json_decode($request->user);
-        $user_solicitante = User::find($request_risk->user_solicitante);
-
-        $sarlaftCorreo  = array($user_solicitante->email,"nelson.fonseca@genfar.com");
-
-        $request_risk->observation .= " | ".$user->name." GESTION SARLAFT : ".$request->observation;
-        $request_form->sarlaft_comentario = $request->observation;
-        $request_form->sarlaft_observation = $request->sarlaft_observation;
-        $request_form->sarlaft_date = Carbon::now(); //FECHA DE REVISIÓN SARLAFT
-
-        $advices = "EL PROVEEDOR HA SIDO ".$request->observation." EN LA EVALUACIÓN SARLAFT REALIZADA POR NELSON FONSECA";
-
-        $data = array(
-            'name_solicitante' => $user->name,
-            'comment' => $request->observation,
-            'advices' => $advices,
-            'id_task' => "TASK-0".$request_risk->id,
-            'id' => $request_risk->id
-        );
-
-        Mail::to($sarlaftCorreo)->send(new GenfarEthicPlan($data));
-
-        $request_risk->save();
-        $request_form->save();
-
-        return redirect()->route('genfar-request-risk.index');
-    }
-
 
 
     public function migo(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
         $user = json_decode($request->user);
         $request_risk->observation .= " | ".$user->name." ACTUALIZACIÓN DE MIGO: ";
@@ -879,20 +778,19 @@ class SanofiRequestRiskController extends Controller
 
 
     public function manage(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
-        $fecha_hoy = Carbon::now();
 
         $user_solicitante = User::find($request_risk->user_solicitante);
         $request_form = SanofiRequestForm::where('sanofi_request_risk_id',(int)$request_risk->id)->first();
         $user = json_decode($request->user);
 
-        $copiasCorreos  = array($user_solicitante->email,"santiago.pogo@genfar.com","daniela.martinezsilva@genfar.com");
+        $copiasCorreos  = array($user_solicitante->email,"santiago.pogo@genfar.com","daniela.martinezsilva@genfar.com","Nelson.Fonseca@genfar.com");
         $csrCorreo  = array($user_solicitante->email,"juanita.cuervo@genfar.com");
-        $csyCorreo  = array($user_solicitante->email,"Ana.TorresVillalobos@genfar.com","Alexander.vidales@genfar.com");
+        $csyCorreo  = array($user_solicitante->email,"Ana.TorresVillalobos@genfar.com");
         $hysCorreo  = array($user_solicitante->email,"carlos.Sanchez@genfar.com");
         $envCorreo  = array($user_solicitante->email,"carlos.Sanchez@genfar.com");
-        $sarlaftCorreo  = array($user_solicitante->email,"nelson.fonseca@genfar.com");
+        //$copiasCorreos  = array($user_solicitante->email,"santiago.pogo@genfar.com","daniela.martinezsilva@genfar.com","Nelson.Fonseca@genfar.com");
 
 
         if($request->status == 1){
@@ -910,7 +808,7 @@ class SanofiRequestRiskController extends Controller
             $request_risk->status_id = 4;
             $request_risk->date_finalizacion = Carbon::now();
         }elseif ($request->status == 5) {
-
+            
             $fileReporte = $request->file('attachment_dds');
             $fileReporte2 = $request->file('attachment_dda');
 
@@ -923,27 +821,11 @@ class SanofiRequestRiskController extends Controller
                 $fileInformeName2 = $request_risk->id.'-1002-Debida Diligencia Ampliada.'.$fileReporte2->getClientOriginalExtension();
                 $request_risk->update(['dda' => $fileReporte2->storeAs('GENFAR/SUPLIERS/'.$request_risk->id, $fileInformeName2)]);
             }
-
-            /** ¿Ha identificado algún posible problema relacionado con la reputación del tercero expuesto o cualquier litigio existente o potencial que involucre al tercero expuesto o a su personal clave? */
+            
             $request_form->alert_dda = $request->dda_acept;
-            /** Hay coincidencias o hallazgo en Listas LA/FT/CO */
-            $request_form->coincidencia_laft = $request->coincidencia_laft;
-            /** Tiene Antecedentes Disciplianarios */
-            $request_form->antecedentes_disciplinarios = $request->antecedentes_disciplinarios;
-            /** Tiene Antecedentes Penales o condenas*/
-            $request_form->antecedentes_penales = $request->antecedentes_penales;
-            /** Tiene Antecedentes Fiscales*/
-            $request_form->antecedentes_fiscales = $request->antecedentes_fiscales;
-            /** Se trata de un PEP*/
-            $request_form->coincidencia_pep = $request->coincidencia_pep;
-            /** Hay coincidencias en otras listas*/
-            $request_form->coincidencia_listas = $request->coincidencia_listas;
-            /** ¿Otros Hallazgos en fuentes abiertas*/
-            $request_form->coincidencia_fuentes = $request->coincidencia_fuentes;
-
             $request_form->save();
 
-
+            
             /** ALERTA CUESTIONARIO ETICO */
             if($request_form->ethics == 1 && $request_risk->request_type == "Homologación"){
                 /**Si hay Alerta */
@@ -953,7 +835,7 @@ class SanofiRequestRiskController extends Controller
                         'id_task' => "TASK-0".$request_risk->id,
                         'id' => $request_risk->id
                     );
-
+        
                     Mail::to($copiasCorreos)->send(new GenfarEthicSubmit($data));
                 }
                 else{
@@ -970,43 +852,43 @@ class SanofiRequestRiskController extends Controller
             if($request_form->csr == 1 && $request_risk->request_type == "Homologación"){
                 if($request_form->csr_1 == 0 || $request_form->csr_2 == 0 ||
                 $request_form->csr_3 == 0 || $request_form->csr_4 == 0 || $request_form->csr_5 == 0 ||
-                $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 ||
+                $request_form->csr_6 == 0 || $request_form->csr_7 == 0 || $request_form->csr_9 == 0 || 
                 $request_form->csr_10 == 0){
                     $data = array(
                         'name_solicitante' => $user->name,
                         'id_task' => "TASK-0".$request_risk->id,
                         'id' => $request_risk->id
                     );
-
+        
                     Mail::to($csrCorreo)->send(new GenfarCSRAlert($data));
                 }
             }
 
-            // /** ALERTA CUESTIONARIO HYS */
-            // if($request_form->hys == 1 && $request_risk->request_type == "Homologación"){
-            //     if($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 || $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 || $request_form->hys_7 == 0 || $request_form->hys_8 == 0){
-            //         $data = array(
-            //             'name_solicitante' => $user->name,
-            //             'id_task' => "TASK-0".$request_risk->id,
-            //             'id' => $request_risk->id
-            //         );
-
-            //         Mail::to($hysCorreo)->send(new GenfarHYSAlert($data));
-            //     }
-            // }
-
-            // /** ALERTA CUESTIONARIO ENV */
-            // if($request_form->env == 1 && $request_risk->request_type == "Homologación"){
-            //     if($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0){
-            //         $data = array(
-            //             'name_solicitante' => $user->name,
-            //             'id_task' => "TASK-0".$request_risk->id,
-            //             'id' => $request_risk->id
-            //         );
-
-            //         Mail::to($envCorreo)->send(new GenfarENVAlert($data));
-            //     }
-            // }
+            /** ALERTA CUESTIONARIO HYS */
+            if($request_form->hys == 1 && $request_risk->request_type == "Homologación"){
+                if($request_form->hys_1 == 0 || $request_form->hys_2 == 1 || $request_form->hys_3 == 1 || $request_form->hys_4 == 1 || $request_form->hys_5 == 0 || $request_form->hys_6 == 0 || $request_form->hys_7 == 0 || $request_form->hys_8 == 0){
+                    $data = array(
+                        'name_solicitante' => $user->name,
+                        'id_task' => "TASK-0".$request_risk->id,
+                        'id' => $request_risk->id
+                    );
+        
+                    Mail::to($hysCorreo)->send(new GenfarHYSAlert($data));
+                }
+            }
+            
+            /** ALERTA CUESTIONARIO ENV */
+            if($request_form->env == 1 && $request_risk->request_type == "Homologación"){
+                if($request_form->env_1 == 0 || $request_form->env_2 == 0 || $request_form->env_3 == 1 || $request_form->env_4 == 1 || $request_form->env_5 == 0 || $request_form->env_6 == 0 || $request_form->env_7 == 0 || $request_form->env_8 == 0){
+                    $data = array(
+                        'name_solicitante' => $user->name,
+                        'id_task' => "TASK-0".$request_risk->id,
+                        'id' => $request_risk->id
+                    );
+        
+                    Mail::to($envCorreo)->send(new GenfarENVAlert($data));
+                }
+            }
 
             /** ALERTA CUESTIONARIO CSY */
             if($request_form->csy == 1 && $request_risk->request_type == "Homologación"){
@@ -1020,29 +902,16 @@ class SanofiRequestRiskController extends Controller
                 }
             }
 
-
-            /** ALERTA CUESTIONARIO SARLAFT */
-            if($request_form->coincidencia_laft == 1 || $request_form->antecedentes_disciplinarios == 1 || $request_form->antecedentes_penales == 1 || $request_form->antecedentes_fiscales == 1 || $request_form->coincidencia_pep == 1 || $request_form->coincidencia_listas == 1 || $request_form->coincidencia_fuentes == 1){
-                $data = array(
-                    'name_solicitante' => $user->name,
-                    'id_task' => "TASK-0".$request_risk->id,
-                    'id' => $request_risk->id
-                );
-                Mail::to($sarlaftCorreo)->send(new GenfarSARLAFTAlert($data));
-            }
-
             $request_risk->date_finalizacion = Carbon::now();
 
-
-
-            $request_risk->observation .= " | ".$fecha_hoy." MOTIVO HOMOLOGADO : ".$request->observation;
+            $request_risk->observation .= " | ".$user->name." MOTIVO HOMOLOGADO : ".$request->observation;
             $request_risk->status_id = 5;
         }
-
+        
         $request_risk->save();
         return back();
     }
-
+    
     /**
      * Download the specified resource from storage.
      *
@@ -1053,7 +922,7 @@ class SanofiRequestRiskController extends Controller
         $request_risk = SanofiRequestRisk::where('id', $id)->first();
         return \Storage::download($request_risk->dda);
     }
-
+    
     /**
      * Download the specified resource from storage.
      *
@@ -1066,7 +935,7 @@ class SanofiRequestRiskController extends Controller
     }
 
     public function buyer(Request $request){
-
+        
         $request_risk = SanofiRequestRisk::find($request->id);
         $user = json_decode($request->user);
         $request_risk->hacat = $request->hacat;
@@ -1117,12 +986,12 @@ class SanofiRequestRiskController extends Controller
     /**
      * Display the Swearch resource.
      *
-     * @param
+     * @param  
      * @return \Illuminate\Http\Response
      */
     public function findByURLView()
     {
-        return view("dashboard.sanofi.findByURL");
+        return view("dashboard.sanofi.findByURL"); 
     }
 
     public function findByURL(Request $request)
@@ -1133,36 +1002,36 @@ class SanofiRequestRiskController extends Controller
 
         if($request->ajax()){
             $output = "";
-
+            
             $genfars = DB::table('sanofi_request_risks')->where('provider_name','LIKE','%'.$request->search."%")->orWhere('provider_id','LIKE','%'.$request->search."%")->paginate(100);
             $sanofis = DB::table('sanofi_request_risk_olds')->where('provider_name','LIKE','%'.$request->search."%")->paginate(100);
             //$olds = DB::table('sanofi_request_olds')->where('nombre','LIKE','%'.$request->search."%")->orWhere('identificacion','LIKE','%'.$request->search."%")->paginate(100);
             $olds = DB::table('sanofi_request_olds')->where('identificacion','LIKE','%'.$request->search."%")->paginate(100);
-
+            
             if($genfars){
                 foreach($genfars as $key => $genfar){
-
+                    
                     $output.='<tr>'.
                     '<td>'.$genfar->id.'</td>'.
                     '<td>'.$genfar->provider_name.'</td>'.
                     '<td>'.$genfar->provider_id.'</td>'.
                     '<td>Solicitud de Genfar</td>'.
                     '<td><a href="https://ambientetest.datalaft.com:2091/genfar-request-risk/'.$genfar->id.'" target="_blank" class="btn btn-outline-danger"><i class="fas fa-edit"></i></a></td>'.
-                    '</tr>';
+                    '</tr>';     
                 }
             }
 
             if($sanofis){
-                foreach($sanofis as $key => $sanofi){
+                foreach($sanofis as $key => $sanofi){                
                     $output.='<tr>'.
                     '<td>'.$sanofi->id.'</td>'.
                     '<td>'.$sanofi->provider_name.'</td>'.
                     '<td> No Aplica</td>'.
                     '<td>Solicitud de Sanofi</td>'.
                     '<td><a href="https://ambientetest.datalaft.com:2091/sanofi-old/'.$sanofi->id.'" target="_blank" class="btn btn-outline-danger"><i class="fas fa-edit"></i></a></td>'.
-                    '</tr>';
+                    '</tr>';     
                 }
-            }
+            } 
 
             if($olds){
                 foreach($olds as $key => $old){
@@ -1172,7 +1041,7 @@ class SanofiRequestRiskController extends Controller
                     '<td>'.$key->indentificacion.'</td>'.
                     '<td>Solicitud a Risk International</td>'.
                     '<td><a href="https://ambientetest.datalaft.com:2091/genfar-old/'.$key->id.'" target="_blank" class="btn btn-outline-danger"><i class="fas fa-edit"></i></a></td>'.
-                    '</tr>';
+                    '</tr>';     
                 }
             }
 
@@ -1270,12 +1139,12 @@ class SanofiRequestRiskController extends Controller
         return \Storage::download($file_reporte->purchase_order);
     }
 
-    public function export()
+    public function export() 
     {
         return Excel::download(new SanofiRequestRiskExport, 'genfar_risk_requests.xlsx');
     }
 
-    public function exportForms()
+    public function exportForms() 
     {
         return Excel::download(new GenfarFormsExport, 'genfar_forms.xlsx');
     }

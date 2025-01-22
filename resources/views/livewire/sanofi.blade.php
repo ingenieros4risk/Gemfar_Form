@@ -183,43 +183,6 @@
                 </div>
             </div>
             <hr>
-            <hr>
-            @if($csi == 1)
-            <div style="text-align: left;" class="btn btn-block btn-primary" ><strong>{{__('t_manifestacion')}}</strong></div>
-            <hr>
-            <p>{{__('manifestacion_1')}}</p>
-            <p>{{__('manifestacion_2')}}</p>
-            <p>{{__('manifestacion_3')}}</p>   
-            <ol>
-                <li><p>{{__('manifestacion_4')}}</p></li>
-                <li><p>{{__('manifestacion_5')}}</p></li>
-                <li><p>{{__('manifestacion_6')}}</p></li>
-                <li><p>{{__('manifestacion_7')}}</p></li>
-                <li><p>{{__('manifestacion_8')}}</p></li>
-                <li><p>{{__('manifestacion_9')}}</p></li>
-                <li><p>{{__('manifestacion_10')}}</p></li>
-                <li><p>{{__('manifestacion_11')}}</p></li>
-                <li><p>{{__('manifestacion_12')}}</p></li>
-                <li><p>{{__('manifestacion_13')}}</p></li>
-                <li><p>{{__('manifestacion_14')}}</p></li>
-                <li><p>{{__('manifestacion_15')}}</p></li>
-                <li><p>{{__('manifestacion_16')}}</p></li>
-                <li><p>{{__('manifestacion_17')}}</p></li>
-                <li><p>{{__('manifestacion_18')}}</p></li>
-                <li><p>{{__('manifestacion_19')}}</p></li>
-            </ol>     
-            <p>{{__('manifestacion_20')}}</p>
-            <div class="row">
-                <div class="col-md-9">
-                    <p style="text-align: center;"><strong>{{__('p10')}}</strong></p>
-                </div>
-                <div class="col-md-3">
-                    <input class="form-control" type="checkbox" name="check_manifestacion" wire:model="check_manifestacion">
-                </div>
-                @error('check_manifestacion') <span class="text-danger error">{{ $message }}</span> @enderror
-            </div>
-            @endif            
-            <hr>
 	        <br>
             <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button" wire:click="back(1)">{{__('back')}}</button>
             <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button" wire:click.prevent="secondStepSubmit">{{__('continue')}} ></button>
@@ -1934,15 +1897,14 @@
 
         <!--Quest Suministro Internacional -->
         @if($csi == 1)
-        <div class="form-group">
             <hr>
-            <div style="text-align: left;" class="btn btn-block btn-dark">{{ __('title_csi')}}</div>
-            <hr>
+            <div style="text-align: left;" class="btn btn-block btn-dark" >CUESTIONARIO PARA DEMOSTRAR SEGURIDAD EN LA CADENA DE SUMINISTRO INTERNACIONAL</div>
+            <br>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_1')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>De cuantos años de experiencia es la trayectoria de su empresa en el negocio:</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_1" wire:model="csi_1">
                         <option value="Mas de 15 años">Mas de 15 años</option>
                         <option value="De 10 a 15 años">De 10 a 15 años</option>
@@ -1954,10 +1916,10 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_2')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Su Empresa Cuenta Con Certificacion En Sistemas De Gestion De Seguridad De La Cadena De Suministro Internacional?:</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_2" wire:model="csi_2">
                         <option value="OEA /C-TPAT / AEO / NEEC">OEA /C-TPAT / AEO / NEEC</option>
                         <option value="ISO 28000 / BASC">ISO 28000 / BASC</option>
@@ -1968,38 +1930,24 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_3')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Su empresa suministra material de empaque para exportacion?</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_3" wire:model="csi_3">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
                         <input type="text" placeholder="Si la repuesta es SI, indique que material de empaque" class="form-control" name="empaque" wire:model="empaque">
                     </select>
                     @error('csi_3') <span class="text-danger error">{{ $message }}</span> @enderror
                 </div>
             </div>
+            <br>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_10')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Que Incoterm Ha Sido Negociado Con Las Empresas Del Grupo Genfar</strong></label>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-control-sm form-control" name="csi_10" wire:model="csi_10">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
-                        <input type="text" placeholder="Si la repuesta es SI, indique cuales servicios" class="form-control" name="servicios" wire:model="servicios">
-                    </select>
-                    @error('csi_10') <span class="text-danger error">{{ $message }}</span> @enderror
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_4')}}</strong></label>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_4" wire:model="csi_4">
                         <option value="EXW">EXW</option>
                         <option value="FOB-FCA">FOB-FCA</option>
@@ -2012,10 +1960,10 @@
             <br>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-9">
-                        <label><strong>{{ __('csi_5')}}</strong></label>
+                    <div class="col-md-6">
+                        <label><strong>Si Usted Es Un Proveedor Extranjero En Que Paises Presta Servicios A Las Empresas Del Grupo Genfar:</strong></label>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <input type="text" class="form-control" placeholder="Indique en que país(es), presta servicios:" name="csi_5" wire:model="csi_5">
                         @error('csi_5') <span class="text-danger error">{{ $message }}</span> @enderror
                     </div>
@@ -2023,59 +1971,44 @@
             </div>
             <br>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_6')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Su Empresa Maneja Informacion Confidencial De Las Empresas Del Grupo Genfar Relacionadas Con La Cadena De Suministro Internacional?.</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_6" wire:model="csi_6">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
+                        <option value="SI">SI </option>
+                        <option value="NO">NO</option>
                         <input type="text" placeholder="Si la repuesta es SI, indique que tipo de información confidencial?" class="form-control" name="confidencial" wire:model="confidencial">
                     </select>
                     @error('csi_6') <span class="text-danger error">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_7')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Su Empresa Tiene Contacto Con La Carga De Exportacion De Las Empresas Del Grupo Genfar?</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_7" wire:model="csi_7">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
+
+                        <option value="SI">SI</option>
+                        <option value="NO">NO</option>
                     </select>
                     @error('csi_7') <span class="text-danger error">{{ $message }}</span> @enderror
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_8')}}</strong></label>
+                <div class="col-md-6">
+                    <label><strong>Su Empresa Tiene Contacto Con La Carga De Importacion De Las Empresas Del Grupo Genfar?</strong></label>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <select class="form-control-sm form-control" name="csi_8" wire:model="csi_8">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
+                        <option value="">Seleccione un respuesta</option>
+                        <option value="SI">SI </option>
+                        <option value="NO">NO</option>
                     </select>
                     @error('csi_8') <span class="text-danger error">{{ $message }}</span> @enderror
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <label><strong>{{ __('csi_9')}}</strong></label>
-                </div>
-                <div class="col-md-3">
-                    <select class="form-control-sm form-control" name="csi_9" wire:model="csi_9">
-                        <option selected value="">{{ __('seleccione')}}</option>
-                        <option value="SI">{{ __('si')}}</option>
-                        <option value="NO">{{ __('no')}}</option>
-                    </select>
-                    @error('csi_9') <span class="text-danger error">{{ $message }}</span> @enderror
-                </div>
-            </div>
-        </div>
         @endif
 
 
@@ -3276,8 +3209,8 @@
                                         <label><strong>{{ __('Es PEP:')}}</strong></label>
                                             <select class="form-control-sm form-control" wire:model="is_pep.{{$index}}">
                                                 <option value="">Seleccione una respuesta</option>
-                                                    <option value="1">{{ __('si')}}</option>
-                                                    <option value="0">{{ __('no')}}</option>
+                                                    <option value="1">Si</option>
+                                                    <option value="0">NO</option>
                                             </select>
                                             @error('is_pep.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
                                     </div>
@@ -3424,304 +3357,18 @@
                 </div>
             </div>
 
-            <hr>
 
-            @if($csi == 1)
+            <hr>
+            <!--
+            @if(in_array(1,$multiple_select_country) or in_array(2,$multiple_select_country))
+
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{ __('certificaciones_seguridad')}}:</strong></label>
+                        <div class="col-md-9">
+                            <label><strong>Si la compañía ó tercero cuenta con la siguiente información por favor enviarla (No obligatorio) :</strong></label>
                         </div>
                         <div class="col-md-9">
-                            <select class="form-control-sm form-control" name="certificaciones_seguridad" wire:model="certificaciones_seguridad">
-                                <option selected value="">{{ __('seleccione')}}</option>
-                                <option value="1">{{ __('si')}}</option>
-                                <option value="0">{{ __('no')}}</option>
-                            </select>
-                            @error('certificaciones_seguridad') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-
-                @if($certificaciones_seguridad == 1)
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_basc')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="file" name="file_basc" wire:model="file_basc">
-                                @error('file_basc') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="col-md-3">
-                                <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="date" class="form-control" name="date_basc" value="{{$date_basc}}" wire:model="date_basc">
-                                @error('date_basc') <span class="text-danger error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_iso28000')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="file" name="file_iso28000" wire:model="file_iso28000">
-                                @error('file_iso28000') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="col-md-3">
-                                <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="date" class="form-control" name="date_iso28000" value="{{$date_iso28000}}" wire:model="date_iso28000">
-                                @error('date_iso28000') <span class="text-danger error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_neec')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="file" name="file_neec" wire:model="file_neec">
-                                @error('file_neec') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="col-md-3">
-                                <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="date" class="form-control" name="date_neec" value="{{$date_neec}}" wire:model="date_neec">
-                                @error('date_neec') <span class="text-danger error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_ctpat')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="file" name="file_ctpat" wire:model="file_ctpat">
-                                @error('file_ctpat') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="col-md-3">
-                                <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="date" class="form-control" name="date_ctpat" value="{{$date_ctpat}}" wire:model="date_ctpat">
-                                @error('date_ctpat') <span class="text-danger error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_seguridad_otro')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input class="form-control" type="file" name="file_seguridad_otro" wire:model="file_seguridad_otro">
-                                @error('file_seguridad_otro') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                            <div class="col-md-3">
-                                <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                            </div>
-                            <div class="col-md-3">
-                                <input type="date" class="form-control" name="date_seguridad_otro" value="{{$date_seguridad_otro}}" wire:model="date_seguridad_otro">
-                                @error('date_seguridad_otro') <span class="text-danger error">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('file_bcp')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="file_bcp" wire:model="file_bcp">
-                                @error('file_bcp') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-
-                @endif
-
-            @endif
-
-            <hr>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{ __('certificaciones_hse')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <select class="form-control-sm form-control" name="certificaciones_hse" wire:model="certificaciones_hse">
-                            <option selected value="">{{ __('seleccione')}}</option>
-                            <option value="1">{{ __('si')}}</option>
-                            <option value="0">{{ __('no')}}</option>
-                        </select>
-                        @error('certificaciones_hse') <span class="text-danger error">{{ $message }}</span> @enderror
-                    </div>
-                </div>
-            </div>
-
-            @if($certificaciones_hse == 1)
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label><strong>{{ __('title_hse')}}</strong></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_iso14001')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_iso14001" wire:model="file_iso14001">
-                            @error('file_iso14001') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_iso14001" value="{{$date_iso14001}}" wire:model="date_iso14001">
-                            @error('date_iso14001') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_iso45001')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_iso45001" wire:model="file_iso45001">
-                            @error('file_iso45001') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_iso45001" value="{{$date_iso45001}}" wire:model="date_iso45001">
-                            @error('date_iso45001') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_ruc')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_ruc" wire:model="file_ruc">
-                            @error('file_ruc') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_ruc" value="{{$date_ruc}}" wire:model="date_ruc">
-                            @error('date_ruc') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_iso26000')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_iso26000" wire:model="file_iso26000">
-                            @error('file_iso26000') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_iso26000" value="{{$date_iso26000}}" wire:model="date_iso26000">
-                            @error('date_iso26000') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_sa8000')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_sa8000" wire:model="file_sa8000">
-                            @error('file_sa8000') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_sa8000" value="{{$date_sa8000}}" wire:model="date_sa8000">
-                            @error('date_sa8000') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_smeta')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_smeta" wire:model="file_smeta">
-                            @error('file_smeta') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_smeta" value="{{$date_smeta}}" wire:model="date_smeta">
-                            @error('date_smeta') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_psci')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_psci" wire:model="file_psci">
-                            @error('file_psci') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_psci" value="{{$date_psci}}" wire:model="date_psci">
-                            @error('date_psci') <span class="text-danger error">{{ $message }}</span> @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('file_ecovadis')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="file_ecovadis" wire:model="file_ecovadis">
-                            @error('file_ecovadis') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                        <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
-                        </div>
-                        <div class="col-md-3">
-                            <input type="date" class="form-control" name="date_ecovadis" value="{{$date_ecovadis}}" wire:model="date_ecovadis">
-                            @error('date_ecovadis') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <label><strong>If the company or third party has the following information, please send it (Not mandatory):</strong></label>
                         </div>
                     </div>
                 </div>
@@ -3729,22 +3376,71 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-3">
-                            <label><strong>{{__('hse_otros')}}:</strong></label>
+                            <label><strong>{{__('certificado_oea')}}:</strong></label>
                         </div>
-                        <div class="col-md-3">
-                            <input class="form-control" type="file" name="hse_otros" wire:model="hse_otros">
-                            @error('hse_otros') <span class="text-danger error">{{ $message }}</span>@enderror
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_oea" wire:model="certificado_oea">
                         </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-md-3">
-                            <label><strong>{{__('fecha_vigencia')}}:</strong></label>
+                            <label><strong>{{__('certificado_laft')}}:</strong></label>
                         </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_laft" wire:model="certificado_laft">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
                         <div class="col-md-3">
-                            <input type="date" class="form-control" name="hse_date" value="{{$hse_date}}" wire:model="hse_date">
-                            @error('hse_date') <span class="text-danger error">{{ $message }}</span> @enderror
+                            <label><strong>{{__('certificado_iso')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_iso" wire:model="certificado_iso">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('certificado_politicas')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_politicas" wire:model="certificado_politicas">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('certificado_financiero')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_financiero" wire:model="certificado_financiero">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('certificado_comercial')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="certificado_comercial" wire:model="certificado_comercial">
                         </div>
                     </div>
                 </div>
             @endif
+            -->
+
 
             <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button" wire:click="back(5)">{{__('back')}}</button>
             <button class="btn btn-pill btn-primary nextBtn btn-sm pull-right" type="button" wire:click="sixtStepSubmit">{{__('submit')}} ></button>
