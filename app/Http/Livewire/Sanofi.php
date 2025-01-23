@@ -40,10 +40,17 @@ class Sanofi extends Component
 
     public $ethichal = 0, $hys = 0, $csr = 0, $csi = 0, $env = 0, $csy = 0;
 
-    public $empaque, $extranjero, $confidencial;
+    public $empaque, $extranjero, $confidencial, $servicios;
     public $csr_1, $csr_2, $csr_3, $csr_4, $csr_5, $csr_6, $csr_7, $csr_8, $csr_9, $csr_10, $csr_11;
+    public $csi_1, $csi_2, $csi_3, $csi_4, $csi_5, $csi_6, $csi_7, $csi_8, $csi_9, $csi_10, $check_manifestacion;
 
-    public $csi_1, $csi_2, $csi_3, $csi_4, $csi_5, $csi_6, $csi_7, $csi_8;
+    /** Variables OEA HSE */
+
+    public $calificacion_oea, $certificaciones_seguridad, $file_basc, $date_basc, $file_iso28000, $date_iso28000, 
+    $file_neec, $date_neec, $file_ctpat, $date_ctpat, $file_seguridad_otro, $date_seguridad_otro, $file_bcp,
+    $certificaciones_hse, $file_iso14001, $date_iso14001, $file_iso45001, $date_iso45001, $file_ruc, $date_ruc, 
+    $file_iso26000, $date_iso26000, $file_sa8000, $date_sa8000, $file_smeta, $date_smeta, $file_psci, 
+    $date_psci, $file_ecovadis, $date_ecovadis, $hse_otros, $hse_date;
 
     public $env_1, $env_2, $env_3, $env_4, $env_5, $env_6, $env_7, $env_8;
 
@@ -261,6 +268,8 @@ class Sanofi extends Component
         $this->csi_6 = $this->requests_form->csi_6;
         $this->csi_7 = $this->requests_form->csi_7;
         $this->csi_8 = $this->requests_form->csi_8;
+        $this->csi_9 = $this->requests_form->csi_9;
+        $this->csi_10 = $this->requests_form->csi_10;
 
 
         /*Saving CSI **/
@@ -326,6 +335,38 @@ class Sanofi extends Component
         $this->certificado_financiero = $requests_form->certificado_financiero;
         $this->certificado_comercial = $requests_form->certificado_comercial;
 
+        $this->calificacion_oea = $requests_form->calificacion_oea;
+        $this->certificaciones_seguridad = $requests_form->certificaciones_seguridad;
+        $this->file_basc = $requests_form->file_basc;
+        $this->date_basc = $requests_form->date_basc;
+        $this->file_iso28000 = $requests_form->file_iso28000;
+        $this->date_iso28000 = $requests_form->date_iso28000;
+        $this->file_neec = $requests_form->file_neec;
+        $this->date_neec = $requests_form->date_neec;
+        $this->file_ctpat = $requests_form->file_ctpat;
+        $this->date_ctpat = $requests_form->date_ctpat;
+        $this->file_seguridad_otro = $requests_form->file_seguridad_otro;
+        $this->date_seguridad_otro = $requests_form->date_seguridad_otro;
+        $this->file_bcp = $requests_form->file_bcp;
+        $this->certificaciones_hse = $requests_form->certificaciones_hse;
+        $this->file_iso14001 = $requests_form->file_iso14001;
+        $this->date_iso14001 = $requests_form->date_iso14001;
+        $this->file_iso45001 = $requests_form->file_iso45001;
+        $this->date_iso45001 = $requests_form->date_iso45001;
+        $this->file_ruc = $requests_form->file_ruc;
+        $this->date_ruc = $requests_form->date_ruc;
+        $this->file_iso26000 = $requests_form->file_iso26000;
+        $this->date_iso26000 = $requests_form->date_iso26000;
+        $this->file_sa8000 = $requests_form->file_sa8000;
+        $this->date_sa8000 = $requests_form->date_sa8000;
+        $this->file_smeta = $requests_form->file_smeta;
+        $this->date_smeta = $requests_form->date_smeta;
+        $this->file_psci = $requests_form->file_psci;
+        $this->date_psci = $requests_form->date_psci;
+        $this->file_ecovadis = $requests_form->file_ecovadis;
+        $this->date_ecovadis = $requests_form->date_ecovadis;
+        $this->hse_date  = $requests_form->hse_date;
+        $this->hse_otros = $requests_form->hse_otros;
 
     }
 
@@ -432,8 +473,14 @@ class Sanofi extends Component
             'sanofi_provider' => 'required',
             'country_homologation' => 'required',
             'type_person' => 'required',
-            'multiple_select_country' => 'required'
+            'multiple_select_country' => 'required',
+            'check_manifestacion' => 'required_if:csi,1',
         ],[
+            'sanofi_provider.required' => __('Seleccione_un_tipo_de_proveedor'),
+            'country_homologation.required' => __('Seleccione_un_pais'),
+            'type_person.required' => __('Seleccione_un_tipo_de_Persona'),
+            'multiple_select_country.required' => __('seleccione'),
+            'check_manifestacion.required_if' => __('check_manifestacion'),
             'sanofi_provider.required' => 'Seleccione un tipo de proveedor',
             'country_homologation.required' => 'Seleccione un país',
             'type_person.required' => 'Seleccione un tipo de Persona',
@@ -688,7 +735,10 @@ class Sanofi extends Component
                 'csi_5' => 'required',
                 'csi_6' => 'required',
                 'csi_7' => 'required',
-                'csi_8' => 'required'
+                'csi_8' => 'required',
+                'csi_9' => 'required',
+                'csi_10' => 'required'
+
             ]);
         }
 
@@ -859,6 +909,9 @@ class Sanofi extends Component
         $this->requests_form->csi_6 = $this->csi_6;
         $this->requests_form->csi_7 = $this->csi_7;
         $this->requests_form->csi_8 = $this->csi_8;
+        $this->requests_form->csi_9 = $this->csi_9;
+        $this->requests_form->csi_10 = $this->csi_10;
+
 
         /*Saving CSR **/
         $this->requests_form->csr_1 = $this->csr_1;
@@ -1169,10 +1222,321 @@ class Sanofi extends Component
             }
         }
 
+                /** NUEVOS DOCUMENTOS */
+
+        $this->requests_form->certificaciones_seguridad = $this->certificaciones_seguridad;
+        $this->requests_form->certificaciones_hse = $this->certificaciones_hse;
+
+        if($this->certificaciones_seguridad == 1){
+
+            if(!is_null($this->file_basc)){
+                $validatedOnly = $this->validate([
+                    'date_basc' => 'required'
+                ]);
+                $this->requests_form->date_basc = $this->date_basc;
+
+                $file_basc = $this->file_basc;
+                $fileReporteName = $this->requests_form->id.'-CERTIFICACION_BASC.'.$file_basc->getClientOriginalExtension();
+                $this->requests_form->update(['file_basc' => $this->file_basc->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+
+            if(!is_null($this->file_iso28000)){
+                $validatedOnly = $this->validate([
+                    'date_iso28000' => 'required'
+                ]);
+                $this->requests_form->date_iso28000 = $this->date_iso28000;
+
+                $file_iso28000 = $this->file_iso28000;
+                $fileReporteName = $this->requests_form->id.'-CERTIFICACION_ISO28000.'.$file_iso28000->getClientOriginalExtension();
+                $this->requests_form->update(['file_iso28000' => $this->file_iso28000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+
+            if(!is_null($this->file_neec)){
+                $validatedOnly = $this->validate([
+                    'date_neec' => 'required'
+                ]);
+                $this->requests_form->date_neec = $this->date_neec;
+
+                $file_neec = $this->file_neec;
+                $fileReporteName = $this->requests_form->id.'-CERTIFICACION_NEEC.'.$file_neec->getClientOriginalExtension();
+                $this->requests_form->update(['file_neec' => $this->file_neec->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+
+            if(!is_null($this->file_ctpat)){
+                $validatedOnly = $this->validate([
+                    'date_ctpat' => 'required'
+                ]);
+                $this->requests_form->date_ctpat = $this->date_ctpat;
+
+                $file_ctpat = $this->file_ctpat;
+                $fileReporteName = $this->requests_form->id.'-CERTIFICACION_CTPAT.'.$file_ctpat->getClientOriginalExtension();
+                $this->requests_form->update(['file_ctpat' => $this->file_ctpat->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+
+            if(!is_null($this->file_seguridad_otro)){
+                $validatedOnly = $this->validate([
+                    'date_seguridad_otro' => 'required'
+                ]);
+                $this->requests_form->date_seguridad_otro = $this->date_seguridad_otro;
+                
+                $file_seguridad_otro = $this->file_seguridad_otro;
+                $fileReporteName = $this->requests_form->id.'-OTRA_CERTIFICACION.'.$file_seguridad_otro->getClientOriginalExtension();
+                $this->requests_form->update(['file_seguridad_otro' => $this->file_seguridad_otro->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+
+            if(!is_null($this->file_bcp)){
+                $file_bcp = $this->file_bcp;
+                $fileReporteName = $this->requests_form->id.'-BCP.'.$file_bcp->getClientOriginalExtension();
+                $this->requests_form->update(['file_bcp' => $this->file_bcp->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+        }
 
 
-        self::submitForm();
+        // $this->date_sa8000 = $requests_form->date_sa8000;
+        // $this->date_smeta = $requests_form->date_smeta;
+        // $this->date_psci = $requests_form->date_psci;
+        // $this->date_ecovadis = $requests_form->date_ecovadis;
+        // $this->hse_date  = $requests_form->hse_date;
+      
 
+        /** Archivos de HSE */
+
+        if($this->certificaciones_hse == 1){
+            if(!is_null($this->file_iso14001)){
+                $validatedOnly = $this->validate([
+                    'date_iso14001' => 'required'
+                ]);
+                $this->requests_form->date_iso14001 = $this->date_iso14001;
+
+                $file_iso14001 = $this->file_iso14001;
+                $fileReporteName = $this->requests_form->id.'-ISO14001.'.$file_iso14001->getClientOriginalExtension();
+                $this->requests_form->update(['file_iso14001.' => $this->file_iso14001->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->file_iso45001)){
+                $validatedOnly = $this->validate([
+                    'date_iso45001' => 'required'
+                ]);
+                $this->requests_form->date_iso45001 = $this->date_iso45001;
+
+                $file_iso45001 = $this->file_iso45001;
+                $fileReporteName = $this->requests_form->id.'-ISO45001.'.$file_iso45001->getClientOriginalExtension();
+                $this->requests_form->update(['file_iso45001' => $this->file_iso45001->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->file_ruc)){
+                $validatedOnly = $this->validate([
+                    'date_ruc' => 'required'
+                ]);
+                $this->requests_form->date_ruc = $this->date_ruc;
+
+                $file_ruc = $this->file_ruc;
+                $fileReporteName = $this->requests_form->id.'-RUC.'.$file_ruc->getClientOriginalExtension();
+                $this->requests_form->update(['file_ruc' => $this->file_ruc->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->file_iso26000)){
+                $validatedOnly = $this->validate([
+                    'date_iso26000' => 'required'
+                ]);
+                $this->requests_form->date_iso26000 = $this->date_iso26000;
+
+                $file_iso26000 = $this->file_iso26000;
+                $fileReporteName = $this->requests_form->id.'-ISO26000.'.$file_iso26000->getClientOriginalExtension();
+                $this->requests_form->update(['file_iso26000' => $this->file_iso26000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+            
+            if(!is_null($this->file_sa8000)){
+                $file_sa8000 = $this->file_sa8000;
+                $fileReporteName = $this->requests_form->id.'-SA8000.'.$file_sa8000->getClientOriginalExtension();
+                $this->requests_form->update(['file_sa8000' => $this->file_sa8000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->file_smeta)){
+                $file_smeta = $this->file_smeta;
+                $fileReporteName = $this->requests_form->id.'-SMETA.'.$file_smeta->getClientOriginalExtension();
+                $this->requests_form->update(['file_smeta' => $this->file_smeta->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            
+            if(!is_null($this->file_psci)){
+                $file_psci = $this->file_psci;
+                $fileReporteName = $this->requests_form->id.'-PSCI.'.$file_psci->getClientOriginalExtension();
+                $this->requests_form->update(['file_psci' => $this->file_psci->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->file_ecovadis)){
+                $file_ecovadis = $this->file_ecovadis;
+                $fileReporteName = $this->requests_form->id.'-ECOVADIS.'.$file_ecovadis->getClientOriginalExtension();
+                $this->requests_form->update(['file_ecovadis' => $this->file_ecovadis->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+    
+            if(!is_null($this->hse_otros)){
+                $hse_otros = $this->hse_otros;
+                $fileReporteName = $this->requests_form->id.'-OTRA_CERTIFICACION_HSE.'.$hse_otros->getClientOriginalExtension();
+                $this->requests_form->update(['hse_otros' => $this->hse_otros->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+            }
+        }
+
+            /** NUEVOS DOCUMENTOS */
+
+            $this->requests_form->certificaciones_seguridad = $this->certificaciones_seguridad;
+            $this->requests_form->certificaciones_hse = $this->certificaciones_hse;
+    
+            if($this->certificaciones_seguridad == 1){
+    
+                if(!is_null($this->file_basc)){
+                    $validatedOnly = $this->validate([
+                        'date_basc' => 'required'
+                    ]);
+                    $this->requests_form->date_basc = $this->date_basc;
+    
+                    $file_basc = $this->file_basc;
+                    $fileReporteName = $this->requests_form->id.'-CERTIFICACION_BASC.'.$file_basc->getClientOriginalExtension();
+                    $this->requests_form->update(['file_basc' => $this->file_basc->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+    
+                if(!is_null($this->file_iso28000)){
+                    $validatedOnly = $this->validate([
+                        'date_iso28000' => 'required'
+                    ]);
+                    $this->requests_form->date_iso28000 = $this->date_iso28000;
+    
+                    $file_iso28000 = $this->file_iso28000;
+                    $fileReporteName = $this->requests_form->id.'-CERTIFICACION_ISO28000.'.$file_iso28000->getClientOriginalExtension();
+                    $this->requests_form->update(['file_iso28000' => $this->file_iso28000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+    
+                if(!is_null($this->file_neec)){
+                    $validatedOnly = $this->validate([
+                        'date_neec' => 'required'
+                    ]);
+                    $this->requests_form->date_neec = $this->date_neec;
+    
+                    $file_neec = $this->file_neec;
+                    $fileReporteName = $this->requests_form->id.'-CERTIFICACION_NEEC.'.$file_neec->getClientOriginalExtension();
+                    $this->requests_form->update(['file_neec' => $this->file_neec->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+    
+                if(!is_null($this->file_ctpat)){
+                    $validatedOnly = $this->validate([
+                        'date_ctpat' => 'required'
+                    ]);
+                    $this->requests_form->date_ctpat = $this->date_ctpat;
+    
+                    $file_ctpat = $this->file_ctpat;
+                    $fileReporteName = $this->requests_form->id.'-CERTIFICACION_CTPAT.'.$file_ctpat->getClientOriginalExtension();
+                    $this->requests_form->update(['file_ctpat' => $this->file_ctpat->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+    
+                if(!is_null($this->file_seguridad_otro)){
+                    $validatedOnly = $this->validate([
+                        'date_seguridad_otro' => 'required'
+                    ]);
+                    $this->requests_form->date_seguridad_otro = $this->date_seguridad_otro;
+                    
+                    $file_seguridad_otro = $this->file_seguridad_otro;
+                    $fileReporteName = $this->requests_form->id.'-OTRA_CERTIFICACION.'.$file_seguridad_otro->getClientOriginalExtension();
+                    $this->requests_form->update(['file_seguridad_otro' => $this->file_seguridad_otro->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+    
+                if(!is_null($this->file_bcp)){
+                    $file_bcp = $this->file_bcp;
+                    $fileReporteName = $this->requests_form->id.'-BCP.'.$file_bcp->getClientOriginalExtension();
+                    $this->requests_form->update(['file_bcp' => $this->file_bcp->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+            }
+    
+    
+            // $this->date_sa8000 = $requests_form->date_sa8000;
+            // $this->date_smeta = $requests_form->date_smeta;
+            // $this->date_psci = $requests_form->date_psci;
+            // $this->date_ecovadis = $requests_form->date_ecovadis;
+            // $this->hse_date  = $requests_form->hse_date;
+            
+    
+            /** Archivos de HSE */
+    
+            if($this->certificaciones_hse == 1){
+                if(!is_null($this->file_iso14001)){
+                    $validatedOnly = $this->validate([
+                        'date_iso14001' => 'required'
+                    ]);
+                    $this->requests_form->date_iso14001 = $this->date_iso14001;
+    
+                    $file_iso14001 = $this->file_iso14001;
+                    $fileReporteName = $this->requests_form->id.'-ISO14001.'.$file_iso14001->getClientOriginalExtension();
+                    $this->requests_form->update(['file_iso14001.' => $this->file_iso14001->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->file_iso45001)){
+                    $validatedOnly = $this->validate([
+                        'date_iso45001' => 'required'
+                    ]);
+                    $this->requests_form->date_iso45001 = $this->date_iso45001;
+    
+                    $file_iso45001 = $this->file_iso45001;
+                    $fileReporteName = $this->requests_form->id.'-ISO45001.'.$file_iso45001->getClientOriginalExtension();
+                    $this->requests_form->update(['file_iso45001' => $this->file_iso45001->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->file_ruc)){
+                    $validatedOnly = $this->validate([
+                        'date_ruc' => 'required'
+                    ]);
+                    $this->requests_form->date_ruc = $this->date_ruc;
+    
+                    $file_ruc = $this->file_ruc;
+                    $fileReporteName = $this->requests_form->id.'-RUC.'.$file_ruc->getClientOriginalExtension();
+                    $this->requests_form->update(['file_ruc' => $this->file_ruc->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->file_iso26000)){
+                    $validatedOnly = $this->validate([
+                        'date_iso26000' => 'required'
+                    ]);
+                    $this->requests_form->date_iso26000 = $this->date_iso26000;
+    
+                    $file_iso26000 = $this->file_iso26000;
+                    $fileReporteName = $this->requests_form->id.'-ISO26000.'.$file_iso26000->getClientOriginalExtension();
+                    $this->requests_form->update(['file_iso26000' => $this->file_iso26000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+                
+                if(!is_null($this->file_sa8000)){
+                    $file_sa8000 = $this->file_sa8000;
+                    $fileReporteName = $this->requests_form->id.'-SA8000.'.$file_sa8000->getClientOriginalExtension();
+                    $this->requests_form->update(['file_sa8000' => $this->file_sa8000->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->file_smeta)){
+                    $file_smeta = $this->file_smeta;
+                    $fileReporteName = $this->requests_form->id.'-SMETA.'.$file_smeta->getClientOriginalExtension();
+                    $this->requests_form->update(['file_smeta' => $this->file_smeta->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                
+                if(!is_null($this->file_psci)){
+                    $file_psci = $this->file_psci;
+                    $fileReporteName = $this->requests_form->id.'-PSCI.'.$file_psci->getClientOriginalExtension();
+                    $this->requests_form->update(['file_psci' => $this->file_psci->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->file_ecovadis)){
+                    $file_ecovadis = $this->file_ecovadis;
+                    $fileReporteName = $this->requests_form->id.'-ECOVADIS.'.$file_ecovadis->getClientOriginalExtension();
+                    $this->requests_form->update(['file_ecovadis' => $this->file_ecovadis->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+        
+                if(!is_null($this->hse_otros)){
+                    $hse_otros = $this->hse_otros;
+                    $fileReporteName = $this->requests_form->id.'-OTRA_CERTIFICACION_HSE.'.$hse_otros->getClientOriginalExtension();
+                    $this->requests_form->update(['hse_otros' => $this->hse_otros->storeAs('GENFAR/PROVIDER/'.$this->requests_form->id, $fileReporteName ,'local')]);
+                }
+            }
+    
+            
+    
+            self::submitForm();        
 
     }
 

@@ -138,6 +138,22 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label>El Proveedor hace parte de la cadena de suministro internacional?</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <select name="cadena_suministros" id="cadena_suministros" class="form-control input-lg" required>
+                                    <option value="1">Si</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                                         
                     <hr>
                     <div class="row">

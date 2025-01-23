@@ -63,7 +63,7 @@
                     <th>Check CSR</th>
                     <th>Check ENV</th>
                     <th>Check Ethics</th>
-                    <th>Check SARLAFT</th>
+                    <th>Check Sagrilaft</th>
                     <th>Check CSY</th>
                     <th>Fecha de Solicitud</th>
                     <th>Fecha de Solución</th>
@@ -122,9 +122,11 @@
                         @endif
                       </td>
                       <td>
-                        @if($value->sarlaft < 1)
+                      @if($value->sarlaft == 0)
                           <button class="btn btn-pill btn-block btn-success" type="button">OK</button>
-                        @else
+                          @elseif($value->sarlaft == 3)
+                          <button class="btn btn-pill btn-block btn-warning" type="button">Pendiente</button>
+                          @else
                           <button class="btn btn-pill btn-block btn-danger" type="button">X</button>
                         @endif
                       </td>

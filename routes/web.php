@@ -101,10 +101,12 @@ Route::group(['middleware' => ['get.menu']], function () {
     Route::group(['prefix' => '{language}'], function(){
         Route::get('genfar/create/{form}', 'SanofiRequestFormController@create');
         Route::get('/download_consentimiento/{diligencia}','SanofiRequestFormController@consentimiento')->name('genfar.consentimiento');
+        Route::get('/download_manifestacion/{diligencia}','SanofiRequestFormController@manifestacion')->name('genfar.manifestacion');
     });
 
     //Ruta de Formulario de Clientes
     Route::group(['prefix' => '{language}'], function(){
+        Route::get('genfar/clients/{form}', 'ClientsController@create');
         Route::get('genfar/clients/{form}', 'GenfarClientFormController@create');
    });
 
@@ -153,7 +155,8 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::post('/genfar-request-risk-csr', 'SanofiRequestRiskController@csr')->name('genfar.csr');
         Route::post('/genfar-request-risk-hys', 'SanofiRequestRiskController@hys')->name('genfar.hys');
         Route::post('/genfar-request-risk-env', 'SanofiRequestRiskController@env')->name('genfar.env');
-
+        Route::post('/genfar-request-risk-sarlaft', 'SanofiRequestRiskController@sarlaft')->name('genfar.sarlaft');
+        Route::post('/genfar-request-risk-perfilamiento', 'SanofiRequestRiskController@perfilamiento')->name('genfar.perfilamiento');
         Route::post('/genfar-request-risk-cancel', 'SanofiRequestRiskController@cancel')->name('genfar.cancel');
         Route::post('/genfar-request-risk-manage', 'SanofiRequestRiskController@manage')->name('genfar.manage');
         Route::post('/genfar-request-risk-migo', 'SanofiRequestRiskController@migo')->name('genfar.migo');
@@ -180,7 +183,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         Route::post('/genfar-supliers-aprobar', 'GenfarSupliersCreationController@aprobar')->name('genfar.aprobar');
         Route::post('/genfar-supliers-confirmar', 'GenfarSupliersCreationController@confirmar')->name('genfar.confirmar');
         Route::get('/download_attach_suplier/{diligence}', 'GenfarSupliersCreationController@downloadattach')->name('genfar.downloadattach');
-        Route::get('/download_attach_confirmation/{diligence}', 'GenfarSupliersCreationController@downloadattachConfirmation')->name('genfar.downloadattach_confirmation');
+        //Route::get('/download_attach_confirmation/{diligence}', 'GenfarSupliersCreationController@downloadattachConfirmation')->name('genfar.downloadattach_confirmation');
         Route::get('/download_attach_aprobation/{diligence}', 'GenfarSupliersCreationController@downloadattachAprobation')->name('genfar.downloadattach_aprobation');
         Route::get('export_tasks_suplier', 'GenfarSupliersCreationController@export')->name('genfar.tasks');
 
