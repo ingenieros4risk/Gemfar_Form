@@ -145,7 +145,23 @@ Route::group(['middleware' => ['get.menu']], function () {
 
         /* Rutas de la Solicitud de Clientes*/
         Route::resource('genfar-request-clients', 'ClientsController');
+        Route::get('/descargar/cliente/{clientId}/{filename}', function ($clientId, $filename) {
+            $path = "GENFAR/CLIENTS/{$clientId}/{$filename}";
+        
+            if (!Storage::disk('local')->exists($path)) {
+                abort(404);
+            }
 
+            $documentNames = config('documents.document_names');
+
+            preg_match('/_(qc\d+)\./', $filename, $matches);
+            $documentKey = $matches[1] ?? null;
+            $downloadName = isset($documentNames[$documentKey])
+                ? preg_replace('/[^A-Za-z0-9_\-]/', '_', $documentNames[$documentKey]) . '.' . pathinfo($filename, PATHINFO_EXTENSION)
+                : $filename;
+        
+            return Storage::disk('local')->download($path, $downloadName);
+        })->name('cliente.descargar');
 
 
         /* Rutas de la Solicitud*/

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Clients;
 use App\Models\ClientType;
+use App\Models\Inspektor\CurrentType;
+use App\Models\Inspektor\InspektorDocumentType;
 use App\Models\Sanofi\SanofiRequestStatus;
 use App\Models\GenfarClientForm;
 use App\Models\User;
@@ -146,11 +148,16 @@ class ClientsController extends Controller
      */
     public function show($id)
     {
+        //dd('Estoy en ClientsController@show'); 
         $user = auth()->user();
         $Client = Clients::find($id);
         $statuses = SanofiRequestStatus::all();
+        $clientForm = GenfarClientForm::where('client_id', $Client->id)->first();
+        $document_types = InspektorDocumentType::pluck('name', 'id')->toArray();
+        $money = CurrentType::pluck('name', 'id')->toArray();
+        $uploadedDocuments = $clientForm ? $clientForm->getUploadedDocuments() : [];
 
-        return view('dashboard.sanofi.client.show',compact('Client', 'user', 'statuses'));
+        return view('dashboard.sanofi.client.show',compact('Client', 'user', 'statuses', 'clientForm','document_types', 'money', 'uploadedDocuments'));
 
     }
 

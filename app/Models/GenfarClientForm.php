@@ -29,4 +29,21 @@ class GenfarClientForm extends Model
         'qc96','qc97','qc98','qc99','qc100','qc101','qc102','qc103','qc104','qc105',
         'qc106','qc107','multiple_select_country','country_homologation'
     ];
+
+    public function getUploadedDocuments()
+    {
+        $documentNames = config('documents.document_names');
+        $uploadedDocuments = [];
+
+        foreach ($documentNames as $field => $name) {
+            if (!empty($this->$field)) {
+                $uploadedDocuments[] = [
+                    'name' => $name,
+                    'path' => $this->$field
+                ];
+            }
+        }
+
+        return $uploadedDocuments;
+    }
 }

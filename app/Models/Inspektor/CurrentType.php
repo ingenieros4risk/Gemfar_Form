@@ -9,15 +9,12 @@ class CurrentType extends Model
 {
     use HasFactory;
 
-    protected $table = 'current_types';
+    protected $table = 'current_types'; 
 
-    /**
+        /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'iso', 'symbol'
-    ];
-
+    protected $fillable = ['name', 'iso', 'symbol']; 
 }

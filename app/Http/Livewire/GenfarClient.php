@@ -75,36 +75,30 @@ class GenfarClient extends Component
 
     public function render()
     {
-        $money = CurrentType::all();
+        $money = CurrentType::orderBy('name')->get();
+        $document_types = InspektorDocumentType::orderBy('name')->get();
     	$countries = SanofiHomologationCountry::all();
-        //$type_homologation = SanofiHomologationType::all();
     	$paises = Country::all();
-        //$providers = SanofiProvider::all();
-        $document_types = InspektorDocumentType::all();
         $legal_entities = LegalEntity::orderBy('name', 'asc')->get();
         $sales_organization = SalesOrganization::orderBy('name', 'asc')->get();
         $channels = Channels::orderBy('name', 'asc')->get();
         $sectors = Sector::orderBy('name', 'asc')->get();
         $oficinas_ventas = Oficinas_Ventas::orderBy('name', 'asc')->get();
         $grupos_vendedores = GrupoVendedores::orderBy('name', 'asc')->get();
-        $money = CurrentType::all();
+       
 
-
-
-    	return view('livewire.genfar-client', compact(
-        	'countries',
-        	'paises',
-            //'providers',
-            'document_types',
-            'money',
+        return view('livewire.genfar-client', compact(
+            'countries',
+            'paises',
+            'document_types', 
+            'money', 
             'legal_entities',
             'sales_organization',
             'channels',
             'sectors',
             'oficinas_ventas',
-            'grupos_vendedores',
-            'money'
-    	));
+            'grupos_vendedores'
+        ));
 
     }
 
@@ -171,39 +165,6 @@ class GenfarClient extends Component
             // ,'multiple_select_country.required' => 'Seleccione un respusta'
         ]);
 
-        /*Validate if is_International*/
-        // if($this->country_homologation != 1 and $this->country_homologation != 5 and $this->country_homologation != 3){
-        //     $this->is_international = 1;
-        // }else{
-        //     switch ($this->country_homologation) {
-        //         case 1:
-        //             if(in_array(3,$this->multiple_select_country) || in_array(4,$this->multiple_select_country))
-        //                 $this->is_international = 1;
-        //             break;
-        //         case 3:
-        //             if(in_array(1,$this->multiple_select_country) || in_array(3,$this->multiple_select_country))
-        //                 $this->is_international = 1;
-
-        //             break;
-        //         case 5:
-        //             if(in_array(1,$this->multiple_select_country) || in_array(4,$this->multiple_select_country))
-        //                 $this->is_international = 1;
-
-        //             break;
-        //         default:
-        //             # code...
-        //             break;
-        //     }
-        // }
-
-        /*Validate Countries Vars*/
-        // in_array(1,$this->multiple_select_country) ? $this->is_co = 1 : $this->is_co = 0;
-        // in_array(3,$this->multiple_select_country) ? $this->is_pe = 1 : $this->is_pe = 0;
-        // in_array(5,$this->multiple_select_country) ? $this->is_ec = 1 : $this->is_ec = 0;
-
-        // $multiple = implode(",", $this->multiple_select_country);
-
-        // $this->requests_form->sanofi_provider  = $this->sanofi_provider;
         $this->requests_form->country_homologation = $this->country_homologation;
         // $this->requests_form->multiple_select_country = $multiple;
 
@@ -310,13 +271,6 @@ class GenfarClient extends Component
             'qc73'=> 'required|max:30'
         ]);
 
-        // $this->requests_form->qc1  = $this->qc1;
-        // $this->requests_form->qc2  = $this->qc2;
-        // $this->requests_form->qc3  = $this->qc3;
-        // $this->requests_form->qc4  = $this->qc4;
-        // $this->requests_form->qc5  = $this->qc5;
-        // $this->requests_form->qc6  = $this->qc6;
-        // $this->requests_form->qc7  = $this->qc7;
         $this->requests_form->qc8  = $this->qc8;
         $this->requests_form->qc9  = $this->qc9;
         $this->requests_form->qc10  = $this->qc10;
@@ -383,42 +337,6 @@ class GenfarClient extends Component
         $this->requests_form->qc71  = $this->qc71;
         $this->requests_form->qc72  = $this->qc72;
         $this->requests_form->qc73  = $this->qc73;
-        // $this->requests_form->qc74  = $this->qc74;
-        // $this->requests_form->qc75  = $this->qc75;
-        // $this->requests_form->qc76  = $this->qc76;
-        // $this->requests_form->qc77  = $this->qc77;
-        // $this->requests_form->qc78  = $this->qc78;
-        // $this->requests_form->qc79  = $this->qc79;
-        // $this->requests_form->qc80  = $this->qc80;
-        // $this->requests_form->qc81  = $this->qc81;
-        // $this->requests_form->qc82  = $this->qc82;
-        // $this->requests_form->qc83  = $this->qc83;
-        // $this->requests_form->qc84  = $this->qc84;
-        // $this->requests_form->qc85  = $this->qc85;
-        // $this->requests_form->qc86  = $this->qc86;
-        // $this->requests_form->qc87  = $this->qc87;
-        // $this->requests_form->qc88  = $this->qc88;
-        // $this->requests_form->qc89  = $this->qc89;
-        // $this->requests_form->qc90  = $this->qc90;
-        // $this->requests_form->qc91  = $this->qc91;
-        // $this->requests_form->qc92  = $this->qc92;
-        // $this->requests_form->qc93  = $this->qc93;
-        // $this->requests_form->qc94  = $this->qc94;
-        // $this->requests_form->qc95  = $this->qc95;
-        // $this->requests_form->qc96  = $this->qc96;
-        // $this->requests_form->qc97  = $this->qc97;
-        // $this->requests_form->qc98  = $this->qc98;
-        // $this->requests_form->qc99  = $this->qc99;
-        // $this->requests_form->qc100  = $this->qc100;
-        // $this->requests_form->qc101  = $this->qc101;
-        // $this->requests_form->qc102  = $this->qc102;
-        // $this->requests_form->qc103  = $this->qc103;
-        // $this->requests_form->qc104  = $this->qc104;
-        // $this->requests_form->qc105  = $this->qc105;
-        // $this->requests_form->qc106  = $this->qc106;
-        // $this->requests_form->qc107  = $this->qc107;
-
-
 
         $this->requests_form->save();
 
@@ -445,51 +363,6 @@ class GenfarClient extends Component
                     'participation_control.0' => 'required|min:1',
                     'is_pep.0' => 'required'
                 ]);
-
-                /*
-                $validatedDate = $this->validate([
-                    'full_name.0' => 'required|min:6',
-                    'bf_type_person.0' => 'required|min:6',
-                    'bf_document.0' => 'required',
-                    'bf_nit.0' => 'required|min:6',
-                    'bf_control.0' => 'required|min:6',
-                    'bf_country_birth.0' => 'required',
-                    'bf_sex' => 'required',
-                    'bf_country_birth.0' => 'required',
-                    'bf_country_home.0' => 'required|min:6',
-                    'bf_country_fiscal.0' => 'required|min:6',
-                    'bf_charge.0' => 'required|min:6',
-                    'bf_place_work.0' => 'required|min:6',
-                    'bf_telephone.0' => 'required|min:6',
-                    'bf_email.0' => 'required|min:6',
-                    'bf_address_work.0' => 'required|min:6',
-                    'bf_address_home.0' => 'required|min:6',
-                    'bf_pep_time.0' => 'required|min:6',
-                    'bf_pep_charge.0' => 'required|min:6',
-                    'coincidence_country.0' => 'required'
-                ],
-                [
-                    'full_name.0' => 'required|min:6',
-                    'bf_type_person.0' => 'required|min:6',
-                    'bf_document.0' => 'required',
-                    'bf_nit.0' => 'required|min:6',
-                    'bf_control.0' => 'required|min:6',
-                    'bf_country_birth.0' => 'required',
-                    'bf_sex' => 'required',
-                    'bf_country_birth.0' => 'required',
-                    'bf_country_home.0' => 'required|min:6',
-                    'bf_country_fiscal.0' => 'required|min:6',
-                    'bf_charge.0' => 'required|min:6',
-                    'bf_place_work.0' => 'required|min:6',
-                    'bf_telephone.0' => 'required|min:6',
-                    'bf_email.0' => 'required|min:6',
-                    'bf_address_work.0' => 'required|min:6',
-                    'bf_address_home.0' => 'required|min:6',
-                    'bf_pep_time.0' => 'required|min:6',
-                    'bf_pep_charge.0' => 'required|min:6',
-                    'coincidence_country.0' => 'required'
-                ]);
-                */
 
                 foreach ($this->full_name as $key => $value)
                 {
@@ -567,51 +440,112 @@ class GenfarClient extends Component
 
     public function sixtStepSubmit()
     {
-
-        $validatedOnly = $this->validate([
-            'qc74'=> 'required',
-            'qc75'=> 'required',
-            'qc76'=> 'required',
-            'qc77'=> 'required',
-            'qc78'=> 'required',
-            'qc79'=> 'required',
-            'qc80'=> 'required',
-            'qc81'=> 'required',
-            'qc82'=> 'required',
-            'qc83'=> 'required',
-            'qc84'=> 'required',
-            'qc85'=> 'required',
-            'qc86'=> 'required',
-            'qc87'=> 'required',
-            'qc88'=> 'required',
-            'qc89'=> 'required',
-            'qc90'=> 'required',
-            'qc91'=> 'required',
-            'qc92'=> 'required',
-            'qc93'=> 'required',
-            'qc94'=> 'required',
-            'qc95'=> 'required',
-            'qc96'=> 'required',
-            'qc97'=> 'required',
-            'qc98'=> 'required',
-            'qc99'=> 'required',
-            'qc100'=> 'required',
-            'qc101'=> 'required',
-            'qc102'=> 'required',
-            'qc103'=> 'required',
-            'qc104'=> 'required',
-            'qc105'=> 'required',
-            'qc106'=> 'required',
-            'qc107'=> 'required'
-        ]);
-
-
-
-        self::submitForm();
-
-
+       
+        $validationRules = [];
+    
+        if ($this->id_client_type == 6) {
+    
+            if ($this->id_country == 1) {
+                $validationRules = [
+                    'qc74' => 'required|file',
+                    'qc75' => 'required|file',
+                    'qc76' => 'required|file',
+                    'qc77' => 'required|file',
+                    'qc78' => 'required|file',
+                    'qc79' => 'required|file',
+                    'qc80' => 'required|file',
+                    'qc81' => 'required|file',
+                    'qc82' => 'required|file',
+                    'qc83' => 'required|file',
+                    'qc84' => 'required|file',
+                    'qc85' => 'required|file',
+                    'qc86' => 'required|file',
+                    'qc87' => 'required|file',
+                    'qc88' => 'required|file',
+                ];
+            }
+           
+            elseif ($this->id_country == 5) {
+                $validationRules = [
+                    'qc74' => 'required|file',
+                    'qc75' => 'required|file',
+                    'qc76' => 'required|file',
+                    'qc77' => 'required|file',
+                    'qc78' => 'required|file',
+                    'qc79' => 'required|file',
+                    'qc80' => 'required|file',
+                    'qc82' => 'required|file',
+                    'qc83' => 'required|file',
+                    'qc85' => 'required|file',
+                    'qc86' => 'required|file',
+                    'qc87' => 'required|file',
+                    'qc88' => 'required|file',
+                ];
+            }
+           
+            else {
+                $validationRules = [
+                    'qc74' => 'required|file',
+                    'qc75' => 'required|file',
+                    'qc76' => 'required|file',
+                    'qc77' => 'required|file',
+                    'qc78' => 'required|file',
+                    'qc79' => 'required|file',
+                    'qc80' => 'required|file',
+                    'qc81' => 'required|file',
+                    'qc82' => 'required|file',
+                    'qc83' => 'required|file',
+                    'qc84' => 'required|file',
+                    'qc86' => 'required|file',
+                    'qc87' => 'required|file',
+                    'qc88' => 'required|file',
+                ];
+            }
+        }
+       
+        if ($this->id_client_type == 1) {
+          
+            if ($this->id_country == 5) {
+                $validationRules['qc89'] = 'required|file';
+            }
+        }
+  
+        if ($this->id_client_type == 5) {
+           
+            if ($this->id_country == 1 || $this->id_country == 5) {
+                $validationRules['qc90'] = 'required|file';
+                $validationRules['qc91'] = 'required|file';
+                $validationRules['qc92'] = 'required|file';
+            }
+        }
+    
+   
+        if ($this->id_client_type == 3) {
+            $validationRules['qc93'] = 'required|file';
+            $validationRules['qc94'] = 'required|file';
+            $validationRules['qc95'] = 'required|file';
+            $validationRules['qc96'] = 'required|file';
+        }
+    
+        if ($this->id_client_type == 2) {
+     
+            if ($this->id_country != 5) {
+                $validationRules['qc97'] = 'required|file';
+                $validationRules['qc98'] = 'required|file';
+            }
+        }
+    
+        if ($this->id_client_type == 4) {
+            $validationRules['qc100'] = 'required|file';
+            $validationRules['qc101'] = 'required|file';
+        }
+    
+        $this->validate($validationRules);
+    
+        $this->submitForm();
+    
+        $this->currentStep = 99;
     }
-
 
         /**
 
@@ -625,6 +559,29 @@ class GenfarClient extends Component
 
     public function submitForm()
     {
+        $clientId = $this->requests_form->client_id;
+        $documentName = config('documents.document_names');
+        //documents
+        $documentFields = [
+            'qc74', 'qc75', 'qc76', 'qc77', 'qc78', 'qc79', 'qc80', 'qc81', 'qc82', 'qc83',
+            'qc84', 'qc85', 'qc86', 'qc87', 'qc88', 'qc89', 'qc90', 'qc91', 'qc92', 'qc93',
+            'qc94', 'qc95', 'qc96', 'qc97', 'qc98', 'qc99', 'qc100', 'qc101', 'qc102', 'qc103',
+            'qc104', 'qc105', 'qc106', 'qc107'
+        ];
+        foreach ($documentFields as $field) {
+            if ($this->$field) {
+                $file = $this->$field;
+                $documentName = $documentNames[$field] ?? $field;
+                $newDocName = preg_replace('/[^A-Za-z0-9_\-]/', '_', $documentName);
+
+                $filename = "{$clientId}_{$newDocName}." . $file->getClientOriginalExtension();
+    
+                $path = $file->storeAs("GENFAR/CLIENTS/{$clientId}", $filename, 'local');
+    
+                $this->requests_form->$field = $path;
+            }
+        }
+    
         $fecha_hoy = Carbon::now();
 
         $fecha_llegada = self::verifyAviabilityDate($fecha_hoy);
@@ -633,24 +590,6 @@ class GenfarClient extends Component
 
 
         $this->requests_form->save();
-
-        /*
-            foreach ($this->requests_form as $object) {
-                $object->save();
-            }
-
-            'name', 'document', 'date_homologation','status','users_id','codsolicitud',
-            'sanofi_provider', 'multiple_select_country', 'is_pep'
-
-            SanofiRequestForm::create([
-                'name' => $this->name,
-                'amount' => $this->amount,
-                'description' => $this->description,
-                'stock' => $this->stock,
-                'status' => $this->status,
-            ]);
-            //'name', 'document', 'date_homologation','status','users_id','codsolicitud'
-        */
 
 
         $this->currentStep = 99;

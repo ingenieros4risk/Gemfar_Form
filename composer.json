@@ -19,6 +19,7 @@
         "laravelcollective/html": "^6.2",
         "livewire/livewire": "^2.3",
         "maatwebsite/excel": "^3.1",
+        "psy/psysh": "^0.12.7",
         "spatie/laravel-medialibrary": "^8.7.2",
         "spatie/laravel-permission": "^3.17",
         "yajra/laravel-datatables-oracle": "^9.11"

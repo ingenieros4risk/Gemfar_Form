@@ -842,7 +842,7 @@ class SanofiRequestRiskController extends Controller
         $sarlaftCorreo  = array($user_solicitante->email,"nelson.fonseca@genfar.com");
 
         $request_risk->observation .= " | ".$user->name." GESTION SARLAFT : ".$request->observation." ".$request->sarlaft_observation;
-        $request_form->sarlaft_comentario = $request->observation;
+        $request_form->sarlaft_comentario = $request->observation ?: $request_form ->sarlaft_comentario;
         $request_form->sarlaft_observation = $request->sarlaft_observation;
         $request_form->sarlaft_date = Carbon::now(); //FECHA DE REVISIÓN SARLAFT
 

@@ -17,8 +17,11 @@ class Localization
     public function handle(Request $request, Closure $next)
     {
         
-        \App::setLocale($request->language);
-            
+        if ($request->has('language')) {
+            \App::setLocale($request->language);
+        } else {
+            \App::setLocale(config('app.locale'));
+        }
         return $next($request);
     }
 }

@@ -1,9 +1,9 @@
 <div>
 
     @if (session()->has('message'))
-        <div class="alert alert-success">
+    <div class="alert alert-success">
         {{ session('message') }}
-        </div>
+    </div>
     @endif
 
     <!-- Stepwizard -->
@@ -15,27 +15,27 @@
             </div>
 
             <div class="stepwizard-step">
-                <a type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-default' : 'btn-success' }}" >2</a>
+                <a type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-default' : 'btn-success' }}">2</a>
                 <p>{{__('genfar_step_2')}}</p>
             </div>
 
             <div class="stepwizard-step">
-                <a type="button" class="btn btn-circle {{ $currentStep != 3 ? 'btn-default' : 'btn-success' }}" >3</a>
+                <a type="button" class="btn btn-circle {{ $currentStep != 3 ? 'btn-default' : 'btn-success' }}">3</a>
                 <p>{{__('sanofi_step_3')}}</p>
             </div>
 
             <div class="stepwizard-step">
-                <a type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-default' : 'btn-success' }}" >4</a>
+                <a type="button" class="btn btn-circle {{ $currentStep != 4 ? 'btn-default' : 'btn-success' }}">4</a>
                 <p>{{__('sanofi_step_4')}}</p>
             </div>
 
             <div class="stepwizard-step">
-                <a type="button" class="btn btn-circle {{ $currentStep != 5 ? 'btn-default' : 'btn-success' }}" >5</a>
+                <a type="button" class="btn btn-circle {{ $currentStep != 5 ? 'btn-default' : 'btn-success' }}">5</a>
                 <p>{{__('sanofi_step_6')}}</p>
             </div>
 
             <div class="stepwizard-step">
-                <a type="button" class="btn btn-circle {{ $currentStep != 6 ? 'btn-default' : 'btn-success' }}" >6</a>
+                <a type="button" class="btn btn-circle {{ $currentStep != 6 ? 'btn-default' : 'btn-success' }}">6</a>
                 <p>{{__('sanofi_step_5')}}</p>
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="col-md-12">
 
             <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{ __('welcome_1')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{ __('welcome_1')}}</div>
             <hr>
             <p> {{ __('welcome_2')}}</p>
             <hr>
@@ -76,7 +76,8 @@
             </div>
 
             <hr>
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-left" wire:click="ZeroStepSubmit" type="button" >{{__('continue')}} ></button>
+            <button class="btn btn-pill btn-success nextBtn btn-sm pull-left" wire:click="ZeroStepSubmit"
+                type="button">{{__('continue')}} ></button>
         </div>
     </div>
 
@@ -84,9 +85,9 @@
     <div class="row setup-content {{ $currentStep != 1 ? 'displayNone' : '' }}" id="step-1">
         <div class="col-md-12">
             <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{ __('informed_consent_RCGG')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{ __('informed_consent_RCGG')}}</div>
             <hr>
-            <p >{{ __('welcome_subtitle') }}</p>
+            <p>{{ __('welcome_subtitle') }}</p>
             <hr>
             <div class="row">
                 <div class="col-md-9">
@@ -100,18 +101,21 @@
             <div class="row">
                 @error('check_risk')
                 <div class="col-md-12">
-                  <span style="border-color: red;" class="form-control text-danger error">{{ $message }}</span>
+                    <span style="border-color: red;" class="form-control text-danger error">{{ $message }}</span>
                 </div>
                 @enderror
             </div>
             <hr>
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-left" wire:click="firstStepSubmit" type="button" >{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+            <button class="btn btn-pill btn-success nextBtn btn-sm pull-left" wire:click="firstStepSubmit"
+                type="button">{{__('continue')}} ></button>
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
                 </svg>
             </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
                 </svg>
@@ -122,63 +126,55 @@
     <!-- Second Step Form -->
     <div class="row setup-content {{ $currentStep != 2 ? 'displayNone' : '' }}" id="step-2">
         <div class="col-md-12">
-			<hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('sanofi_step_1_title')}}</div>
+            <hr>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{__('sanofi_step_1_title')}}</div>
             <hr>
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <label for="type_person"><h4><strong>{{__('type_person')}}:</strong></h4></label>
+                    <label for="type_person">
+                        <h4><strong>{{__('type_person')}}:</strong></h4>
+                    </label>
                     <select class="form-control-sm form-control" wire:model="type_person" required>
                         <option value="">Seleccione un tipo de persona</option>
                         <option value=1>Individuo/Individual</option>Individual / Organization
                         <option value=2>Organización/Organization</option>
                     </select>
-                    @error('type_person') <span style="border-color: red;" class="text-danger error">{{ $message }}</span>@enderror
+                    @error('type_person') <span style="border-color: red;"
+                        class="text-danger error">{{ $message }}</span>@enderror
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <label for="country_homologation"><h4><strong>{{__('country_select')}}:</strong></h4></label>
+                    <label for="country_homologation">
+                        <h4><strong>{{__('country_select')}}:</strong></h4>
+                    </label>
                     <select class="form-control-sm form-control" wire:model="country_homologation">
                         <option value="">{{__('seleccionar_un_pais')}}</option>
-                    @foreach($paises as $pais)
+                        @foreach($paises as $pais)
                         <option value="{{$pais->id}}">{{$pais->name}}</option>
-                    @endforeach
+                        @endforeach
                     </select>
-                    @error('country_homologation') <span style="border-color: red;" class="text-danger error">{{ $message }}</span>@enderror
+                    @error('country_homologation') <span style="border-color: red;"
+                        class="text-danger error">{{ $message }}</span>@enderror
                 </div>
             </div>
 
-            <!-- <div class="form-group">
-                <div class="col-md-12">
-                    <label for=""><h4><strong>{{__('country_homologation')}}:</strong></h4></label>
-                    <div class="row">
-                        <div class="col-md-9 col-form-label text-align">
-                        @foreach($countries as $index => $country)
-                            @if($index != 1)
-                            <div class="form-check checkbox">
-                                <input wire:model="multiple_select_country.{{ $index }}" class="form-check-input text-align" type="checkbox" value="{{$country->id}}">
-                                <label class="form-check-label">{{$country->country}}</label>
-                            </div>
-                            @endif
-                        @endforeach
-                        @error('multiple_select_country') <span style="border-color: red;" class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <hr>
-	        <br>
-            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button" wire:click="back(1)">{{__('back')}}</button>
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button" wire:click.prevent="secondStepSubmit">{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+            <br>
+            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button"
+                wire:click="back(1)">{{__('back')}}</button>
+            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button"
+                wire:click.prevent="secondStepSubmit">{{__('continue')}} ></button>
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
                 </svg>
             </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
                 </svg>
@@ -191,7 +187,8 @@
         <div class="col-md-12">
             <div class="form-group">
                 <hr>
-                    <div style="text-align: left;" class="btn btn-block btn-primary" ><strong>{{__('legal_co')}}</strong></div>
+                <div style="text-align: left;" class="btn btn-block btn-primary"><strong>{{__('legal_co')}}</strong>
+                </div>
                 <hr>
                 <h3 style="text-align: center;"> {{__('warning_privacity')}}</h3>
                 <hr>
@@ -221,41 +218,49 @@
                 <table class="table table-responsive-sm table-bordered table-striped table-sm">
                     <thead>
                         <tr>
-                        <th>País/Country</th>
-                        <th>Compañía/Company</th>
-                        <th>Identificación/ID</th>
-                        <th>Correo Electrónico/Email</th>
-                        <th>Declaración de privacidad/Privacy Policy</th>
+                            <th>País/Country</th>
+                            <th>Compañía/Company</th>
+                            <th>Identificación/ID</th>
+                            <th>Correo Electrónico/Email</th>
+                            <th>Declaración de privacidad/Privacy Policy</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        <td>Colombia</td>
-                        <td>Genfar S.A.</td>
-                        <td>NIT 817001644-1</td>
-                        <td>protecciondatosgenfar@genfar.com</td>
-                        <td><a target="_blank" href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a></td>
+                            <td>Colombia</td>
+                            <td>Genfar S.A.</td>
+                            <td>NIT 817001644-1</td>
+                            <td>protecciondatosgenfar@genfar.com</td>
+                            <td><a target="_blank"
+                                    href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a>
+                            </td>
                         </tr>
                         <tr>
-                        <td>Colombia</td>
-                        <td>Genfar Desarrollo y Manufactura S.A.</td>
-                        <td>NIT 800226384-6</td>
-                        <td>protecciondatosgenfar@genfar.com</td>
-                        <td><a target="_blank" href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a></td>
+                            <td>Colombia</td>
+                            <td>Genfar Desarrollo y Manufactura S.A.</td>
+                            <td>NIT 800226384-6</td>
+                            <td>protecciondatosgenfar@genfar.com</td>
+                            <td><a target="_blank"
+                                    href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a>
+                            </td>
                         </tr>
                         <tr>
-                        <td>Perú</td>
-                        <td>Genfar del Perú S.A.C.</td>
-                        <td>RUC 20609981262</td>
-                        <td>protecciondatosgenfar@genfar.com</td>
-                        <td><a target="_blank" href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a></td>
+                            <td>Perú</td>
+                            <td>Genfar del Perú S.A.C.</td>
+                            <td>RUC 20609981262</td>
+                            <td>protecciondatosgenfar@genfar.com</td>
+                            <td><a target="_blank"
+                                    href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a>
+                            </td>
                         </tr>
                         <tr>
-                        <td>Ecuador</td>
-                        <td>Genfar del Ecuador S.A.S.</td>
-                        <td>RUC 1793197944001</td>
-                        <td>protecciondatosgenfar@genfar.com</td>
-                        <td><a target="_blank" href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a></td>
+                            <td>Ecuador</td>
+                            <td>Genfar del Ecuador S.A.S.</td>
+                            <td>RUC 1793197944001</td>
+                            <td>protecciondatosgenfar@genfar.com</td>
+                            <td><a target="_blank"
+                                    href="https://www.genfar.com/politica-de-privacidad">https://www.genfar.com/politica-de-privacidad</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -277,13 +282,27 @@
                 <h4 style="text-align: center;"> {{__('t5')}}</h4>
                 <p>{{__('p16')}}</p>
                 <ol>
-                    <li><p>{{__('p17')}}</p></li>
-                    <li><p>{{__('p18')}}</p></li>
-                    <li><p>{{__('p19')}}</p></li>
-                    <li><p>{{__('p20')}}</p></li>
-                    <li><p>{{__('p21')}}</p></li>
-                    <li><p>{{__('p22')}}</p></li>
-                    <li><p>{{__('p23')}}</p></li>
+                    <li>
+                        <p>{{__('p17')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p18')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p19')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p20')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p21')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p22')}}</p>
+                    </li>
+                    <li>
+                        <p>{{__('p23')}}</p>
+                    </li>
                 </ol>
                 <br>
                 <div class="row">
@@ -313,19 +332,20 @@
                 <p>{{__('p26')}}</p>
                 <p>{{__('p27')}}</p>
                 <ul>
-                @if(app()->getLocale() == 'es')
+                    @if(app()->getLocale() == 'es')
                     <li><a target="_blank" href="{{ asset('files/conducta.pdf') }}">{{__('codigo')}}</a></li>
-                @else
+                    @else
                     <li><a target="_blank" href="{{ asset('files/conducta_en.pdf') }}">{{__('codigo')}}</a></li>
-                @endif
+                    @endif
 
-                    <li><a target="_blank" href="{{ asset('files/Politica_Antisoborno_Genfar.pdf') }}">{{__('politica')}}</a></li>
+                    <li><a target="_blank"
+                            href="{{ asset('files/Politica_Antisoborno_Genfar.pdf') }}">{{__('politica')}}</a></li>
 
-                @if(app()->getLocale() == 'es')
+                    @if(app()->getLocale() == 'es')
                     <li><a target="_blank" href="{{ asset('files/tyc.pdf') }}">{{__('terminos')}}</a></li>
-                @else
+                    @else
                     <li><a target="_blank" href="{{ asset('files/tyc_en.pdf') }}">{{__('terminos')}}</a></li>
-                @endif
+                    @endif
                 </ul>
                 <div class="row">
                     <div class="col-md-9">
@@ -338,14 +358,18 @@
                 </div>
             </div>
             <hr>
-            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button" wire:click="back(2)">{{__('back')}}</button>
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button" wire:click="thirdStepSubmit">{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button"
+                wire:click="back(2)">{{__('back')}}</button>
+            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button"
+                wire:click="thirdStepSubmit">{{__('continue')}} ></button>
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
                 </svg>
             </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
                 </svg>
@@ -361,18 +385,22 @@
             <div class="form-group">
                 <div class="row">
                     <div style="border-color: red" class="col-md-12">
-                        <div class="alert alert-warning" role="alert">En caso de que una pregunta no aplique, llene el campo como <strong>NO APLICA</strong>. - In case a question does not apply, fill in the field as <strong>DOES NOT APPLY</strong></div>
+                        <div class="alert alert-warning" role="alert">En caso de que una pregunta no aplique, llene el
+                            campo como <strong>NO APLICA</strong>. - In case a question does not apply, fill in the
+                            field as <strong>DOES NOT APPLY</strong></div>
                     </div>
                 </div>
                 <div class="row">
                     <div style="border-color: red" class="col-md-12">
-                        <div class="alert alert-info" role="alert">El máximo de caracteres permitidos por campo son <strong>30.</strong> - The maximum characters allowed per field are <strong>30</strong>.</div>
+                        <div class="alert alert-info" role="alert">El máximo de caracteres permitidos por campo son
+                            <strong>30.</strong> - The maximum characters allowed per field are <strong>30</strong>.
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
             <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('tc2')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{__('tc2')}}</div>
             <hr>
 
             <div class="form-group">
@@ -393,10 +421,10 @@
                     </div>
                     <div class="col-md-9">
                         <select class="form-control-sm form-control" name="qc9" wire:model="qc9">
-                        <option value="">Seleccione un tipo de Documento/Select a Document Type</option>
-                        @foreach($document_types as $document)
+                            <option value="">Seleccione un tipo de Documento/Select a Document Type</option>
+                            @foreach($document_types as $document)
                             <option value="{{$document->id}}">{{$document->cat}} - {{$document->name}}</option>
-                        @endforeach
+                            @endforeach
                         </select>
                         @error('qc9') <span class="text-danger error">{{ $message }}</span> @enderror
                     </div>
@@ -971,7 +999,7 @@
                 </div>
             </div> -->
             <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('tc6')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{__('tc6')}}</div>
             <hr>
             <div class="form-group">
                 <div class="row">
@@ -1112,7 +1140,7 @@
                 </div>
             </div>
             <hr> -->
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('tc9')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{__('tc9')}}</div>
             <hr>
             <div class="form-group">
                 <div class="row">
@@ -1154,9 +1182,9 @@
                     </div>
                     <div class="col-md-9">
                         <select name="qc73" wire:model="qc73" class="form-control">
-                        <option value="">Seleccione una opción</option>
+                            <option value="">Seleccione una opción</option>
                             @foreach($money as $value)
-                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                            <option value="{{ $value->id }}">{{ $value->name }}</option>
                             @endforeach
                         </select>
                         @error('qc73') <span class="text-danger error">{{ $message }}</span> @enderror
@@ -1165,18 +1193,22 @@
             </div>
 
             <hr>
-            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button" wire:click="back(3)">{{__('back')}}</button>
+            <button class="btn btn-pill btn-outline-error nextBtn btn-sm pull-right" type="button"
+                wire:click="back(3)">{{__('back')}}</button>
             @if($errors->any())
             {!! implode('', $errors->all('<div>:message</div>')) !!}
             @endif
 
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button" wire:click="fourtStepSubmit">{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button"
+                wire:click="fourtStepSubmit">{{__('continue')}} ></button>
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
                 </svg>
             </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+            <a class="btn btn-pill btn-warning btn-sm"
+                style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
                 <svg class="c-icon">
                     <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
                 </svg>
@@ -1190,171 +1222,216 @@
     <div class="row setup-content {{ $currentStep != 5 ? 'displayNone' : '' }}" id="step-5">
         <div class="col-md-12">
 
-        @if($type_person == 1)
-        <div class="col-md-12">
-        <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{ __('ANEXO E. DECLARACIÓN JURADA DE BENEFICIARIOS FINALES.')}}</div>
-            <div class="form-group">
-                <div class="row">
-                    <div style="border-color: red" class="col-md-12">
-                        <div class="alert alert-info" role="alert"><p><strong>Para este tipo de Persona no es necesario </strong> realizar la vinculación DECLARACIÓN JURADA DE BENEFICIARIOS FINALES</p></div>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button" wire:click="back(4)">{{__('back')}}</button>
-            <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button" wire:click="fifttStepSubmit">{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
-                <svg class="c-icon">
-                    <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
-                </svg>
-            </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
-                <svg class="c-icon">
-                    <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
-                </svg>
-            </a>
-        </div>
-        @else
-        <div class="col-md-12">
-            <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{ __('ANEXO E. DECLARACIÓN JURADA DE BENEFICIARIOS FINALES.')}}</div>
-            <div class="form-group">
-                <div class="row">
-                    <div style="border-color: red" class="col-md-12">
-                        <div class="alert alert-info" role="alert"><p><strong>{{$qc5}}</strong> realiza la vinculación DECLARACIÓN JURADA DE BENEFICIARIOS FINALES</p></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div style="border-color: red" class="col-md-12">
-                    <div class="alert alert-warning" role="alert">
-                        <strong>Beneficiario Final:</strong> Es aquella persona natural que, directa o indirectamente, posee o controla a una persona jurídica o un ente o estructura jurídica.
-                        Por favor relacione a continuación <strong>la información de las personas naturales o jurídicas que tienen el control</strong> (por ejemplo: grupos empresariales, matrices o controlantes, o cualquier otra forma de control) o ejercen influencia, directamente o indirectamente, en el cliente o proveedor:
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <p>En este formulario es necesario especificar la información de los terceros, por favor seleccione una de las siguientes opciones:</p>
-            <ul>
-                <li><strong>(Opción 1)</strong> Son 1 o más Terceros Identificados.</li>
-                <li><strong>(Opción 2)</strong> Son más de 10 Terceros y los tengo previamente identificados.</li>
-                <li><strong>(Opción 3)</strong> No cuento o no suministro la información de BENEFICIARIOS FINALES</li>
-            </ul>
-            <hr>
-            <div class="form-group">
-                <strong>{{__('Señale si se trata de un nuevo tercero (indicando el tipo de tercero) o si es actualización de datos o Si No suministra información:')}}</strong>
-                <div class="col-md-9 col-form-label">
-                    <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" type="radio" value="1" wire:model="moreCoincidences">
-                        <label class="form-check-label">1 a 5 Terceros:</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" type="radio" value="2" wire:model="moreCoincidences">
-                        <label class="form-check-label">+10 Terceros:</label>
-                    </div>
-                    <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" type="radio" value="0" wire:model="moreCoincidences">
-                        <label class="form-check-label">No Suministra Información de Beneficiarios Finales:</label>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('I. Información General de los Beneficiarios Finales')}}</div>
-            <hr>
-
-            <!-- // Si No hay BF  -->
-            @if($moreCoincidences == 0)
+            @if($type_person == 1)
+            <div class="col-md-12">
+                <hr>
+                <div style="text-align: left;" class="btn btn-block btn-primary">
+                    {{ __('ANEXO E. DECLARACIÓN JURADA DE BENEFICIARIOS FINALES.')}}</div>
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-md-12">
-                            <label for="select_coincidencia" class="form-control-label"><strong>En caso de no suministrar la información requerida, a continuación se exponen los motivos que llevan a la no entrega, indicando claramente las normas en que se sustenta:</strong></label>
-                            <textarea class="form-control" wire:model="adicional_text" rows="3" placeholder="p. ej. No cuento con toda la información"></textarea>
-                            @error('adicional_text') <span style="border-color: red;" class="text-danger error">{{ $message }}</span>@enderror
-                            <input type="file" wire:model="no_coincidence_file">
-                            @error('no_coincidence_file') <span style="border-color: red;" class="text-danger error">{{ $message }}</span>@enderror
+                        <div style="border-color: red" class="col-md-12">
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>Para este tipo de Persona no es necesario </strong> realizar la vinculación
+                                    DECLARACIÓN JURADA DE BENEFICIARIOS FINALES</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            @elseif($moreCoincidences == 1)
+                <hr>
+                <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button"
+                    wire:click="back(4)">{{__('back')}}</button>
+                <button class="btn btn-pill btn-success nextBtn btn-sm pull-right" type="button"
+                    wire:click="fifttStepSubmit">{{__('continue')}} ></button>
+                <a class="btn btn-pill btn-warning btn-sm"
+                    style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+                    <svg class="c-icon">
+                        <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
+                    </svg>
+                </a>
+                <a class="btn btn-pill btn-warning btn-sm"
+                    style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+                    <svg class="c-icon">
+                        <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
+                    </svg>
+                </a>
+            </div>
+            @else
+            <div class="col-md-12">
+                <hr>
+                <div style="text-align: left;" class="btn btn-block btn-primary">
+                    {{ __('ANEXO E. DECLARACIÓN JURADA DE BENEFICIARIOS FINALES.')}}</div>
+                <div class="form-group">
+                    <div class="row">
+                        <div style="border-color: red" class="col-md-12">
+                            <div class="alert alert-info" role="alert">
+                                <p><strong>{{$qc5}}</strong> realiza la vinculación DECLARACIÓN JURADA DE BENEFICIARIOS
+                                    FINALES</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div style="border-color: red" class="col-md-12">
-                        <div class="alert alert-warning" role="alert">En caso de que una pregunta no aplique, llene el campo como <strong>NO APLICA</strong>. - In case a question does not apply, fill in the field as <strong>DOES NOT APPLY</strong></div>
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Beneficiario Final:</strong> Es aquella persona natural que, directa o
+                            indirectamente, posee o controla a una persona jurídica o un ente o estructura jurídica.
+                            Por favor relacione a continuación <strong>la información de las personas naturales o
+                                jurídicas que tienen el control</strong> (por ejemplo: grupos empresariales, matrices o
+                            controlantes, o cualquier otra forma de control) o ejercen influencia, directamente o
+                            indirectamente, en el cliente o proveedor:
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <p>En este formulario es necesario especificar la información de los terceros, por favor seleccione una
+                    de las siguientes opciones:</p>
+                <ul>
+                    <li><strong>(Opción 1)</strong> Son 1 o más Terceros Identificados.</li>
+                    <li><strong>(Opción 2)</strong> Son más de 10 Terceros y los tengo previamente identificados.</li>
+                    <li><strong>(Opción 3)</strong> No cuento o no suministro la información de BENEFICIARIOS FINALES
+                    </li>
+                </ul>
+                <hr>
+                <div class="form-group">
+                    <strong>{{__('Señale si se trata de un nuevo tercero (indicando el tipo de tercero) o si es actualización de datos o Si No suministra información:')}}</strong>
+                    <div class="col-md-9 col-form-label">
+                        <div class="form-check form-check-inline mr-1">
+                            <input class="form-check-input" type="radio" value="1" wire:model="moreCoincidences">
+                            <label class="form-check-label">1 a 5 Terceros:</label>
+                        </div>
+                        <div class="form-check form-check-inline mr-1">
+                            <input class="form-check-input" type="radio" value="2" wire:model="moreCoincidences">
+                            <label class="form-check-label">+10 Terceros:</label>
+                        </div>
+                        <div class="form-check form-check-inline mr-1">
+                            <input class="form-check-input" type="radio" value="0" wire:model="moreCoincidences">
+                            <label class="form-check-label">No Suministra Información de Beneficiarios Finales:</label>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div style="text-align: left;" class="btn btn-block btn-primary">
+                    {{__('I. Información General de los Beneficiarios Finales')}}</div>
+                <hr>
+
+                <!-- // Si No hay BF  -->
+                @if($moreCoincidences == 0)
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="select_coincidencia" class="form-control-label"><strong>En caso de no
+                                    suministrar la información requerida, a continuación se exponen los motivos que
+                                    llevan a la no entrega, indicando claramente las normas en que se
+                                    sustenta:</strong></label>
+                            <textarea class="form-control" wire:model="adicional_text" rows="3"
+                                placeholder="p. ej. No cuento con toda la información"></textarea>
+                            @error('adicional_text') <span style="border-color: red;"
+                                class="text-danger error">{{ $message }}</span>@enderror
+                            <input type="file" wire:model="no_coincidence_file">
+                            @error('no_coincidence_file') <span style="border-color: red;"
+                                class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                @elseif($moreCoincidences == 1)
+                <div class="row">
+                    <div style="border-color: red" class="col-md-12">
+                        <div class="alert alert-warning" role="alert">En caso de que una pregunta no aplique, llene el
+                            campo como <strong>NO APLICA</strong>. - In case a question does not apply, fill in the
+                            field as <strong>DOES NOT APPLY</strong></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="button" class="btn btn-pill btn-success btn-sm" wire:click="addInput">Agregar Tercero</button>
+                            <button type="button" class="btn btn-pill btn-success btn-sm" wire:click="addInput">Agregar
+                                Tercero</button>
                         </div>
                         <hr>
                         @foreach ($inputs as $index => $input)
-                            <div class="form-group card col-md-12 border-primary">
-                                <div class="row">
-                                    <div class="col-sm-9">
-                                        <h4>Información del Beneficiario #{{$index+1}}</h4>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <button style="float: right; margin-left: -50%;" type="button" class="btn btn-pill btn-danger btn-sm" wire:click="removeInput({{ $index }})">
-                                            <a>
-                                                <svg class="c-icon">
-                                                    <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-trash"></use>
-                                                </svg>
-                                            </a>
-                                        </button>
-                                    </div>
+                        <div class="form-group card col-md-12 border-primary">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <h4>Información del Beneficiario #{{$index+1}}</h4>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label><strong>{{ __('Nombre Completo:')}}</strong></label>
-                                            <input type="text" class="form-control" placeholder="Nombre Completo o Razón Social:" wire:model="full_name.{{$index}}" required>
-                                            @error('full_name.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label><strong>{{ __('qc22')}}:</strong></label>
-                                            <select class=" form-control" name="document_beneficial_ownership.{{$index}}" wire:model="document_beneficial_ownership.{{$index}}" >
-                                                @foreach($document_types as $docs)
-                                                    <option value="{{$docs->id}}">{{$docs->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        @error('document_beneficial_ownership.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label><strong>{{ __('Documento de Identificación')}}:</strong></label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Número de Documento de Identificación:" wire:model="bf_document.{{$index}}" required>
-                                            @error('bf_document.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label><strong>{{ __('% Participación:')}}</strong></label>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" wire:model="participation_control.{{$index}}" placeholder="p. ej: 5%" required>
-                                            @error('participation_control.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label><strong>{{ __('Es PEP:')}}</strong></label>
-                                            <select class="form-control-sm form-control" wire:model="is_pep.{{$index}}">
-                                                <option value="">Seleccione una respuesta</option>
-                                                    <option value="1">Si</option>
-                                                    <option value="0">NO</option>
-                                            </select>
-                                            @error('is_pep.{{$index}}') <span class="text-danger error">{{ $message }}</span>@enderror
-                                    </div>
+                                <div class="col-sm-3">
+                                    <button style="float: right; margin-left: -50%;" type="button"
+                                        class="btn btn-pill btn-danger btn-sm" wire:click="removeInput({{ $index }})">
+                                        <a>
+                                            <svg class="c-icon">
+                                                <use
+                                                    xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-trash">
+                                                </use>
+                                            </svg>
+                                        </a>
+                                    </button>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label><strong>{{ __('Nombre Completo:')}}</strong></label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Nombre Completo o Razón Social:"
+                                            wire:model="full_name.{{$index}}" required>
+                                        @error('full_name.{{$index}}') <span
+                                            class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><strong>{{ __('qc22')}}:</strong></label>
+                                    <select class=" form-control" name="document_beneficial_ownership.{{$index}}"
+                                        wire:model="document_beneficial_ownership.{{$index}}">
+                                        @foreach($document_types as $docs)
+                                        <option value="{{$docs->id}}">{{$docs->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('document_beneficial_ownership.{{$index}}') <span
+                                        class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
+                                <div class="col-md-3">
+                                    <label><strong>{{ __('Documento de Identificación')}}:</strong></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"
+                                            placeholder="Número de Documento de Identificación:"
+                                            wire:model="bf_document.{{$index}}" required>
+                                        @error('bf_document.{{$index}}') <span
+                                            class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><strong>{{ __('% Participación:')}}</strong></label>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control"
+                                            wire:model="participation_control.{{$index}}" placeholder="p. ej: 5%"
+                                            required>
+                                        @error('participation_control.{{$index}}') <span
+                                            class="text-danger error">{{ $message }}</span>@enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <label><strong>{{ __('Es PEP:')}}</strong></label>
+                                    <select class="form-control-sm form-control" wire:model="is_pep.{{$index}}">
+                                        <option value="">Seleccione una respuesta</option>
+                                        <option value="1">Si</option>
+                                        <option value="0">NO</option>
+                                    </select>
+                                    @error('is_pep.{{$index}}') <span
+                                        class="text-danger error">{{ $message }}</span>@enderror
+                                </div>
+                            </div>
+                        </div>
                         @endforeach
                     </div>
                 </div>
-            @elseif($moreCoincidences == 2)
+                @elseif($moreCoincidences == 2)
                 <div class="form-group">
                     <p>Señale la cantidad total de terceros relacionados en el adjunto</p>
                     <div class="form-group">
-                        <label for="amount_thirds"><strong>Cantidad total de terceros relacionados en el adjunto:</strong></label>
-                        <input type="number" wire:model="amount_thirds" class="form-control" id="amount_thirds" min="10">
+                        <label for="amount_thirds"><strong>Cantidad total de terceros relacionados en el
+                                adjunto:</strong></label>
+                        <input type="number" wire:model="amount_thirds" class="form-control" id="amount_thirds"
+                            min="10">
                         @error('amount_thirds') <span class="text-danger error">{{ $message }}</span> @enderror
                     </div>
                     <p>En caso de adjuntar una lista de terceros, por favor identificar los siguientes campos:</p>
@@ -1365,33 +1442,37 @@
                         <li>Porcentaje de Participación</li>
                         <li>Responder a la pregunta ¿Es un PEP?</li>
                     </ul>
-                    <p >Por favor adjunte el archivo donde se encuentren sus terceros</p>
+                    <p>Por favor adjunte el archivo donde se encuentren sus terceros</p>
                     <input type="file" wire:model="coincidence_file">
                     @error('coincidence_file') <span class="text-danger error">{{ $message }}</span> @enderror
                     <div wire:loading wire:target="coincidence_file">Cargando Documento ...</div>
                     <br>
                 </div>
-            @endif
+                @endif
 
-            @if($errors->any())
-            {!! implode('', $errors->all('<div>:message</div>')) !!}
-            @endif
+                @if($errors->any())
+                {!! implode('', $errors->all('<div>:message</div>')) !!}
+                @endif
 
-            <hr>
-            <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button" wire:click="back(4)">{{__('back')}}</button>
-            <button class="btn btn-pill btn-outline-primary nextBtn btn-sm pull-right" type="button" wire:click="fifttStepSubmit">{{__('continue')}} ></button>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
-                <svg class="c-icon">
-                    <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
-                </svg>
-            </a>
-            <a class="btn btn-pill btn-warning btn-sm" style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
-                <svg class="c-icon">
-                    <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
-                </svg>
-            </a>
-        </div>
-        @endif
+                <hr>
+                <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button"
+                    wire:click="back(4)">{{__('back')}}</button>
+                <button class="btn btn-pill btn-outline-primary nextBtn btn-sm pull-right" type="button"
+                    wire:click="fifttStepSubmit">{{__('continue')}} ></button>
+                <a class="btn btn-pill btn-warning btn-sm"
+                    style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;" onclick="scrollToBottom()">
+                    <svg class="c-icon">
+                        <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-bottom"></use>
+                    </svg>
+                </a>
+                <a class="btn btn-pill btn-warning btn-sm"
+                    style="position: fixed; bottom: 60px; right: 20px; z-index: 9999;" onclick="scrollToTop()">
+                    <svg class="c-icon">
+                        <use xlink:href="../../../assets/icons/coreui/free-symbol-defs.svg#cui-arrow-top"></use>
+                    </svg>
+                </a>
+            </div>
+            @endif
         </div>
 
     </div>
@@ -1402,567 +1483,540 @@
         <div class="col-md-12">
 
             <hr>
-                <div style="text-align: left;" class="btn btn-block btn-primary" >{{__('tc10')}}</div>
+            <div style="text-align: left;" class="btn btn-block btn-primary">{{__('tc10')}}</div>
             <hr>
-
+            @php $showMessage = true; @endphp
             @if($id_client_type == 6)
-                @if($id_country == 1)
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc74')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc74" wire:model="qc74">
-                                @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc75')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc75" wire:model="qc75">
-                                @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc76')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc76" wire:model="qc76">
-                                @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc77')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc77" wire:model="qc77">
-                                @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc78')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc78" wire:model="qc78">
-                                @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc79')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc79" wire:model="qc79">
-                                @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc80')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc80" wire:model="qc80">
-                                @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc81')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc81" wire:model="qc81">
-                                @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc82')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc82" wire:model="qc82">
-                                @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc83')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc83" wire:model="qc83">
-                                @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc84')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc84" wire:model="qc84">
-                                @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc85')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc85" wire:model="qc85">
-                                @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc86')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc86" wire:model="qc86">
-                                @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc87')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc87" wire:model="qc87">
-                                @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc88')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc88" wire:model="qc88">
-                                @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                @if($id_country == 5)
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc74')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc74" wire:model="qc74">
-                                @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc75')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc75" wire:model="qc75">
-                                @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc76')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc76" wire:model="qc76">
-                                @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc77')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc77" wire:model="qc77">
-                                @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc78')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc78" wire:model="qc78">
-                                @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc79')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc79" wire:model="qc79">
-                                @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc80')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc80" wire:model="qc80">
-                                @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc81')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc81" wire:model="qc81">
-                                @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc82')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc82" wire:model="qc82">
-                                @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc83')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc83" wire:model="qc83">
-                                @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc84')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc84" wire:model="qc84">
-                                @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div> -->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc85')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc85" wire:model="qc85">
-                                @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc86')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc86" wire:model="qc86">
-                                @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc87')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc87" wire:model="qc87">
-                                @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc88')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc88" wire:model="qc88">
-                                @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
-                        </div>
-                    </div>
-                @else
+            @if($id_country == 1)
+            @php $showMessage = false; @endphp
                 <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc74')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc74" wire:model="qc74">
-                                @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc74')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc74" wire:model="qc74">
+                            @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc75')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc75" wire:model="qc75">
-                                @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc75')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc75" wire:model="qc75">
+                            @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc76')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc76" wire:model="qc76">
-                                @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc76')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc76" wire:model="qc76">
+                            @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc77')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc77" wire:model="qc77">
-                                @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc77')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc77" wire:model="qc77">
+                            @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc78')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc78" wire:model="qc78">
-                                @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc78')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc78" wire:model="qc78">
+                            @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc79')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc79" wire:model="qc79">
-                                @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc79')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc79" wire:model="qc79">
+                            @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc80')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc80" wire:model="qc80">
-                                @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc80')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc80" wire:model="qc80">
+                            @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc81')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc81" wire:model="qc81">
-                                @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc81')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc81" wire:model="qc81">
+                            @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc82')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc82" wire:model="qc82">
-                                @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc82')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc82" wire:model="qc82">
+                            @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc83')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc83" wire:model="qc83">
-                                @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc83')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc83" wire:model="qc83">
+                            @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc84')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc84" wire:model="qc84">
-                                @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc84')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc84" wire:model="qc84">
+                            @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc85')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc85" wire:model="qc85">
-                                @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc85')}}:</strong></label>
                         </div>
-                    </div> -->
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc86')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc86" wire:model="qc86">
-                                @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc85" wire:model="qc85">
+                            @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc87')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc87" wire:model="qc87">
-                                @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc86')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc86" wire:model="qc86">
+                            @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <label><strong>{{__('qc88')}}:</strong></label>
-                            </div>
-                            <div class="col-md-9">
-                                <input class="form-control" type="file" name="qc88" wire:model="qc88">
-                                @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
-                            </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc87')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc87" wire:model="qc87">
+                            @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </div>
-                @endif
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc88')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc88" wire:model="qc88">
+                            @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+            @endif
+            @if($id_country == 5)
+            @php $showMessage = false; @endphp
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc74')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc74" wire:model="qc74">
+                            @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc75')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc75" wire:model="qc75">
+                            @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc76')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc76" wire:model="qc76">
+                            @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc77')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc77" wire:model="qc77">
+                            @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc78')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc78" wire:model="qc78">
+                            @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc79')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc79" wire:model="qc79">
+                            @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc80')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc80" wire:model="qc80">
+                            @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc82')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc82" wire:model="qc82">
+                            @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc83')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc83" wire:model="qc83">
+                            @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc85')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc85" wire:model="qc85">
+                            @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc86')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc86" wire:model="qc86">
+                            @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc87')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc87" wire:model="qc87">
+                            @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc88')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc88" wire:model="qc88">
+                            @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+            @else
+            @php $showMessage = false; @endphp
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc74')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc74" wire:model="qc74">
+                            @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc75')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc75" wire:model="qc75">
+                            @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc76')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc76" wire:model="qc76">
+                            @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc77')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc77" wire:model="qc77">
+                            @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc78')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc78" wire:model="qc78">
+                            @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc79')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc79" wire:model="qc79">
+                            @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc80')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc80" wire:model="qc80">
+                            @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc81')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc81" wire:model="qc81">
+                            @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc82')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc82" wire:model="qc82">
+                            @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc83')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc83" wire:model="qc83">
+                            @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc84')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc84" wire:model="qc84">
+                            @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc86')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc86" wire:model="qc86">
+                            @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc87')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc87" wire:model="qc87">
+                            @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label><strong>{{__('qc88')}}:</strong></label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="file" name="qc88" wire:model="qc88">
+                            @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                </div>
+            @endif
             @endif
 
             @if($id_client_type == 1)
-                @if($id_country == 5)
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc89')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc89" wire:model="qc89">
-                            @error('qc89') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
+            @if($id_country == 5)
+            @php $showMessage = false; @endphp
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><strong>{{__('qc89')}}:</strong></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" name="qc89" wire:model="qc89">
+                        @error('qc89') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-                @endif
+            </div>
+            @endif
             @endif
 
             @if($id_client_type == 5)
-                @if($id_country == 1 || $id_country == 5)
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc90')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc90" wire:model="qc90">
-                            @error('qc90') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
+            @if($id_country == 1 || $id_country == 5)
+            @php $showMessage = false; @endphp
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><strong>{{__('qc90')}}:</strong></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" name="qc90" wire:model="qc90">
+                        @error('qc90') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc91')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc91" wire:model="qc91">
-                            @error('qc91') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><strong>{{__('qc91')}}:</strong></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" name="qc91" wire:model="qc91">
+                        @error('qc91') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc92')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc92" wire:model="qc92">
-                            @error('qc92') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label><strong>{{__('qc92')}}:</strong></label>
+                    </div>
+                    <div class="col-md-9">
+                        <input class="form-control" type="file" name="qc92" wire:model="qc92">
+                        @error('qc92') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-                @endif
+            </div>
+            @endif
             @endif
 
             @if($id_client_type == 3)
+            @php $showMessage = false; @endphp
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-3">
@@ -2010,310 +2064,8 @@
             @endif
 
             @if($id_client_type == 2)
-                @if($id_country != 5)
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc97')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc97" wire:model="qc97">
-                            @error('qc97') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <label><strong>{{__('qc98')}}:</strong></label>
-                        </div>
-                        <div class="col-md-9">
-                            <input class="form-control" type="file" name="qc98" wire:model="qc98">
-                            @error('qc98') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                </div>
-                @endif
-            @endif
-
-            @if($id_client_type == 4)
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc100')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc100" wire:model="qc100">
-                        @error('qc100') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc101')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc101" wire:model="qc101">
-                        @error('qc101') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            @endif
-
-            <!-- <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc74')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc74" wire:model="qc74">
-                        @error('qc74') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc75')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc75" wire:model="qc75">
-                        @error('qc75') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc76')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc76" wire:model="qc76">
-                        @error('qc76') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc77')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc77" wire:model="qc77">
-                        @error('qc77') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc78')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc78" wire:model="qc78">
-                        @error('qc78') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc79')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc79" wire:model="qc79">
-                        @error('qc79') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc80')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc80" wire:model="qc80">
-                        @error('qc80') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc81')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc81" wire:model="qc81">
-                        @error('qc81') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc82')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc82" wire:model="qc82">
-                        @error('qc82') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc83')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc83" wire:model="qc83">
-                        @error('qc83') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc84')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc84" wire:model="qc84">
-                        @error('qc84') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc85')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc85" wire:model="qc85">
-                        @error('qc85') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc86')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc86" wire:model="qc86">
-                        @error('qc86') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc87')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc87" wire:model="qc87">
-                        @error('qc87') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc88')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc88" wire:model="qc88">
-                        @error('qc88') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc89')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc89" wire:model="qc89">
-                        @error('qc89') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc90')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc90" wire:model="qc90">
-                        @error('qc90') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc91')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc91" wire:model="qc91">
-                        @error('qc91') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc92')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc92" wire:model="qc92">
-                        @error('qc92') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc93')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc93" wire:model="qc93">
-                        @error('qc93') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc94')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc94" wire:model="qc94">
-                        @error('qc94') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc95')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc95" wire:model="qc95">
-                        @error('qc95') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc96')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc96" wire:model="qc96">
-                        @error('qc96') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
+            @if($id_country != 5)
+            @php $showMessage = false; @endphp
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-3">
@@ -2336,17 +2088,11 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label><strong>{{__('qc99')}}:</strong></label>
-                    </div>
-                    <div class="col-md-9">
-                        <input class="form-control" type="file" name="qc99" wire:model="qc99">
-                        @error('qc99') <span class="text-danger error">{{ $message }}</span>@enderror
-                    </div>
-                </div>
-            </div>
+            @endif
+            @endif
+
+            @if($id_client_type == 4)
+            @php $showMessage = false; @endphp
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-3">
@@ -2368,22 +2114,39 @@
                         @error('qc101') <span class="text-danger error">{{ $message }}</span>@enderror
                     </div>
                 </div>
-            </div> -->
+            </div>
+            @endif
+
+            @if($showMessage)
+            <div class="alert alert-warning">
+                <strong>Atención ==> </strong> No se encontraron documentos para el tipo de cliente o país.
+            </div>
+            @endif
+
             <hr>
-            <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button" wire:click="back(5)">{{__('back')}}</button>
-            <button class="btn btn-pill btn-primary nextBtn btn-sm pull-right" type="button" wire:click="sixtStepSubmit">{{__('submit')}} ></button>
+            <button class="btn btn-pill btn-outline-dark nextBtn btn-sm pull-right" type="button"
+                wire:click="back(5)">{{__('back')}}</button>
+                <button class="btn btn-pill btn-primary btn-sm pull-right" type="button"
+                    wire:loading.attr="disabled"
+                    wire:target="sixtStepSubmit"
+                    wire:click="sixtStepSubmit">
+                    <span wire:loading.remove wire:target="sixtStepSubmit">{{__('submit')}} ></span>
+                    <span wire:loading wire:target="sixtStepSubmit">Procesando...</span>
+                </button>
 
         </div>
     </div>
 
-    <div class="row setup-content {{ $currentStep != 99 ? 'displayNone' : '' }}" id="step-6">
+    <div class="row setup-content {{ $currentStep != 99 ? 'displayNone' : '' }}" id="step-99">
 
         <div class="col-md-12">
             <hr>
             <div class="alert alert-success" role="alert">
                 <h4 class="alert-heading">Solicitud Agregada Satisfactoriamente! - Request Added Satisfactorily!</h4>
                 <hr>
-                <p class="mb-0">Uno proveedor de Risk estará comunicandose con su información para continuar con su proceso de homologación./A Risk provider will be communicating with your information to continue with its approval process.</p>
+                <p class="mb-0">Uno proveedor de Risk estará comunicandose con su información para continuar con su
+                    proceso de homologación./A Risk provider will be communicating with your information to continue
+                    with its approval process.</p>
             </div>
             <hr>
         </div>
