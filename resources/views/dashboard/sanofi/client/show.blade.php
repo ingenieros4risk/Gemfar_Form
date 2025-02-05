@@ -45,10 +45,27 @@
     background-color: #6c757d;
     color: white;
 }
+
+.card-header-gray {
+    background-color: #555555;
+    color: #fff;
+    border-bottom: 1px solid #444;
+  }
+  .section-title {
+    color: #555555;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+  }
 </style>
 @endsection
 
 @section('content')
+@php
+    $isFormResponses = isset($clientForm) && !is_null($clientForm->qc8) && $clientForm->qc8 != '';
+
+    $isDocuments = isset($uploadedDocuments) && count($uploadedDocuments) > 0;
+@endphp
 <div class="container-fluid">
     <div class="animated fadeIn">
         <ul class="nav nav-tabs" id="mainTabs" role="tablist">
@@ -58,13 +75,24 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="formulario-tab" data-toggle="tab" href="#formulario" role="tab" aria-controls="formulario" aria-selected="false">
-                    <i class="fa fa-edit"></i> Formulario
+                <a class="nav-link {{ !$isFormResponses ? 'disabled' : '' }}"
+                   id="formulario-tab"
+                   data-toggle="{{ $isFormResponses ? 'tab' : '' }}"
+                   href="#formulario" role="tab" aria-controls="formulario" aria-selected="false">
+                   <i class="fa fa-edit"></i> Formulario
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="documentos-tab" data-toggle="tab" href="#documentos" role="tab" aria-controls="documentos" aria-selected="false">
-                    <i class="fa fa-paperclip"></i> Documentos
+                <a class="nav-link {{ !$isDocuments ? 'disabled' : '' }}"
+                   id="documentos-tab"
+                   data-toggle="{{ $isDocuments ? 'tab' : '' }}"
+                   href="#documentos" role="tab" aria-controls="documentos" aria-selected="false">
+                   <i class="fa fa-paperclip"></i> Documentos
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="aprobaciones-tab" data-toggle="tab" href="#aprobaciones" role="tab" aria-controls="aprobaciones" aria-selected="false">
+                    <i class="fa fa-paperclip"></i> Aprobadores
                 </a>
             </li>
         </ul>
@@ -80,9 +108,9 @@
                                 <i class="fa fa-users-cog"></i> Gestión de Clientes Genfar Risk
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('genfar.manage') }}" id="form-manage">
+                                <form method="POST" action="{{ route('clients.manage') }}" id="form-manage">
                                     @csrf
-                                    <input type="hidden" name="id" value="{{ $Client->id }}">
+                                    <input type="hidden" name="client_id" value="{{ $Client->id }}">
                                     <input type="hidden" name="user" value="{{ $user }}">
 
                                     <div class="form-section">
@@ -94,37 +122,186 @@
                                     </div>
 
                                     <div class="form-section">
-                                        <div class="form-group">
-                                            <label class="font-weight-bold">Estado de la Solicitud:</label>
-                                            <select name="status" id="status" class="form-control input-lg" required>
-                                                <option value="">--- Seleccione Estado ---</option>
-                                                @foreach($statuses as $status)
-                                                <option value="{{ $status->id }}"
-                                                    {{ isset($currentStatus) && $status->id == $currentStatus ? 'selected' : '' }}>
-                                                    {{ $status->name }}
-                                                </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Estado de la Solicitud:</label>
+                                        <select name="id_status" id="id_status" class="form-control input-lg">
+                                                    <option value="">--- Seleccione Estado ---</option>
+                                                    @foreach($statuses as $status)
+                                                        <option value="{{ $status->id }}">{{ $status->name }}</option>
+                                                    @endforeach
+                                                </select>
                                     </div>
+                                </div>
 
-                                    <div class="form-section">
-                                        <div class="form-group">
-                                            <label class="font-weight-bold">Observaciones:</label>
-                                            <textarea class="form-control" name="observation" rows="3"
-                                                placeholder="Describa el motivo del cambio de estado..." required></textarea>
-                                        </div>
+                                <div class="form-section">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Observaciones:</label>
+                                        <textarea class="form-control" name="observation" rows="3"
+                                            placeholder="Describa el motivo del cambio de estado..." required></textarea>
                                     </div>
+                                </div>
 
-                                    <button class="btn btn-warning btn-block" type="submit">
-                                        <i class="fa fa-sync-alt"></i> Actualizar Estado
-                                    </button>
+                                <button class="btn btn-warning btn-block" type="submit">
+                                    <i class="fa fa-sync-alt"></i> Actualizar Estado
+                                </button>
+
                                 </form>
+                                <!--Datos del Cliente -->
+                                <div class="card shadow-sm mt-4">
+                                <div class="card-header bg-light text-dark border-bottom">
+                                    <h5 class="m-0">
+                                    <i class="fa fa-user-circle mr-2"></i>
+                                    Datos del Cliente
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="text-secondary mb-3">
+                                        <i class="fa fa-user-tie mr-2"></i> Información del Solicitante
+                                        </h6>
+                                        <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                            <th class="w-50 text-muted">Nombre de solicitante:</th>
+                                            <td>{{ $Client->third_party_name }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Área solicitante:</th>
+                                            <td>{{ $Client->area_solicitante }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">País de radicación:</th>
+                                            <td>{{ optional($Client->country)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Tipo de solicitud:</th>
+                                            <td>{{ optional($Client->tipoSolicitud)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Tipo de cliente:</th>
+                                            <td>{{ optional($Client->clientType)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="text-secondary mb-3">
+                                        <i class="fa fa-address-card mr-2"></i> Contacto
+                                        </h6>
+                                        <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                            <th class="w-50 text-muted">Nombre de contacto:</th>
+                                            <td>{{ $Client->name_contact_client }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Número de contacto:</th>
+                                            <td>{{ $Client->number_client }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Email de contacto:</th>
+                                            <td>{{ $Client->email }}</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="text-secondary mb-3">
+                                        <i class="fa fa-building mr-2"></i> Empresa / Entidad Legal
+                                        </h6>
+                                        <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                            <th class="w-50 text-muted">Compañía o Entidad Legal:</th>
+                                            <td>{{ optional($Client->sociedadSolicitante)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Organización de Ventas:</th>
+                                            <td>{{ optional($Client->salesOrganization)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Oficina de Ventas:</th>
+                                            <td>{{ optional($Client->oficinaVentas)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Grupo de Vendedores:</th>
+                                            <td>{{ $Client->grupo_vendedores }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Nombre Comercial:</th>
+                                            <td>{{ $Client->name_comercial }}</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="text-secondary mb-3">
+                                        <i class="fa fa-chart-line mr-2"></i> Información Comercial
+                                        </h6>
+                                        <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                            <th class="w-50 text-muted">Canal:</th>
+                                            <td>{{ optional($Client->channel)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Sector:</th>
+                                            <td>{{ optional($Client->sector)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Tipo de venta:</th>
+                                            <td>{{ optional($Client->typeSale)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Grupo de clientes:</th>
+                                            <td>{{ optional($Client->groupClient)->name ?? 'N/A' }}</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <h6 class="text-secondary mb-3">
+                                        <i class="fa fa-chart-area mr-2"></i> Proyecciones
+                                        </h6>
+                                        <table class="table table-borderless table-sm">
+                                        <tbody>
+                                            <tr>
+                                            <th class="w-50 text-muted">Volumen mensual estimado de Compras:</th>
+                                            <td>{{ $Client->vol_men_esti_comp }}</td>
+                                            </tr>
+                                            <tr>
+                                            <th class="text-muted">Proyección de Ventas:</th>
+                                            <td>
+                                                @if($Client->update_attachment_sales)
+                                                <a href="{{ route('cliente.descargar', [
+                                                    'clientId' => $Client->id,
+                                                    'filename' => basename($Client->update_attachment_sales)
+                                                ]) }}" target="_blank">
+                                                    Ver archivo
+                                                </a>
+                                                @else
+                                                N/A
+                                                @endif
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-          
+                </div>          
             </div>
 
             <!--Documentos -->
@@ -248,6 +425,65 @@
                     </div>
                 </div>
             </div> 
+            </div>
+            <!--Aprobador -->
+            <div class="tab-pane fade" id="aprobaciones" role="tabpanel"
+                 aria-labelledby="aprobaciones-tab">
+                <div class="row mt-4" id="aprobacionesCliente">
+                    <div class="col-md-8 mx-auto">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-white bg-dark">
+                                <i class="fa fa-user"></i> Aprobaciones
+                            </div>
+                            <div class="card-body">
+                                @php
+                                    $clientTypeId   = optional($Client->clientType)->id;
+                                    $clientTypeName = optional($Client->clientType)->name;
+                                @endphp
+
+                                <p><strong>Tipo de cliente seleccionado:</strong> {{ $clientTypeName }}</p>
+
+                                @if($clientTypeId == 1) 
+                                    <!-- Cliente Nacional-->
+                                    @include('partials._aprobacion_tesoreria_cartera')
+                                    @include('partials._aprobacion_datos_maestros')
+                                    @include('partials._aprobacion_control_interno')
+                                    @include('partials._aprobacion_cumplimiento_sagrilaft')
+                                    @include('partials._aprobacion_asuntos_regulatorios')
+
+                                @elseif($clientTypeId == 2)
+                                    <!-- Exportaciones-->
+                                    @include('partials._aprobacion_tesoreria_cartera')
+                                    @include('partials._aprobacion_datos_maestros')
+                                    @include('partials._aprobacion_control_interno')
+                                    @include('partials._aprobacion_cumplimiento_sagrilaft')
+
+                                @elseif($clientTypeId == 3)
+                                    <!-- Interco-->
+                                    @include('partials._aprobacion_tesoreria_cartera')
+                                    @include('partials._aprobacion_datos_maestros')
+                                    @include('partials._aprobacion_control_interno')
+                                    @include('partials._aprobacion_cumplimiento_sagrilaft')
+
+                                @elseif($clientTypeId == 4)
+                                    <!-- Empleados-->
+                                    @include('partials._aprobacion_datos_maestros')
+
+                                @elseif($clientTypeId == 5)
+                                    <!-- No Stock-->
+                                    @include('partials._aprobacion_tesoreria_cartera')
+                                    @include('partials._aprobacion_datos_maestros')
+                                    @include('partials._aprobacion_control_interno')
+                                    @include('partials._aprobacion_cumplimiento_sagrilaft')
+
+                                @else
+                                    <p>Aprobaciones no disponibles para este cliente.</p>
+                                @endif
+
+                            </div>
+                        </div>
+                    </div>
+                </div> 
             </div>
         </div> 
     </div>

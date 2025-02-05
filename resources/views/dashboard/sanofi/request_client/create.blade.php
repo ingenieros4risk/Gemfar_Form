@@ -11,7 +11,7 @@
   <nav class="navbar fixed-top navbar-expand-lg" style="background-color: #ffff;">
     <div class="container justify-content-center">
       <ul class="nav navbar-nav navbar-center" id="nav-center" style="justify-content: center;">
-        <li><img class="c-sidebar-brand-full" src="{{ url('/assets/brand/sanofi.png') }}"></li>
+        <li><img class="c-sidebar-brand-full" src="{{ url('/assets/brand/sanofitransform.PNG') }}"></li>
       </ul>
     </div>
 

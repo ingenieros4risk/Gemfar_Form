@@ -539,8 +539,11 @@ class GenfarClient extends Component
             $validationRules['qc100'] = 'required|file';
             $validationRules['qc101'] = 'required|file';
         }
-    
-        $this->validate($validationRules);
+        
+        // validation rules
+        if (!empty($validationRules)) {
+            $this->validate($validationRules);
+        }
     
         $this->submitForm();
     

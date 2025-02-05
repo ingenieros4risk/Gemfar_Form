@@ -163,6 +163,12 @@ Route::group(['middleware' => ['get.menu']], function () {
             return Storage::disk('local')->download($path, $downloadName);
         })->name('cliente.descargar');
 
+        Route::post('/clients/tesoreria', [\App\Http\Controllers\ClientsController::class, 'tesoreriaCartera'])->name('aprobar.tesoreria_cartera');
+        Route::post('/clients/datos-maestros', [\App\Http\Controllers\ClientsController::class, 'datosMaestros'])->name('aprobar.datos_maestros');    
+        Route::post('/clients/control-interno', [\App\Http\Controllers\ClientsController::class, 'controlInterno'])->name('aprobar.control_interno');       
+        Route::post('/clients/cumplimiento', [\App\Http\Controllers\ClientsController::class, 'cumplimientoSagrilaft'])->name('aprobar.cumplimiento_sagrilaf');    
+        Route::post('/clients/regulatorios', [\App\Http\Controllers\ClientsController::class, 'asuntosRegulatorios'])->name('aprobar.asuntos_regulatorios');
+
 
         /* Rutas de la Solicitud*/
         Route::resource('genfar-request-risk', 'SanofiRequestRiskController');
@@ -307,6 +313,7 @@ Route::group(['middleware' => ['get.menu']], function () {
         });
 
         Route::resource('clients','ClientsController');
+        Route::post('/clients/manage', 'ClientsController@updateStatus')->name('clients.manage');
         // Route::post('/genfar-request-clients',   'ClientsController@store')->name('genfar-request-clients.store');
         // Route::get('/genfar-request-clients',   'ClientsController@index')->name('genfar-request-clients.index');
 

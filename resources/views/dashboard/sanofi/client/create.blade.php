@@ -113,10 +113,6 @@
                     </select>
                 </div>
 
-                <!-- <div class="form-group" id="gcid_code_group" style="display: none;">
-                    <label for="gcid_code">Código del GCID</label>
-                    <input type="text" class="form-control" id="gcid_code" name="gcid_code">
-                </div> -->
 
                 <div class="form-group">
                     <label for="vol_men_esti_comp">Volumen mensual estimado de Compras</label>
@@ -166,15 +162,6 @@
                     <label for="email">Email de contacto del cliente</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-
-                <!-- <div class="row">
-                    <div class="col-sm-12">
-                        <div class="form-group">
-                            <label>Adjunto Aprobación de Compra (Este archivo es mandatorio para el scope de Proveedores de Compras)</label>
-                            <input class="form-control" type="file" name="update_attachment_compras" id="update_attachment_compras">
-                        </div>
-                    </div>
-                </div> -->
 
                 <hr>
                 <div class="row">

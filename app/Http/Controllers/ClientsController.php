@@ -37,6 +37,16 @@ class ClientsController extends Controller
         $you = auth()->user();
         $clients = Clients::all();
 
+        $clients = Clients::leftJoin('genfar_client_forms', 'clients.id', '=', 'genfar_client_forms.client_id')
+        ->select(
+            'clients.*',
+            'genfar_client_forms.tesoreria_status',
+            'genfar_client_forms.datos_maestros_status',
+            'genfar_client_forms.control_interno_status',
+            'genfar_client_forms.cumplimiento_status',
+            'genfar_client_forms.regulatorio_status'
+        )
+        ->get();
         foreach ($clients as $key) {
 
             $user_solicitante = User::find($key->id_user);
@@ -115,6 +125,7 @@ class ClientsController extends Controller
         $client->vol_men_esti_comp = $request->input('vol_men_esti_comp');
         $client->name_comercial = $request->input('name_comercial');
         $client->email = $request->input('email');
+        $client->name_contact_client = $request->input('name_contact_client');
         $client->password = "G3NF4RR1SK";
         $client->id_user = $user->id;
         $client->date_solicitud = Carbon::now();
@@ -150,7 +161,18 @@ class ClientsController extends Controller
     {
         //dd('Estoy en ClientsController@show'); 
         $user = auth()->user();
-        $Client = Clients::find($id);
+        $Client = Clients::with([
+            'country',
+            'tipoSolicitud',
+            'clientType',
+            'salesOrganization',
+            'channel',
+            'sector',
+            'typeSale',
+            'groupClient',
+            'oficinaVentas',
+            'sociedadSolicitante'
+        ])->findOrFail($id);
         $statuses = SanofiRequestStatus::all();
         $clientForm = GenfarClientForm::where('client_id', $Client->id)->first();
         $document_types = InspektorDocumentType::pluck('name', 'id')->toArray();
@@ -194,4 +216,106 @@ class ClientsController extends Controller
     {
         //
     }
+
+    public function tesoreriaCartera(Request $request)
+    {
+        $clientForm = GenfarClientForm::where('client_id', $request->input('client_id'))->firstOrFail();
+
+        $accion = $request->input('accion'); 
+        $comentario = $request->input('comentario_tesoreria_cartera');
+        $clientForm->tesoreria_comment = $comentario;
+        $clientForm->tesoreria_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
+        $clientForm->tesoreria_approved_at = now();
+
+        // 4. Guardas en BD
+        $clientForm->save();
+
+        return back()->with('success', 'Guardada.');
+
+    }
+
+    public function datosMaestros(Request $request)
+    {
+        $clientForm = GenfarClientForm::where('client_id', $request->input('client_id'))->firstOrFail();
+
+        $accion = $request->input('accion'); 
+        $comentario = $request->input('comentario_datos_maestros');
+        $clientForm->datos_maestros_comment = $comentario;
+        $clientForm->datos_maestros_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
+        $clientForm->datos_maestros_approved_at = now();
+
+        $clientForm->save();
+
+        return back()->with('success', 'Guardada.');
+    }
+
+    public function controlInterno(Request $request)
+    {
+        $clientForm = GenfarClientForm::where('client_id', $request->input('client_id'))->firstOrFail();
+
+        $accion = $request->input('accion'); 
+        $comentario = $request->input('comentario_control_interno');
+        $clientForm->control_interno_comment = $comentario;
+        $clientForm->control_interno_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
+        $clientForm->control_interno_approved_at = now();
+
+        $clientForm->save();
+
+        return back()->with('success', 'Guardada.');
+    }
+
+    public function cumplimientoSagrilaft(Request $request)
+    {
+        $clientForm = GenfarClientForm::where('client_id', $request->input('client_id'))->firstOrFail();
+
+        $accion = $request->input('accion'); 
+        $comentario = $request->input('comentario_cumplimiento_sagrilaft');
+        $clientForm->cumplimiento_comment = $comentario;
+        $clientForm->cumplimiento_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
+        $clientForm->cumplimiento_approved_at = now();
+
+        $clientForm->save();
+
+        return back()->with('success', 'Guardada.');
+    }
+
+    public function asuntosRegulatorios(Request $request)
+    {
+        $clientForm = GenfarClientForm::where('client_id', $request->input('client_id'))->firstOrFail();
+
+        $accion = $request->input('accion'); 
+        $comentario = $request->input('comentario_asuntos_regulatorios');
+        $clientForm->regulatorio_comment = $comentario;
+        $clientForm->regulatorio_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
+        $clientForm->regulatorio_approved_at = now();
+
+        $clientForm->save();
+
+        return back()->with('success', 'Guardada.');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $request->validate([
+            'client_id'   => 'required',
+            'id_status'   => 'nullable',
+            'observation' => 'nullable',
+        ]);
+
+        $client = Clients::find($request->client_id);
+        if (!$client) {
+            return redirect()->back()->with('error', 'No se encontró cliente');
+        }
+
+        $client->id_status = $request->input('id_status');
+    
+        $client->save();
+    
+        return redirect()->back()->with('success', 'Estado Guardado.');
+    }
+    
+    
+    
+    
+
 }

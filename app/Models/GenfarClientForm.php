@@ -27,7 +27,12 @@ class GenfarClientForm extends Model
         'qc74','qc75','qc76','qc77','qc78','qc79','qc80','qc81','qc82','qc83','qc84',
         'qc85','qc86','qc87','qc88','qc89','qc90','qc91','qc92','qc93','qc94','qc95',
         'qc96','qc97','qc98','qc99','qc100','qc101','qc102','qc103','qc104','qc105',
-        'qc106','qc107','multiple_select_country','country_homologation'
+        'qc106','qc107','multiple_select_country','country_homologation',
+        'tesoreria_comment','tesoreria_status','tesoreria_approved_at',
+        'datos_maestros_comment','datos_maestros_status','datos_maestros_approved_at',
+        'control_interno_comment','control_interno_status','control_interno_approved_at',
+        'cumplimiento_comment','cumplimiento_status','cumplimiento_approved_at',
+        'regulatorio_comment','regulatorio_status','regulatorio_approved_at','status_id','observation',
     ];
 
     public function getUploadedDocuments()
