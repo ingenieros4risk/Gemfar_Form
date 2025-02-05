@@ -227,7 +227,6 @@ class ClientsController extends Controller
         $clientForm->tesoreria_status = ($accion === 'rechazar') ? 'Rechazado' : 'Aprobado';
         $clientForm->tesoreria_approved_at = now();
 
-        // 4. Guardas en BD
         $clientForm->save();
 
         return back()->with('success', 'Guardada.');
@@ -313,9 +312,4 @@ class ClientsController extends Controller
     
         return redirect()->back()->with('success', 'Estado Guardado.');
     }
-    
-    
-    
-    
-
 }

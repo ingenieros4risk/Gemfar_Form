@@ -135,6 +135,7 @@
     $('#requests_risk-table').DataTable({
         responsive: true,
         scrollY: "500px",
+        scrollX: true,
         scrollCollapse: true,
         paging: true,
         pagingType: "simple_numbers",
