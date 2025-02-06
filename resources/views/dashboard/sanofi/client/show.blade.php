@@ -115,7 +115,7 @@
 
                                     <div class="form-section">
                                         <a target="_blank"
-                                            href="https://ambientetest.datalaft.com:2091/es/genfar/clients/{{ $Client->id }}"
+                                            href="https://ambientetest.datalaft.com:2150/es/genfar/clients/{{ $Client->id }}"
                                             class="btn btn-outline-secondary btn-block mb-3">
                                             <i class="fa fa-external-link-alt"></i> Formulario Proveedor (ES)
                                         </a>

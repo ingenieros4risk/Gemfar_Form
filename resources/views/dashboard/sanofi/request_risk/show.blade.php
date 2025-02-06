@@ -24,8 +24,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                            <a target="_blank" href="https://ambientetest.datalaft.com:2091/es/genfar/create/{{ $request_risk->id }}" class="btn btn-block btn-secondary">Enlace Formulario Proveedor Español</a>
-                                            <a target="_blank" href="https://ambientetest.datalaft.com:2091/en/genfar/create/{{ $request_risk->id }}" class="btn btn-block btn-secondary">Enlace Formulario Proveedor Ingles</a>
+                                            <a target="_blank" href="https://ambientetest.datalaft.com:2150/es/genfar/create/{{ $request_risk->id }}" class="btn btn-block btn-secondary">Enlace Formulario Proveedor Español</a>
+                                            <a target="_blank" href="https://ambientetest.datalaft.com:2150/en/genfar/create/{{ $request_risk->id }}" class="btn btn-block btn-secondary">Enlace Formulario Proveedor Ingles</a>
                                             </div>
                                         </div>
                                     </div>
