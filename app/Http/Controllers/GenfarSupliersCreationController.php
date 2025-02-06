@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sanofi\GenfarSupliersCreation;
-use App\Exports\SanofiRequestRiskExport;
 use App\Models\Sanofi\SanofiRequestRisk;
 use App\Models\Sanofi\SanofiHomologationCountry;
 use App\Models\Sanofi\SanofiRequestStatus;
@@ -16,14 +15,11 @@ use App\Models\User;
 //use App\Mail\SanofiRiskCreate;
 use App\Mail\GenfarCreateSupplier;
 use App\Mail\GenfarAprobarSupplier;
-use App\Mail\GenfarConfirmarSupplier;
 use App\Mail\eProveedoresApproveNotificaction;
-use App\Mail\eProveedoresConfirmNotificaction;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Mail\MailNotify;
 use App\Exports\SanofiExportsSuppliers;
 
 
@@ -631,7 +627,6 @@ class GenfarSupliersCreationController extends Controller
         $request_risk->supplier_code_ec = $request->input('suplier_code_ec');
         $request_risk->comments .= " | ".$fecha_hoy." ".$user_solicitante->name." OBSERVACIÓN: ".$request->input('comments');
         $request_risk->approve = null;
-        $request_risk->confirm = null;
         $request_risk->status = 0;
         $request_risk->date_request = Carbon::now();
 
