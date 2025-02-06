@@ -91,27 +91,18 @@ class GenfarSupliersCreationController extends Controller
     {
 
         $requests_risk_no_approve = GenfarSupliersCreation::where('approve',NULL)->get();
-        $requests_risk_no_confirm = GenfarSupliersCreation::where('status',0)->where('approve','APROBAR')->get();
 
-        $userConfirm = array("milton.gomez@genfar.com");
-        $userApprove = array("catherine.ramirez@genfar.com");
+        $userApprove = array("hyndayara.martins@eurofarma.com");
   
         
         $data_approve = array(
             'tickets' => $requests_risk_no_approve,
             'amount' => count($requests_risk_no_approve)
         );
-
-        $data_confirm = array(
-            'tickets' => $requests_risk_no_confirm,
-            'amount' => count($requests_risk_no_confirm)
-        );
-
-        Mail::to($userApprove)->send(new eProveedoresApproveNotificaction($data_approve));
-
-        Mail::to($userConfirm)->send(new eProveedoresConfirmNotificaction($data_confirm));
+		
+		Mail::to($userApprove)->send(new eProveedoresApproveNotificaction($data_approve));
         
-        return redirect()->back()->with('success', 'El correo de Solicitudes Pendientes se ha enviado.');
+        return redirect()->back()->with('success', 'El correo de Solicitudes Pendientes por Aprobar se ha enviado.');
         
     }
 
@@ -218,8 +209,8 @@ class GenfarSupliersCreationController extends Controller
     {
         $user = auth()->user();
 
-        $copiasCorreos  = array($user->email,"catherine.ramirez@genfar.com","Nelson.Fonseca@genfar.com","laura.garciacortes-ext@genfar.com");
-        $copiasCorreoCompras = array($user->email,"Nelson.Fonseca@genfar.com","catherine.ramirez@genfar.com");
+        $copiasCorreos  = array($user->email,"catherine.ramirez@genfar.com","laura.garciacortes-ext@genfar.com");
+        $copiasCorreoCompras = array($user->email,"catherine.ramirez@genfar.com");
 
         $validatedData = $request->validate([
             'paises' => 'required',
@@ -449,114 +440,7 @@ class GenfarSupliersCreationController extends Controller
 
 
     }
-
-    public function confirmar(Request $request){
-
-
-        $request->validate([
-            'resumen' => 'required',
-            'observacion' => 'required'
-        ]);
-
-        $fecha_hoy = Carbon::now();
-        $request_risk = GenfarSupliersCreation::find($request->id);
-
-        //$user_solicitante = User::find($request_risk->solicitante);
-        $you = auth()->user();
-        $request_risk->confirm = $request->input('resumen');
-
-        if($request->input('resumen') == "RECHAZAR"){
-            $observacion = "RECHAZADO";
-        }else {
-            $observacion = "CONFIRMADO";
-        }
-
-        $request_risk->comments .= " | ".$fecha_hoy." ".$you->name."  ESTADO CONFIRMACIÓN: ".$observacion." OBSERVACIÓN: ".$request->input('observacion');
-       
-        $solicitante = User::find($request_risk->solicitante);
-        $copiasCorreos = array($solicitante->email,"milton.gomez@genfar.com","Nelson.Fonseca@genfar.com","laura.garciacortes-ext@genfar.com","catherine.ramirez@genfar.com");
-        $copiasCorreoCompras = array($solicitante->email,"Nelson.Fonseca@genfar.com","catherine.ramirez@genfar.com");
-
-        if($request->input('resumen') == "CONFIRMAR"){
-            $request_risk->status = 1;
-            $request_risk->date_confirm = $fecha_hoy;     
-        }else{
-            $request_risk->status = 2;
-        }
-
-        $request_risk->date_updated = $fecha_hoy;
-        $request_risk->save();
-
-        if($request_risk->supplier_code_co == null){
-            $request_risk->supplier_code_co = " ";
-        }
-
-        if($request_risk->supplier_code_ec == null){
-            $request_risk->supplier_code_ec = " ";
-        }
-
-
-        if($request_risk->supplier_code_pe == null){
-            $request_risk->supplier_code_pe = " ";
-        }
-
-        /* SEND CONFIRMACION EMAIL  */
-
-        /*ADDING FILES*/
-        $fileReporte = $request->file('confirm_file');
-        
-        if($fileReporte!=null){
-
-            /*Nombre del archivo*/ 
-            $fileReporteName = 'ADJUNTO_CONFIRMACION-'.$request_risk->id.'.'.$fileReporte->getClientOriginalExtension();
-            $request_risk->update(['confirm_file' => $fileReporte->storeAs('SANOFI/SUPLIERS/'.$request_risk->id, $fileReporteName)]);   
-            
-
-            /* SEND ASIGNACION EMAIL */        
-            $data = array(
-                'name_solicitante' => $solicitante->name,
-                'id_task' => "TASK-0".$request_risk->id,
-                'supplier_code_co' => $request_risk->supplier_code_co,
-                'supplier_code_pe' => $request_risk->supplier_code_pe,
-                'supplier_code_ec' => $request_risk->supplier_code_ec,
-                'provider_name' => $request_risk->provider_name,
-                'id' => $request_risk->id,
-                'resumen' => $observacion,
-                'comments' => $request->input('observacion'),
-                'file_to_client' => $fileReporte
-            );
-
-            if($request_risk->genfar_provider != 2){
-                Mail::to($copiasCorreos)->send(new GenfarConfirmarSupplier($data));
-            }else{
-                Mail::to($copiasCorreoCompras)->send(new GenfarConfirmarSupplier($data));
-            }
-
-        }else {
-            $data = array(
-                'name_solicitante' => $solicitante->name,
-                'id_task' => "TASK-0".$request_risk->id,
-                'supplier_code_co' => $request_risk->supplier_code_co,
-                'supplier_code_pe' => $request_risk->supplier_code_pe,
-                'supplier_code_ec' => $request_risk->supplier_code_ec,
-                'provider_name' => $request_risk->provider_name,
-                'id' => $request_risk->id,
-                'resumen' => $observacion,
-                'comments' => $request->input('observacion'),
-                'file_to_client' => 0
-            );
-    
-            if($request_risk->genfar_provider != 2){
-                Mail::to($copiasCorreos)->send(new GenfarConfirmarSupplier($data));
-            }else{
-                Mail::to($copiasCorreoCompras)->send(new GenfarConfirmarSupplier($data));
-            } 
-        }        
-
-        return redirect()->route('genfar.pending');
-
-    }
-
+	
     public function aprobar(Request $request){
 
         $request->validate([
@@ -591,7 +475,7 @@ class GenfarSupliersCreationController extends Controller
 
         
         
-        /* SEND CONFIRMACION EMAIL  */
+        /* SEND APROBACION EMAIL  */
 
         /*ADDING FILES*/
         $fileReporte = $request->file('approve_file');
@@ -616,8 +500,7 @@ class GenfarSupliersCreationController extends Controller
 
             if ($request_risk->action == "Bloquear") {
                 if ($request->input('resumen') == "APROBAR") {
-                    $request_risk->status = 0;
-                    $request_risk->confirm = "";
+                    $request_risk->status = 1;
                     $request_risk->date_updated = Carbon::now();
                     $request_risk->date_approve = Carbon::now();
                     Mail::to($solicitante->email)->send(new GenfarAprobarSupplier($data));
@@ -629,8 +512,7 @@ class GenfarSupliersCreationController extends Controller
                 }     
             }else{
                 if ($request->input('resumen') == "APROBAR") {
-                    $request_risk->status = 0;
-                    $request_risk->confirm = "";
+                    $request_risk->status = 1;
                     $request_risk->date_updated = Carbon::now();
                     $request_risk->date_approve = Carbon::now();
                     Mail::to($solicitante->email)->send(new GenfarAprobarSupplier($data));
@@ -654,8 +536,7 @@ class GenfarSupliersCreationController extends Controller
     
             if ($request_risk->action == "Bloquear") {
                 if ($request->input('resumen') == "APROBAR") {
-                    $request_risk->status = 0;
-                    $request_risk->confirm = "";
+                    $request_risk->status = 1;
                     $request_risk->date_updated = Carbon::now();
                     $request_risk->date_approve = Carbon::now();
                     Mail::to($solicitante->email)->send(new GenfarAprobarSupplier($data));
@@ -667,11 +548,10 @@ class GenfarSupliersCreationController extends Controller
                 }     
             }else{
                 if ($request->input('resumen') == "APROBAR") {
-                    $request_risk->status = 0;
-                    $request_risk->confirm = "";
+                    $request_risk->status = 1;
                     $request_risk->date_updated = Carbon::now();
                     $request_risk->date_approve = Carbon::now();
-                    Mail::to($solicitante->email,"milton.gomez@genfar.com","Nelson.Fonseca@genfar.com")->send(new GenfarAprobarSupplier($data));
+                    Mail::to($solicitante->email)->send(new GenfarAprobarSupplier($data));
                 }elseif ($request->input('resumen') == "RECHAZAR") {
                     Mail::to($solicitante->email)->send(new GenfarAprobarSupplier($data));
                     $request_risk->status = 2;
@@ -705,10 +585,10 @@ class GenfarSupliersCreationController extends Controller
      * @param  \App\Models\Diligence  $diligence
      * @return \Illuminate\Http\Response
      */
-    public function downloadattachConfirmation($id){
-        $request_risk = GenfarSupliersCreation::find($id);
-        return \Storage::download($request_risk->confirm_file);
-    }
+    //public function downloadattachConfirmation($id){
+    //    $request_risk = GenfarSupliersCreation::find($id);
+    //    return \Storage::download($request_risk->confirm_file);
+    //}
 
     /**
      * Download the specified resource from storage.
@@ -733,8 +613,8 @@ class GenfarSupliersCreationController extends Controller
         $fecha_hoy = Carbon::now();
         $request_risk = GenfarSupliersCreation::find($id);
         $user_solicitante = User::find($request_risk->solicitante);
-        $copiasCorreos  = array($user_solicitante->email,"catherine.ramirez@genfar.com","Nelson.Fonseca@genfar.com","laura.garciacortes-ext@genfar.com");
-        $copiasCorreoCompras = array($user_solicitante->email,"Nelson.Fonseca@genfar.com","catherine.ramirez@genfar.com");
+        $copiasCorreos  = array($user_solicitante->email,"catherine.ramirez@genfar.com","laura.garciacortes-ext@genfar.com");
+        $copiasCorreoCompras = array($user_solicitante->email,"catherine.ramirez@genfar.com");
 
         $input['paises'] = $request->input('paises');
         $request_risk->genfar_provider = $request->input('genfar_provider');
